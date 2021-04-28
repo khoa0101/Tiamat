@@ -1,0 +1,21 @@
+body{
+  background: black;
+}
+footer{
+  margin: 0 0 20px;
+  display: flex;
+  justify-content: center;
+}
+
+img:hover{
+  transform: scale(1.2);
+  transition: ease-out 0.5s;
+  
+}
+
+canvas{
+  background-image: url(https://i.pinimg.com/originals/95/3d/c1/953dc19b8d5038d4918a42db8e5339c5.gif);
+  background-image: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+};

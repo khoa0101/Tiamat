@@ -3,10 +3,11 @@ function Game() {
   this.players = new Array(6);
   this.enemies = [];
   this.turns = [];
+  this.currentTurn = this.turns[0];
 }
 
-Game.DIM_X = 1534;
-Game.DIM_Y = 900;
+Game.DIM_X = 1514;
+Game.DIM_Y = 860;
 Game.FPS = 60;
 
 Game.prototype.add = function(object) {
@@ -31,9 +32,18 @@ Game.prototype.setTurn = function(){
 
 Game.prototype.checkTurn = function(){
   for (let i = 0; i < this.turns.length; i++){
-    if (this.turns[i] !== undefined && !this.turns[i].alive) delete this.turns[i];
+    if (!this.turns[i].alive){
+      this.turns.splice(i, 1);
+      i--;
+    };
   }
-}
+};
+
+Game.prototype.nextTurn = function(){
+  let temp = this.turns.pop();
+  this.turns.push(temp);
+  this.currentTurn = this.turns[0];
+};
 
 Game.prototype.win = function(){
   for (let i = 0; i < this.enemies.length; i++){

@@ -25,7 +25,7 @@ eval("function Character(side, charType, level = 1, currentHealth = 50, maxHealt
   \*********************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Character = __webpack_require__(/*! ./character/char */ \"./src/character/char.js\");\nfunction Game() {\n  this.players = new Array(6);\n  this.enemies = [];\n  this.turns = [];\n}\n\nGame.DIM_X = 1534;\nGame.DIM_Y = 900;\nGame.FPS = 60;\n\nGame.prototype.add = function(object) {\n  if (object.side = \"player\"){\n    this.players.push(object);\n  } else {\n    this.enemies.push(object);\n  }\n};\n\nGame.prototype.setTurn = function(){\n  this.players.forEach((player) => {\n    this.turns.push(player);\n  });\n  this.enemies.forEach((enemy) => {\n    this.turns.push(enemy);\n  });\n\n  this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);\n  this.turns = this.turns.reverse;\n};\n\nGame.prototype.checkTurn = function(){\n  for (let i = 0; i < this.turns.length; i++){\n    if (this.turns[i] !== undefined && !this.turns[i].alive) delete this.turns[i];\n  }\n}\n\nGame.prototype.win = function(){\n  for (let i = 0; i < this.enemies.length; i++){\n    if (this.enemies[i].alive) return false;\n  }\n  return true;\n};\n\nGame.prototype.lose = function(){\n  for (let i = 0; i < this.players.length; i++){\n    if (this.players[i].alive) return false;\n  }\n  return true;\n}\n\nmodule.exports = Game;\n\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Character = __webpack_require__(/*! ./character/char */ \"./src/character/char.js\");\nfunction Game() {\n  this.players = new Array(6);\n  this.enemies = [];\n  this.turns = [];\n  this.currentTurn = this.turns[0];\n}\n\nGame.DIM_X = 1514;\nGame.DIM_Y = 860;\nGame.FPS = 60;\n\nGame.prototype.add = function(object) {\n  if (object.side = \"player\"){\n    this.players.push(object);\n  } else {\n    this.enemies.push(object);\n  }\n};\n\nGame.prototype.setTurn = function(){\n  this.players.forEach((player) => {\n    this.turns.push(player);\n  });\n  this.enemies.forEach((enemy) => {\n    this.turns.push(enemy);\n  });\n\n  this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);\n  this.turns = this.turns.reverse;\n};\n\nGame.prototype.checkTurn = function(){\n  for (let i = 0; i < this.turns.length; i++){\n    if (!this.turns[i].alive){\n      this.turns.splice(i, 1);\n      i--;\n    };\n  }\n};\n\nGame.prototype.nextTurn = function(){\n  let temp = this.turns.pop();\n  this.turns.push(temp);\n  this.currentTurn = this.turns[0];\n};\n\nGame.prototype.win = function(){\n  for (let i = 0; i < this.enemies.length; i++){\n    if (this.enemies[i].alive) return false;\n  }\n  return true;\n};\n\nGame.prototype.lose = function(){\n  for (let i = 0; i < this.players.length; i++){\n    if (this.players[i].alive) return false;\n  }\n  return true;\n}\n\nmodule.exports = Game;\n\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -35,7 +35,17 @@ eval("const Character = __webpack_require__(/*! ./character/char */ \"./src/char
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\n// const GameView = require(\"./game_view\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  console.log(\"Webpack\")\n  // new GameView(game, ctx).start();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst Sound = __webpack_require__(/*! ./sound.js */ \"./src/sound.js\");\n// const GameView = require(\"./game_view\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const music = new Sound;\n  console.log(music);\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  // document.addEventListener(\"click\", () => {\n  //   music.playAudio(music.menuMusic);\n  // })\n  console.log(\"Webpack\");\n  new GameView(game, ctx).start();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/sound.js":
+/*!**********************!*\
+  !*** ./src/sound.js ***!
+  \**********************/
+/***/ ((module) => {
+
+eval("function Sound(){\n  this.menuMusic = new Audio(\"../dist/sounds/BBS_menu.mp3\");\n}\n\nSound.prototype.playAudio = function(audio){\n  console.log(\"playAudio function\")\n  if (audio.paused) audio.play();\n}\n\nmodule.exports = Sound;\n\n//# sourceURL=webpack:///./src/sound.js?");
 
 /***/ })
 
