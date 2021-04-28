@@ -48,73 +48,58 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
-function damageCal(character, dmgType, powerRatio, baseDmg){
-  let totalDamage = Math.floor((baseDmg + (character.power * powerRatio)) 
-  * (1.0 + character[`${dmgType}Mod`]) * (1.0 + character.damageMod));
+Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){
+  let totalDamage = Math.floor((baseDmg + (this.power * powerRatio)) 
+  * (1.0 + this[`${dmgType}Mod`]) * (1.0 + this.damageMod));
   return totalDamage; 
 }
 
-function takeDamage(character, dmgType ,dmg){
-  let damageRecieve = Math.floor(dmg * (1.0 - character[`${dmgType}Res`]));
+Character.prototype.takeDamage = function(dmgType ,dmg){
+  let damageRecieve = Math.floor(dmg * (1.0 - this[`${dmgType}Res`]));
   if (damageRecieve < 0){
-    heal(character, -damageRecieve);
+    heal(this, -damageRecieve);
   } else {
     let remainder = damageRecieve;
-    if (character.barrier > 0){
-      remainder -= character.barrier;
-      character.barrier = character.barrier - damageRecieve;
-      if (character.barrier < 0) character.barrier = 0;
+    if (this.barrier > 0){
+      remainder -= this.barrier;
+      this.barrier = this.barrier - damageRecieve;
+      if (this.barrier < 0) this.barrier = 0;
     }
-    if (character.armor > 0 && remainder > 0){
-      let temp = character.armor;
-      character.armor -= remainder;
+    if (this.armor > 0 && remainder > 0){
+      let temp = this.armor;
+      this.armor -= remainder;
       remainder -= temp;
-      if (character.armor < 0) character.armor = 0;
+      if (this.armor < 0) this.armor = 0;
     }
     if (remainder > 0){
-      character.currentHealth = character.currentHealth - remainder;
+      this.currentHealth = this.currentHealth - remainder;
     }
   }
-  checkDeath(character);
+  this.checkDeath();
   return damageRecieve;
 }
 
-function healCal(character, powerRatio, baseHeal){
-  let totalHeal = Math.floor((baseHeal + (character.power * powerRatio)) 
-  * (1.0 + character.healMod));
+Character.prototype.healCal = function(powerRatio, baseHeal){
+  let totalHeal = Math.floor((baseHeal + (this.power * powerRatio)) 
+  * (1.0 + this.healMod));
   return totalHeal;
 }
 
-function heal(character, healAmt){
-  let value = character.currentHealth + healAmt;
-  if ( value > character.maxHealth ){
-    character.currentHealth = character.maxHealth;
-    character.barrier = value - character.maxHealth;
+Character.prototype.heal = function(healAmt){
+  let value = this.currentHealth + healAmt;
+  if ( value > this.maxHealth ){
+    this.currentHealth = this.maxHealth;
+    this.barrier = value - this.maxHealth;
   } else {
-    character.currentHealth = value;
+    this.currentHealth = value;
   }
 }
 
 function checkDeath(character){
   if (character.currentHealth < 0){
-    console.log(`${character.charType} has been defeated!`);
     character.active = false;
     character.alive = false;
   }
 }
 
-let player = new Character("player", "Wizard");
-let slime = new Character("enemy", "Slime");
-player.damageMod = 0.2;
-player.fireMod = 0.2;
-player.healMod = 0.2;
-// slime.fireRes = 2;
-slime.currentHealth = 20;
-console.log(player);
-console.log(slime);
-let damageTotal = damageCal(player, "fire", 0.5, 100);
-console.log(damageTotal);
-console.log(takeDamage(slime, "fire", damageTotal));
-console.log(slime.currentHealth);
-console.log(slime.barrier);
-
+module.exports = Character;
