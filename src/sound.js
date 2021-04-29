@@ -3,7 +3,6 @@ function Sound(){
 }
 
 Sound.prototype.playAudio = function(audio){
-  console.log("playAudio function")
   if (audio.paused){ 
     audio.play();
   }

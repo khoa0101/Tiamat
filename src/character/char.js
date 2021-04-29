@@ -95,7 +95,7 @@ Character.prototype.heal = function(healAmt){
   }
 }
 
-function checkDeath(character){
+Character.prototype.checkDeath = function(character){
   if (character.currentHealth < 0){
     character.active = false;
     character.alive = false;

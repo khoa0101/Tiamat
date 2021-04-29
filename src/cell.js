@@ -1,3 +1,6 @@
+const Util = require('./util.js');
+const Game = require('./game.js');
+
 class Cell {
   constructor(ctx, x, y){
     this.ctx = ctx;
@@ -8,8 +11,11 @@ class Cell {
   }
 
   draw(){
-    this.ctx.strokeStyle = 'black';
-    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+    if (Game.MOUSE.x && Game.MOUSE.y && Util.collision(this, Game.MOUSE)){
+      this.ctx.strokeStyle = 'white';
+      this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+    }
   }
 };
 

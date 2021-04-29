@@ -11,33 +11,24 @@ document.addEventListener("DOMContentLoaded", function(){
   canvasEl.height= Game.DIM_Y;
   music.menuMusic.volume = 0.2;
 
-  const mouse = {
-    x: undefined,
-    y: undefined,
-    width: 0.1,
-    height: 0.1,
-  }
-
   let canvasPosition = canvasEl.getBoundingClientRect();
   canvasEl.addEventListener('mousemove', function(e){
-    mouse.x = e.x - canvasPosition.left;
-    mouse.y = e.y - canvasPosition.top;
-    console.log(mouse.x + " " + mouse.y)
+    Game.MOUSE.x = e.x - canvasPosition.left;
+    Game.MOUSE.y = e.y - canvasPosition.top;
   });
 
   canvasEl.addEventListener('mouseleave', function(){
-    mouse.x = undefined;
-    mouse.y = undefined;
+    Game.MOUSE.x = undefined;
+    Game.MOUSE.y = undefined;
   });
 
   const ctx = canvasEl.getContext("2d");
   const gameView = new GameView(game, ctx);
+  game.addEnemy();
   gameView.animate();
   gameView.createGrid();
-  gameView.handleGameGrid();
   soundButton.addEventListener("click", () => {
     music.playAudio(music.menuMusic);
-    console.log(music.menuMusic.paused);
     if (music.menuMusic.paused){
       soundButton.value = "Unmute";
     } else {
