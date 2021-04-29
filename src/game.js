@@ -1,13 +1,14 @@
 const Character = require("./character/char");
 function Game() {
+  this.grid = [];
   this.players = new Array(6);
   this.enemies = [];
   this.turns = [];
   this.currentTurn = this.turns[0];
 }
 
-Game.DIM_X = 1514;
-Game.DIM_Y = 860;
+Game.DIM_X = 1500;
+Game.DIM_Y = 800;
 Game.FPS = 60;
 
 Game.prototype.add = function(object) {

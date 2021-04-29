@@ -4,7 +4,12 @@ function Sound(){
 
 Sound.prototype.playAudio = function(audio){
   console.log("playAudio function")
-  if (audio.paused) audio.play();
+  if (audio.paused){ 
+    audio.play();
+  }
+  else {
+    audio.pause();
+  } 
 }
 
 module.exports = Sound;

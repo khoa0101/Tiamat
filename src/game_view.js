@@ -10,7 +10,7 @@ function GameView(game, ctx) {
 };
 
 GameView.prototype.animate = function(){
-  this.ctx.fillStyle = "black";
+  this.ctx.fillStyle = "white";
   this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);
   requestAnimationFrame(this.animate.bind(this));
 };
