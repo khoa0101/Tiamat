@@ -9,6 +9,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/cell.js":
+/*!*********************!*\
+  !*** ./src/cell.js ***!
+  \*********************/
+/***/ ((module) => {
+
+eval("class Cell {\n  constructor(ctx, x, y){\n    this.ctx = ctx;\n    this.x = x;\n    this.y = y;\n    this.width = 100;\n    this.height = 100;\n  }\n\n  draw(){\n    this.ctx.strokeStyle = 'black';\n    this.ctx.strokeRect(this.x, this.y, this.width, this.height);\n  }\n};\n\nmodule.exports = Cell;\n\n//# sourceURL=webpack:///./src/cell.js?");
+
+/***/ }),
+
 /***/ "./src/character/char.js":
 /*!*******************************!*\
   !*** ./src/character/char.js ***!
@@ -35,7 +45,7 @@ eval("const Character = __webpack_require__(/*! ./character/char */ \"./src/char
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\")\n\nfunction GameView(game, ctx) {\n  this.ctx = ctx;\n  this.game = game;\n  this.controlsBar = {\n    width: Game.DIM_X,\n    height: 100,\n  }\n};\n\nGameView.prototype.animate = function(){\n  this.ctx.fillStyle = \"white\";\n  this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);\n  requestAnimationFrame(this.animate.bind(this));\n};\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\")\nconst Cell = __webpack_require__(/*! ./cell.js */ \"./src/cell.js\")\n\nfunction GameView(game, ctx) {\n  this.ctx = ctx;\n  this.game = game;\n  this.controlsBar = {\n    width: Game.DIM_X,\n    height: 100,\n  }\n};\n\nGameView.prototype.createGrid = function(){\n  for (let y = 100; y < Game.DIM_Y; y += 100){\n    for (let x = 0; x < Game.DIM_X; x += 100){\n      this.game.grid.push(new Cell(this.ctx, x, y));\n    }\n  }\n}; \n\nGameView.prototype.handleGameGrid = function(){\n  for (let i = 0; i < this.game.grid.length; i++){\n    this.game.grid[i].draw();\n  }\n};\n\nGameView.prototype.animate = function(){\n  this.ctx.fillStyle = \"white\";\n  this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);\n  requestAnimationFrame(this.animate.bind(this));\n};\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
 
 /***/ }),
 
@@ -45,7 +55,7 @@ eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\")\n\nfu
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst Sound = __webpack_require__(/*! ./sound.js */ \"./src/sound.js\");\nconst GameView = __webpack_require__(/*! ./game_view.js */ \"./src/game_view.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const music = new Sound;\n  const soundButton = document.getElementById(\"music\");\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n  music.menuMusic.volume = 0.2;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  new GameView(game, ctx).animate();\n  soundButton.addEventListener(\"click\", () => {\n    music.playAudio(music.menuMusic);\n    console.log(music.menuMusic.paused);\n    if (music.menuMusic.paused){\n      soundButton.value = \"Unmute\";\n    } else {\n      soundButton.value = \"Mute\";\n    }\n  })\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst Sound = __webpack_require__(/*! ./sound.js */ \"./src/sound.js\");\nconst GameView = __webpack_require__(/*! ./game_view.js */ \"./src/game_view.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const music = new Sound;\n  const soundButton = document.getElementById(\"music\");\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n  music.menuMusic.volume = 0.2;\n\n  const mouse = {\n    x: undefined,\n    y: undefined,\n    width: 0.1,\n    height: 0.1,\n  }\n\n  let canvasPosition = canvasEl.getBoundingClientRect();\n  canvasEl.addEventListener('mousemove', function(e){\n    mouse.x = e.x - canvasPosition.left;\n    mouse.y = e.y - canvasPosition.top;\n    console.log(mouse.x + \" \" + mouse.y)\n  });\n\n  canvasEl.addEventListener('mouseleave', function(){\n    mouse.x = undefined;\n    mouse.y = undefined;\n  });\n\n  const ctx = canvasEl.getContext(\"2d\");\n  const gameView = new GameView(game, ctx);\n  gameView.animate();\n  gameView.createGrid();\n  gameView.handleGameGrid();\n  soundButton.addEventListener(\"click\", () => {\n    music.playAudio(music.menuMusic);\n    console.log(music.menuMusic.paused);\n    if (music.menuMusic.paused){\n      soundButton.value = \"Unmute\";\n    } else {\n      soundButton.value = \"Mute\";\n    }\n  })\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
