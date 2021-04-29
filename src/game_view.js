@@ -1,42 +1,17 @@
+const Game = require("./game.js")
+
 function GameView(game, ctx) {
   this.ctx = ctx;
   this.game = game;
-  this.ship = this.game.addShip();
-}
-
-GameView.MOVES = {
-  w: [0, -1],
-  a: [-1, 0],
-  s: [0, 1],
-  d: [1, 0],
+  this.controlsBar = {
+    width: Game.DIM_X,
+    height: 100,
+  }
 };
 
-GameView.prototype.bindKeyHandlers = function bindKeyHandlers() {
-  const ship = this.ship;
-
-  Object.keys(GameView.MOVES).forEach(function(k)  {
-    const move = GameView.MOVES[k];
-    key(k, function () { ship.power(move); });
-  });
-
-  key("space", function () { ship.fireBullet(); });
-};
-
-GameView.prototype.start = function start() {
-  this.bindKeyHandlers();
-  this.lastTime = 0;
-  // start the animation
-  requestAnimationFrame(this.animate.bind(this));
-};
-
-GameView.prototype.animate = function animate(time) {
-  const timeDelta = time - this.lastTime;
-
-  this.game.step(timeDelta);
-  this.game.draw(this.ctx);
-  this.lastTime = time;
-
-  // every call to animate requests causes another call to animate
+GameView.prototype.animate = function(){
+  this.ctx.fillStyle = "black";
+  this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);
   requestAnimationFrame(this.animate.bind(this));
 };
 

@@ -1,11 +1,10 @@
 const Game = require("./game.js");
 const Sound = require("./sound.js");
-// const GameView = require("./game_view");
+const GameView = require("./game_view.js");
 
 document.addEventListener("DOMContentLoaded", function(){
   const canvasEl = document.getElementById("game-canvas");
   const music = new Sound;
-  console.log(music);
   const game = new Game;
   canvasEl.width = Game.DIM_X;
   canvasEl.height= Game.DIM_Y;
@@ -14,6 +13,5 @@ document.addEventListener("DOMContentLoaded", function(){
   // document.addEventListener("click", () => {
   //   music.playAudio(music.menuMusic);
   // })
-  console.log("Webpack");
-  new GameView(game, ctx).start();
+  new GameView(game, ctx).animate();
 })

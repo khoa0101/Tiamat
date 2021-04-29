@@ -29,13 +29,23 @@ eval("const Character = __webpack_require__(/*! ./character/char */ \"./src/char
 
 /***/ }),
 
+/***/ "./src/game_view.js":
+/*!**************************!*\
+  !*** ./src/game_view.js ***!
+  \**************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\")\n\nfunction GameView(game, ctx) {\n  this.ctx = ctx;\n  this.game = game;\n  this.controlsBar = {\n    width: Game.DIM_X,\n    height: 100,\n  }\n};\n\nGameView.prototype.animate = function(){\n  this.ctx.fillStyle = \"black\";\n  this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);\n  requestAnimationFrame(this.animate.bind(this));\n};\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst Sound = __webpack_require__(/*! ./sound.js */ \"./src/sound.js\");\n// const GameView = require(\"./game_view\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const music = new Sound;\n  console.log(music);\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  // document.addEventListener(\"click\", () => {\n  //   music.playAudio(music.menuMusic);\n  // })\n  console.log(\"Webpack\");\n  new GameView(game, ctx).start();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst Sound = __webpack_require__(/*! ./sound.js */ \"./src/sound.js\");\nconst GameView = __webpack_require__(/*! ./game_view.js */ \"./src/game_view.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n  const canvasEl = document.getElementById(\"game-canvas\");\n  const music = new Sound;\n  const game = new Game;\n  canvasEl.width = Game.DIM_X;\n  canvasEl.height= Game.DIM_Y;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  // document.addEventListener(\"click\", () => {\n  //   music.playAudio(music.menuMusic);\n  // })\n  new GameView(game, ctx).animate();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
