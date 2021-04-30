@@ -11,7 +11,6 @@ class Cell {
   }
 
   draw(){
-
     if (Game.MOUSE.x && Game.MOUSE.y && Util.collision(this, Game.MOUSE)){
       this.ctx.strokeStyle = 'white';
       this.ctx.strokeRect(this.x, this.y, this.width, this.height);

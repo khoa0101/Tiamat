@@ -32,12 +32,22 @@ GameView.prototype.renderEnemies = function(){
   }
 };
 
+GameView.prototype.renderTurn = function(){
+  let x = 300;
+  for (let i = 0; i < this.game.turns.length && i < 7; i++){
+    this.game.turns[i].draw(this.ctx, x, 500);
+    x += 100;
+  }
+}
+
 GameView.prototype.animate = function(){
   this.ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
   this.ctx.fillStyle = "white";
   this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);
   this.handleGameGrid();
   this.renderEnemies();
+  this.renderTurn();
+  this.game.checkTurn();
   requestAnimationFrame(this.animate.bind(this));
 };
 

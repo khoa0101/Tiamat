@@ -48,6 +48,11 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
+Character.prototype.normalAttack = function(target){
+  let dmgType = "physical";
+  target.takeDamage(dmgType, this.damageCal(dmgType, 1, 1).bind(this));
+};
+
 Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){
   let totalDamage = Math.floor((baseDmg + (this.power * powerRatio)) 
   * (1.0 + this[`${dmgType}Mod`]) * (1.0 + this.damageMod));

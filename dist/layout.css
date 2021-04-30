@@ -4,36 +4,60 @@ body{
   justify-content: center;
   background: black;
 }
+
+@font-face {
+  font-family: 'DnDC' ;
+  src: url('fonts/DnDC.ttf');
+  font-style: normal;
+  font-weight: 100;
+}
+
 footer{
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 
 img:hover{
   transform: scale(1.2);
   transition: ease-out 0.5s; 
 }
-
-#music{
-  position: absolute;
-  top: 3%;
-  left: 80%;
-  padding: 15px 10px;
-  border: solid 2px black;
-  border-radius: 100%;
-  background: white;
-}
-
-#music:hover{
+button:hover,input:hover{
   cursor: pointer;
-  color: white;
-  background-color: black;
+}
+.menu{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1;
 }
 
-#music:active{
-  color: white;
-  background-color: greenyellow;
+.hidden{
+  display: none;
+}
+
+.menu-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+}
+
+.menu h1{
+  font-family: 'DnDC';
+  font-size: 200px;
+  padding: 20px;
+  background: -webkit-linear-gradient(left, rgb(255, 0, 0), rgb(114, 0, 114), rgb(255, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 canvas{

@@ -6,6 +6,8 @@ function Game() {
   this.enemies = new Array(6);
   this.turns = [];
   this.currentTurn = this.turns[0];
+  this.gameStart = false;
+  this.gameOver = false;
 }
 
 Game.MOUSE = {
@@ -21,9 +23,8 @@ Game.FPS = 60;
 
 Game.prototype.addEnemy = function(){
   for (let i = 0; i < this.enemies.length; i++){
-    this.enemies[i] = new Slime("enemy", "slime");
+    this.enemies[i] = new Slime();
   }
-  console.log(this.enemies);
 };
 
 Game.prototype.setTurn = function(){
@@ -35,7 +36,7 @@ Game.prototype.setTurn = function(){
   });
 
   this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
-  this.turns = this.turns.reverse;
+  // this.turns = this.turns.reverse;
 };
 
 Game.prototype.checkTurn = function(){
@@ -57,6 +58,7 @@ Game.prototype.win = function(){
   for (let i = 0; i < this.enemies.length; i++){
     if (this.enemies[i].alive) return false;
   }
+  this.gameOver = true;
   return true;
 };
 
@@ -64,6 +66,7 @@ Game.prototype.lose = function(){
   for (let i = 0; i < this.players.length; i++){
     if (this.players[i].alive) return false;
   }
+  this.gameOver = true;
   return true;
 }
 

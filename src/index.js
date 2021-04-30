@@ -4,8 +4,10 @@ const GameView = require("./game_view.js");
 
 document.addEventListener("DOMContentLoaded", function(){
   const canvasEl = document.getElementById("game-canvas");
-  const music = new Sound;
+  const menuModal = document.getElementsByClassName("menu");
   const soundButton = document.getElementById("music");
+  const startButton = document.getElementById("start");
+  const music = new Sound;
   const game = new Game;
   canvasEl.width = Game.DIM_X;
   canvasEl.height= Game.DIM_Y;
@@ -24,9 +26,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
   const ctx = canvasEl.getContext("2d");
   const gameView = new GameView(game, ctx);
-  game.addEnemy();
-  gameView.animate();
-  gameView.createGrid();
+
+  startButton.addEventListener('click', () => {
+    menuModal[0].classList.add("hidden");
+    game.addEnemy();
+    game.setTurn();
+    gameView.animate();
+    gameView.createGrid();
+  })
+
+  console.log(Object.keys(music));
+
   soundButton.addEventListener("click", () => {
     music.playAudio(music.menuMusic);
     if (music.menuMusic.paused){
