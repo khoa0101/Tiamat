@@ -75,7 +75,7 @@ eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\ncon
   \**********************/
 /***/ ((module) => {
 
-eval("function Sound(){\n  this.menuMusic = new Audio(\"../dist/sounds/BBS_menu.mp3\");\n}\n\nSound.prototype.playAudio = function(audio){\n  if (audio.paused){ \n    audio.play();\n  }\n  else {\n    audio.pause();\n  } \n}\n\nmodule.exports = Sound;\n\n//# sourceURL=webpack:///./src/sound.js?");
+eval("function Sound(){\n  this.menuMusic = new Audio(\"../dist/sounds/BBS_menu.mp3?\");\n}\n\nSound.prototype.playAudio = function(audio){\n  if (audio.paused){ \n    audio.play();\n  }\n  else {\n    audio.pause();\n  } \n}\n\nmodule.exports = Sound;\n\n//# sourceURL=webpack:///./src/sound.js?");
 
 /***/ }),
 
