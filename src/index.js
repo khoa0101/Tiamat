@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function(){
     gameView.createGrid();
   })
 
-  console.log(Object.keys(music));
-
   soundButton.addEventListener("click", () => {
     music.playAudio(music.menuMusic);
     if (music.menuMusic.paused){
