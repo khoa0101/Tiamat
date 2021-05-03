@@ -1,5 +1,5 @@
 function Sound(){
-  this.menuMusic = new Audio("../dist/sounds/BBS_menu");
+  this.menuMusic = document.getElementById("menu-music");
   this.menuMusic.loop = true;
 }
 
