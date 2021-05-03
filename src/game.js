@@ -1,20 +1,29 @@
-const Character = require("./character/char");
+const Slime = require("./character/enemies/slime.js");
+
 function Game() {
+  this.grid = [];
   this.players = new Array(6);
-  this.enemies = [];
+  this.enemies = new Array(6);
   this.turns = [];
   this.currentTurn = this.turns[0];
+  this.gameStart = false;
+  this.gameOver = false;
 }
 
-Game.DIM_X = 1514;
-Game.DIM_Y = 860;
+Game.MOUSE = {
+  x: undefined,
+  y: undefined,
+  width: 0.1,
+  height: 0.1,
+}
+
+Game.DIM_X = 1300;
+Game.DIM_Y = 600;
 Game.FPS = 60;
 
-Game.prototype.add = function(object) {
-  if (object.side = "player"){
-    this.players.push(object);
-  } else {
-    this.enemies.push(object);
+Game.prototype.addEnemy = function(){
+  for (let i = 0; i < this.enemies.length; i++){
+    this.enemies[i] = new Slime();
   }
 };
 
@@ -27,7 +36,7 @@ Game.prototype.setTurn = function(){
   });
 
   this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
-  this.turns = this.turns.reverse;
+  // this.turns = this.turns.reverse;
 };
 
 Game.prototype.checkTurn = function(){
@@ -49,6 +58,7 @@ Game.prototype.win = function(){
   for (let i = 0; i < this.enemies.length; i++){
     if (this.enemies[i].alive) return false;
   }
+  this.gameOver = true;
   return true;
 };
 
@@ -56,6 +66,7 @@ Game.prototype.lose = function(){
   for (let i = 0; i < this.players.length; i++){
     if (this.players[i].alive) return false;
   }
+  this.gameOver = true;
   return true;
 }
 

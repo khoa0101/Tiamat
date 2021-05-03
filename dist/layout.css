@@ -1,21 +1,81 @@
 body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: black;
 }
+
+@font-face {
+  font-family: 'DnDC' ;
+  src: url('fonts/DnDC.ttf');
+  font-style: normal;
+  font-weight: 100;
+}
+
 footer{
-  margin: 0 0 20px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 
 img:hover{
   transform: scale(1.2);
-  transition: ease-out 0.5s;
-  
+  transition: ease-out 0.5s; 
+}
+
+button, input{
+  background: black;
+  color: white;
+  border: none;
+  transition: ease-in-out 0.5s;
+}
+
+button:hover, input:hover{
+  cursor: pointer;
+  transform: scale(1.3);
+  transition: ease-in-out 0.5s;
+}
+
+.menu{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  top: 0;
+  width: 100%;
+  height: 90%;
+  background: black;
+  z-index: 1;
+}
+
+.hidden{
+  display: none;
+}
+
+.menu-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+}
+
+.menu h1{
+  font-family: 'DnDC';
+  font-size: 200px;
+  padding: 20px;
+  background: -webkit-linear-gradient(left, rgb(255, 0, 0), rgb(114, 0, 114), rgb(255, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 canvas{
+  position: relative;
+  margin: 0 auto;
   background-image: url(https://i.pinimg.com/originals/95/3d/c1/953dc19b8d5038d4918a42db8e5339c5.gif);
   background-image: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 };

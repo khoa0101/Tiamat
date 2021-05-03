@@ -1,42 +1,53 @@
+const Game = require("./game.js");
+const Cell = require("./cell.js");
+
 function GameView(game, ctx) {
   this.ctx = ctx;
   this.game = game;
-  this.ship = this.game.addShip();
+  this.controlsBar = {
+    width: Game.DIM_X,
+    height: 100,
+  }
+};
+
+GameView.prototype.createGrid = function(){
+  for (let y = 100; y < Game.DIM_Y; y += 100){
+    for (let x = 0; x < Game.DIM_X; x += 100){
+      this.game.grid.push(new Cell(this.ctx, x, y));
+    }
+  }
+}; 
+
+GameView.prototype.handleGameGrid = function(){
+  for (let i = 0; i < this.game.grid.length; i++){
+    this.game.grid[i].draw();
+  }
+};
+
+GameView.prototype.renderEnemies = function(){
+  let x = 100;
+  for (let i = 0; i < this.game.enemies.length; i++){
+    this.game.enemies[i].draw(this.ctx, x, 100);
+    x += 200; 
+  }
+};
+
+GameView.prototype.renderTurn = function(){
+  let x = 300;
+  for (let i = 0; i < this.game.turns.length && i < 7; i++){
+    this.game.turns[i].draw(this.ctx, x, 500);
+    x += 100;
+  }
 }
 
-GameView.MOVES = {
-  w: [0, -1],
-  a: [-1, 0],
-  s: [0, 1],
-  d: [1, 0],
-};
-
-GameView.prototype.bindKeyHandlers = function bindKeyHandlers() {
-  const ship = this.ship;
-
-  Object.keys(GameView.MOVES).forEach(function(k)  {
-    const move = GameView.MOVES[k];
-    key(k, function () { ship.power(move); });
-  });
-
-  key("space", function () { ship.fireBullet(); });
-};
-
-GameView.prototype.start = function start() {
-  this.bindKeyHandlers();
-  this.lastTime = 0;
-  // start the animation
-  requestAnimationFrame(this.animate.bind(this));
-};
-
-GameView.prototype.animate = function animate(time) {
-  const timeDelta = time - this.lastTime;
-
-  this.game.step(timeDelta);
-  this.game.draw(this.ctx);
-  this.lastTime = time;
-
-  // every call to animate requests causes another call to animate
+GameView.prototype.animate = function(){
+  this.ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+  // this.ctx.fillStyle = "white";
+  // this.ctx.fillRect(0, 0, this.controlsBar.width, this.controlsBar.height);
+  this.handleGameGrid();
+  this.renderEnemies();
+  this.renderTurn();
+  this.game.checkTurn();
   requestAnimationFrame(this.animate.bind(this));
 };
 
