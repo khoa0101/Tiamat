@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../dist/images/drag_icon.svg" type="image/x-icon">  
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="layout.css">
   <script type="application/javascript" src="./main.js"></script>
@@ -23,14 +24,72 @@
   </canvas>
   <div class="menu">
     <h1>Tiamat</h1>
-      <div class="menu-container">
+    <div class="menu-container">
         <button id="start">Start Game</button>
         <button id="team">Team Management</button>
         <button id="tutorial">Tutorial</button>
         <input type="button" id="music" value="Play sound"/>
         <button id="credits">Credits</button>
-      </div>
     </div>
+  </div>
+
+  <div class="modal hidden" id="credit-screen">
+    <div class="close-x">X</div>
+    <div id="credit-container">
+      <h1>Credits</h1>
+      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a></div>
+      <div>Images by MapleStory.</div>
+      <div>Music by Bleach Brave Souls Original Soundtrack "Eastern Dream".</div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="team-management">
+    <div class="close-x">X</div>
+    <div id="team-management-container">
+      <h1>Coming Soon!</h1>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="tutorial-page">
+    <div class="close-x">X</div>
+    <div id="tutorial-page-container">
+      <h1>Tutorial</h1>
+      <h2>Glossary</h2>
+        <ul>
+          <li>Health: Health determines how tough the character is. The more health it has,
+            the more hit it can take. If health reaches 0, the character is dead.
+          </li>
+          <li>Power: Power determines how strong/powerful the character is. The more power the character has, 
+            the more damage it will deal to its enemies.
+          </li>
+          <li>Armor: Armor determines how much damage the character can mitigate before taking damage to its health</li>
+          <li>Barrier: Like armor, barrier grants a temporary shield to the character. Barrier functions like an extra health bar. 
+            Barrier must be destroy before any damage can be dealt to target.
+          </li>
+          <li>Action Point(AP): Action point determines how many actions a character can make before ending its turn. 
+            Each actions(attack, abilities, spells, etc...) has different amount of action point cost.   
+          </li>
+          <li>Critical chance: Critical chance determines how accurate the character is at targeting
+            the weak point of its enemy. Landing a critical hit increases the damage of an attack.
+          </li>
+          <li>Critial damage: Critical damage determines how powerful the critial hit of an attack is.</li>
+          <li>Resistance: Resistance(physical, fire, water, lightning, poison, holy, dark, energy)
+            determines how much damage the character will take upon receiving an attack.
+            Having negative resistance will make an attack do more damage. Having resistance above 100% will heal
+            the character instead.
+          </li>
+          <li>Damage bonus: Damage bonus(physical, fire, water, lightning, poison, holy, dark, energy)
+            determines how much more damage the character will deal to its target.
+          </li>
+          <li>Lifesteal: Lifesteal heals the character performing the attack based on the damage dealt.</li>
+        </ul>
+      <h2>Combat</h2>
+      <ul>
+        <li>Comming soon!</li>
+      </ul>
+    </div>
+  </div>
+
   <footer>
     <div>
       <a href="https://github.com/khoa0101/Tiamat"><img src="images/GitHub64px.png"></a>
