@@ -12,6 +12,7 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.currentHealth = currentHealth;
   this.maxHealth = maxHealth;
   this.AP = AP;
+  this.APMax = 6;
   this.APRec = APRec;
   this.power = power;
   this.armor = armor;
@@ -82,6 +83,12 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
   }
   this.checkDeath();
   return damageRecieve;
+}
+Character.prototype.endTurn = function(){
+  this.AP += this.APRec;
+  if (this.AP > this.APMax){
+    this.AP = this.APMax; 
+  }
 }
 
 Character.prototype.healCal = function(powerRatio, baseHeal){

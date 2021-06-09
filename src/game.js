@@ -49,7 +49,8 @@ Game.prototype.checkTurn = function(){
 };
 
 Game.prototype.nextTurn = function(){
-  let temp = this.turns.pop();
+  let temp = this.turns.shift();
+  temp.endTurn();
   this.turns.push(temp);
   this.currentTurn = this.turns[0];
 };
