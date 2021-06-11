@@ -3,8 +3,8 @@ html{
 }
 
 body{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   justify-content: center;
   background: black;
   color: white;
@@ -18,6 +18,10 @@ body{
 }
 
 h1{
+  position: sticky;
+  top: 0px;
+  background: black;
+  width: 100%;
   padding: 20px 0;
   font-family: 'DnDC';
   font-size: 50px;
@@ -38,6 +42,8 @@ ul{
 }
 
 footer{
+  background: black;
+  top: 90%;
   margin: 20px 0;
   display: flex;
   justify-content: center;
@@ -91,10 +97,24 @@ button:hover, input:hover{
 #credit-container, #tutorial-page-container, #team-management-container{
   padding-top: 10px;
   width: 600px;
+  max-height: 80vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+#credit, #tutorial-page, #team-management{
+  max-height: 80vh;
+}
+
+#credit-container::-webkit-scrollbar, #tutorial-page-container::-webkit-scrollbar, #team-management-container::-webkit-scrollbar {
+  display: none;
+}
+
 
 .close-x{
   padding: 10px;
+  height: 20px;
 }
 .close-x:hover{
   cursor: pointer;
@@ -137,4 +157,5 @@ ul li {
 
 .important{
   font-weight: bold;
+  font-size: 20px;
 }
