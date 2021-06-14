@@ -14,14 +14,6 @@ class Ranger extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
-
-  draw(ctx, x, y){
-    let slime = document.getElementById("ranger");
-    ctx.drawImage(slime, x, y, 100, 100);
-    ctx.fillStyle = 'green';
-    ctx.font = '20px Arial';
-    ctx.fillText(`${Math.floor(this.currentHealth)}/${Math.floor(this.maxHealth)}`, x, y);
-  };
 }
 
 module.exports = Ranger;

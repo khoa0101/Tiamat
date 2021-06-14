@@ -10,17 +10,6 @@ function Game() {
   this.gameOver = false;
 }
 
-Game.MOUSE = {
-  x: undefined,
-  y: undefined,
-  width: 0.1,
-  height: 0.1,
-}
-
-Game.DIM_X = 1300;
-Game.DIM_Y = 600;
-Game.FPS = 60;
-
 Game.prototype.addEnemy = function(){
   for (let i = 0; i < this.enemies.length; i++){
     this.enemies[i] = new Slime();
@@ -36,7 +25,6 @@ Game.prototype.setTurn = function(){
   });
 
   this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
-  // this.turns = this.turns.reverse;
 };
 
 Game.prototype.checkTurn = function(){

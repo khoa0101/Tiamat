@@ -14,14 +14,6 @@ class Slime extends Character{
       energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [], xp = 0,
       maxXP = 100, xpReward = 10);
   };
-
-  draw(ctx, x, y){
-    let slime = document.getElementById("slime");
-    ctx.drawImage(slime, x, y, 100, 100);
-    ctx.fillStyle = 'red';
-    ctx.font = '20px Arial';
-    ctx.fillText(`${Math.floor(this.currentHealth)}/${Math.floor(this.maxHealth)}`, x, y);
-  };
 }
 
 module.exports = Slime;
