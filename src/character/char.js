@@ -89,6 +89,7 @@ Character.prototype.endTurn = function(){
   if (this.AP > this.APMax){
     this.AP = this.APMax; 
   }
+  this.heal(this.healCal(0, this.regen));
 }
 
 Character.prototype.healCal = function(powerRatio, baseHeal){
