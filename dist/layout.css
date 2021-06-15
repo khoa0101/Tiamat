@@ -42,7 +42,11 @@ ul{
 }
 
 footer{
+  position: absolute;
   background: black;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: 20px 0;
   display: flex;
   justify-content: center;
@@ -141,15 +145,6 @@ button:hover, input:hover{
   -webkit-text-fill-color: transparent;
 }
 
-canvas{
-  position: relative;
-  margin: 0 auto;
-  background-image: url(https://i.pinimg.com/originals/95/3d/c1/953dc19b8d5038d4918a42db8e5339c5.gif);
-  background-image: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 ul li {
   margin: 10px 0;
 }
@@ -157,4 +152,8 @@ ul li {
 .important{
   font-weight: bold;
   font-size: 20px;
+}
+
+.underline{
+  text-decoration: underline;
 }

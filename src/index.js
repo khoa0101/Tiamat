@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function(){
   const game = new Game;
   music.menuMusic.volume = 0.2;
 
-  const gameView = new GameView(game, ctx);
-
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
     game.addEnemy();

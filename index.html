@@ -12,17 +12,15 @@
 </head>
 <body>
   <!-- <audio id="menu-music" src="./dist/sounds/BBS_menu.mp3" loop></audio> -->
-  <canvas id="game-canvas">
-    <div class="images">
-      <img id="warrior" src="./dist/images/warrior.png"/>
-      <img id="rouge" src="./dist/images/rouge.png"/>
-      <img id="ranger" src="./dist/images/archer.png"/>
-      <img id="cleric" src="./dist/images/cleric.png"/>
-      <img id="mage" src="./dist/images/mage.png"/>
-      <img id="bard" src="./dist/images/bard.png"/>
-      <img id="slime" src="./dist/images/slime.png"/>
-    </div>
-  </canvas>
+  <!-- <div class="images">
+    <img id="warrior" src="./dist/images/warrior.png"/>
+    <img id="rouge" src="./dist/images/rouge.png"/>
+    <img id="ranger" src="./dist/images/archer.png"/>
+    <img id="cleric" src="./dist/images/cleric.png"/>
+    <img id="mage" src="./dist/images/mage.png"/>
+    <img id="bard" src="./dist/images/bard.png"/>
+    <img id="slime" src="./dist/images/slime.png"/>
+  </div> -->
   <div class="menu">
     <h1>Tiamat</h1>
     <div class="menu-container">
@@ -57,32 +55,32 @@
       <h1>Tutorial</h1>
       <h2>Glossary</h2>
         <ul>
-          <li><i class="important">Health:</i> Health determines how tough the character is. The more health it has,
+          <li><i class="important underline">Health:</i> Health determines how tough the character is. The more health it has,
             the more hit it can take. If health reaches 0, the character is dead.
           </li>
-          <li><i class="important">Power:</i> Power determines how strong/powerful the character is. The more power the character has, 
+          <li><i class="important underline">Power:</i> Power determines how strong/powerful the character is. The more power the character has, 
             the more damage it will deal to its enemies.
           </li>
-          <li><i class="important">Armor:</i> Armor determines how much damage the character can mitigate before taking damage to its health</li>
-          <li>Barrier: Like armor, barrier grants a temporary shield to the character. Barrier functions like an extra health bar. 
+          <li><i class="important underline">Armor:</i> Armor determines how much damage the character can mitigate before taking damage to its health</li>
+          <li><i class="important underline">Barrier:</i> Like armor, barrier grants a temporary shield to the character. Barrier functions like an extra health bar. 
             Barrier must be destroy before any damage can be dealt to target.
           </li>
-          <li><i class="important">Action Point(AP):</i> Action point determines how many actions a character can make before ending its turn. 
+          <li><i class="important underline">Action Point(AP):</i> Action point determines how many actions a character can make before ending its turn. 
             Each actions(attack, abilities, spells, etc...) has different amount of action point cost.   
           </li>
-          <li><i class="important">Critical chance:</i> Critical chance determines how accurate the character is at targeting
+          <li><i class="important underline">Critical chance:</i> Critical chance determines how accurate the character is at targeting
             the weak point of its enemy. Landing a critical hit increases the damage of an attack.
           </li>
-          <li><i class="important">Critial damage:</i> Critical damage determines how powerful the critial hit of an attack is.</li>
-          <li>Resistance: Resistance(physical, fire, water, lightning, poison, holy, dark, energy)
+          <li><i class="important underline">Critial damage:</i> Critical damage determines how powerful the critial hit of an attack is.</li>
+          <li><i class="important underline">Resistance:</i> Resistance(physical, fire, water, lightning, poison, holy, dark, energy)
             determines how much damage the character will take upon receiving an attack.
             Having negative resistance will make an attack do more damage. Having resistance above 100% will heal
             the character instead.
           </li>
-          <li><i class="important">Damage bonus:</i> Damage bonus(physical, fire, water, lightning, poison, holy, dark, energy)
+          <li><i class="important underline">Damage bonus:</i> Damage bonus(physical, fire, water, lightning, poison, holy, dark, energy)
             determines how much more damage the character will deal to its target.
           </li>
-          <li><i class="important">Lifesteal:</i> Lifesteal heals the character performing the attack based on the damage dealt.</li>
+          <li><i class="important underline">Lifesteal:</i> Lifesteal heals the character performing the attack based on the damage dealt.</li>
         </ul>
       <h2>Combat</h2>
       <ul>
@@ -94,7 +92,7 @@
   <footer>
   <footer>
     <div credits>
-      <a href="https://github.com/khoa0101/Tiamat"><img src="./dist/images/GitHub64px.png"></a>
+      <a href="https://github.com/khoa0101/Tiamat" target="_blank"><img src="./dist/images/GitHub64px.png"></a>
     </div>    
   </footer>
 </body>

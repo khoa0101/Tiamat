@@ -2,8 +2,8 @@ const Slime = require("./character/enemies/slime.js");
 
 function Game() {
   this.grid = [];
-  this.players = new Array(6);
-  this.enemies = new Array(6);
+  this.players = new Array(4);
+  this.enemies = new Array(4);
   this.turns = [];
   this.currentTurn = this.turns[0];
   this.gameStart = false;
