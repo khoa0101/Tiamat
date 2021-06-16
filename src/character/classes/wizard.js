@@ -14,6 +14,14 @@ class Wizard extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
+
+  render(){
+    this.render("wizard");
+    const div = document.getElementById("wizard");
+    const img = document.createElement("img");
+    img.src = './dist/images/wizard.png';
+    div.prepend(img);
+  }
 }
 
 module.exports = Wizard;

@@ -14,6 +14,14 @@ class Slime extends Character{
       energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [], xp = 0,
       maxXP = 100, xpReward = 10);
   };
+
+  render(){
+    this.render("slime");
+    const div = document.getElementById("slime");
+    const img = document.createElement("img");
+    img.src = './dist/images/slime.png';
+    div.prepend(img);
+  }
 }
 
 module.exports = Slime;

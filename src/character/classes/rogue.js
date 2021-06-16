@@ -14,6 +14,14 @@ class Rogue extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
+
+  render(){
+    this.render("rogue");
+    const div = document.getElementById("rogue");
+    const img = document.createElement("img");
+    img.src = './dist/images/rogue.png';
+    div.prepend(img);
+  }
 }
 
-module.exports = Rouge;
+module.exports = Rogue;

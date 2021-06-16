@@ -19,12 +19,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
+    game.addAllies();
     game.addEnemy();
     game.setTurn();
-    while(!game.gameOver){
-      game.win();
-      game.lose();
-    }
   });
 
   creditButton.addEventListener('click', () => {
@@ -48,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 
-  soundButton.addEventListener("click", () => {
+  soundButton.addEventListener("click", (song) => {
     music.playAudio(music.menuMusic);
     if (music.menuMusic.paused){
       soundButton.value = "Unmute";

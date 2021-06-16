@@ -13,6 +13,14 @@ class Cleric extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
+
+  render(){
+    this.render("cleric");
+    const div = document.getElementById("cleric");
+    const img = document.createElement("img");
+    img.src = './dist/images/cleric.png';
+    div.prepend(img);
+  }
 }
 
 module.exports = Cleric;

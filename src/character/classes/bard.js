@@ -13,6 +13,14 @@ class Warrior extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
+
+  render(){
+    this.render("bard");
+    const div = document.getElementById("bard");
+    const img = document.createElement("img");
+    img.src = './dist/images/bard.png';
+    div.prepend(img);
+  }
 }
 
 module.exports = Warrior;

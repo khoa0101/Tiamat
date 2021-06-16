@@ -60,7 +60,8 @@ Character.prototype.render = function(char){
   armor.max = this.armor;
   barrier.value = this.barrier;
   barrier.max = this.barrier;
-  div.classList.add('character',char);
+  div.classList.add('character');
+  div.setAttribute('id', char);
   div.appendChild(healthBar);
   div.appendChild(armor);
   div.appendChild(barrier);

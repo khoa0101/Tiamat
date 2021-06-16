@@ -1,4 +1,8 @@
 const Slime = require("./character/enemies/slime.js");
+const Rogue = require("./character/classes/rogue.js");
+const Cleric = require("./character/classes/cleric.js");
+const Warrior = require("./character/classes/warrior.js");
+const Wizard = require("./character/classes/wizard.js");
 
 function Game() {
   this.grid = [];
@@ -15,6 +19,13 @@ Game.prototype.addEnemy = function(){
     this.enemies[i] = new Slime();
   }
 };
+
+Game.prototype.addAllies = function(){
+  this.players[0] = new Warrior();
+  this.players[1] = new Cleric();
+  this.players[2] = new Wizard();
+  this.players[3] = new Rogue();
+}
 
 Game.prototype.setTurn = function(){
   this.players.forEach((player) => {
