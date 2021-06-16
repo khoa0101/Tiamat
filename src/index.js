@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function(){
     menuModal[0].classList.add("hidden");
     game.addEnemy();
     game.setTurn();
+    while(!game.gameOver){
+      game.win();
+      game.lose();
+    }
   });
 
   creditButton.addEventListener('click', () => {

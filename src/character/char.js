@@ -49,8 +49,24 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
-Character.prototype.normalAttack = function(target){
-  let dmgType = "physical";
+Character.prototype.render = function(char){
+  const div = document.createElement('div');
+  const healthBar = document.createElement('progress');
+  const armor = document.createElement('progress');
+  const barrier = document.createElement('progress');
+  healthBar.value = this.currentHealth;
+  healthBar.max = this.maxHealth;
+  armor.value = this.armor;
+  armor.max = this.armor;
+  barrier.value = this.barrier;
+  barrier.max = this.barrier;
+  div.classList.add('character',char);
+  div.appendChild(healthBar);
+  div.appendChild(armor);
+  div.appendChild(barrier);
+}
+
+Character.prototype.normalAttack = function(dmgType,target){
   target.takeDamage(dmgType, this.damageCal(dmgType, 1, 1).bind(this));
 };
 
@@ -90,6 +106,16 @@ Character.prototype.endTurn = function(){
     this.AP = this.APMax; 
   }
   this.heal(this.healCal(0, this.regen));
+  this.barrierDie();
+}
+
+Character.prototype.barrierDie = function(){
+  if (this.barrier > 0){
+    this.barrier -= this.barrierDecay;
+    if (this.barrier < 0){
+      this.barrier = 0;
+    } 
+  }
 }
 
 Character.prototype.healCal = function(powerRatio, baseHeal){
