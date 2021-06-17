@@ -67,6 +67,9 @@ Character.prototype.render = function(char){
   div.appendChild(barrier);
 }
 
+Character.prototype.renderPortrait = function(){
+}
+
 Character.prototype.normalAttack = function(dmgType,target){
   target.takeDamage(dmgType, this.damageCal(dmgType, 1, 1).bind(this));
 };

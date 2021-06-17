@@ -16,7 +16,7 @@ class Wizard extends Character{
   };
 
   render(){
-    this.render("wizard");
+    Character.prototype.render.call("wizard");
     const div = document.getElementById("wizard");
     const img = document.createElement("img");
     img.src = './dist/images/wizard.png';

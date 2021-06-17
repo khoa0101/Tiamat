@@ -15,7 +15,7 @@ class Cleric extends Character{
   };
 
   render(){
-    this.render("cleric");
+    Character.prototype.render.call("cleric");
     const div = document.getElementById("cleric");
     const img = document.createElement("img");
     img.src = './dist/images/cleric.png';

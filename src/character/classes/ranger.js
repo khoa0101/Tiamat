@@ -16,7 +16,7 @@ class Ranger extends Character{
   };
 
   render(){
-    this.render("ranger");
+    Character.prototype.render.call("ranger");
     const div = document.getElementById("ranger");
     const img = document.createElement("img");
     img.src = './dist/images/ranger.png';

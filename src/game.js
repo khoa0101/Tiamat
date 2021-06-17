@@ -52,6 +52,8 @@ Game.prototype.nextTurn = function(){
   temp.endTurn();
   this.turns.push(temp);
   this.currentTurn = this.turns[0];
+  this.win();
+  this.lose();
 };
 
 Game.prototype.win = function(){

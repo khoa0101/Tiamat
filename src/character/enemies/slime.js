@@ -16,7 +16,7 @@ class Slime extends Character{
   };
 
   render(){
-    this.render("slime");
+    Character.prototype.render.call("slime");
     const div = document.getElementById("slime");
     const img = document.createElement("img");
     img.src = './dist/images/slime.png';

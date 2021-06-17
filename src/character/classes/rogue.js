@@ -16,7 +16,7 @@ class Rogue extends Character{
   };
 
   render(){
-    this.render("rogue");
+    Character.prototype.render.call("rogue");
     const div = document.getElementById("rogue");
     const img = document.createElement("img");
     img.src = './dist/images/rogue.png';
