@@ -50,7 +50,6 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
 }
 
 Character.prototype.render = function(char, el){
-  console.log(el);
   const img = document.createElement("img");
   const div = document.createElement('div');
   const healthBar = document.createElement('div');
@@ -88,7 +87,7 @@ Character.prototype.render = function(char, el){
 }
 
 Character.prototype.renderPortrait = function(char){
-  const img = document.createElement(img);
+  const img = document.createElement('img');
   img.src=`./dist/images/${char.toLowerCase()}.png`;
   return img; 
 }

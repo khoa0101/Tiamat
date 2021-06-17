@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", function(){
   const teamPage = document.getElementById("team-management");
   const music = new Sound;
   const game = new Game;
-  game.addAllies();
-  game.addEnemy();
   const gameView = new GameView(game);
   music.menuMusic.volume = 0.2;
 
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
+    game.addAllies();
+    game.addEnemy();
     game.setTurn();
+    gameView.setupView();
   });
 
   creditButton.addEventListener('click', () => {

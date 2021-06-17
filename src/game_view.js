@@ -3,7 +3,6 @@ const Game = require("./game.js");
 class GameView{
   constructor(game){
     this.game = game;
-    this.setupView();
   }
 
   setupView(){
@@ -11,7 +10,9 @@ class GameView{
     const endTurn = document.createElement('button');
     const returnToMenu = document.createElement('button');
     endTurn.setAttribute('id', 'end-turn');
+    endTurn.innerHTML = "End Turn"
     returnToMenu.setAttribute('id', 'return-to-menu');
+    returnToMenu.innerHTML = "Return to menu";
     const navBar = document.getElementById('nav-bar');
     const turns = document.getElementById('turn-display');
     const ally = document.getElementById('ally-team');
@@ -27,6 +28,10 @@ class GameView{
     for (let i = 0; i < this.game.turns.length; i++){
       turns.appendChild(this.game.turns[i].renderPortrait(this.game.turns[i].charType));
     }
+    returnToMenu.addEventListener('click', () => {
+      const menuModal = document.getElementsByClassName("menu");
+      menuModal[0].classList.remove("hidden");
+    })
   }
 }
 

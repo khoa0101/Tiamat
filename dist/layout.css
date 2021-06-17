@@ -176,9 +176,20 @@ ul li {
   grid-template-columns: 1fr 1fr;
 }
 
+#turn-display{
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+}
+
+#turn-display img{
+  height: 5vh;
+  width: 5vh;
+}
+
 .character{
-  width: 20vw;
-  height: 20vh;
+  width: 15vw;
+  height: 15vh;
 }
 
 .character img{
