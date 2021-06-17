@@ -49,7 +49,9 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
-Character.prototype.render = function(char, $el){
+Character.prototype.render = function(char, el){
+  console.log(el);
+  const img = document.createElement("img");
   const div = document.createElement('div');
   const healthBar = document.createElement('progress');
   const armor = document.createElement('progress');
@@ -60,15 +62,20 @@ Character.prototype.render = function(char, $el){
   armor.max = this.armor;
   barrier.value = this.barrier;
   barrier.max = this.barrier;
+  img.src = `./dist/images/${char.toLowerCase()}.png`;
   div.classList.add('character');
   div.setAttribute('id', char);
+  div.appendChild(img);
   div.appendChild(healthBar);
   div.appendChild(armor);
   div.appendChild(barrier);
-  $el.appendChild(div);
+  el.appendChild(div);
 }
 
-Character.prototype.renderPortrait = function(){
+Character.prototype.renderPortrait = function(char){
+  const img = document.createElement(img);
+  img.src=`./dist/images/${char.toLowerCase()}.png`;
+  return img; 
 }
 
 Character.prototype.normalAttack = function(dmgType,target){

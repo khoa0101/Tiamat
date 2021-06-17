@@ -14,12 +14,8 @@ class Warrior extends Character{
       maxXP, xpReward);
   };
 
-  render(){
-    super.render(this.charType);
-    const div = document.getElementById(this.charType);
-    const img = document.createElement("img");
-    img.src = './dist/images/bard.png';
-    div.prepend(img);
+  render(el){
+    super.render(this.charType, el);
   }
 }
 

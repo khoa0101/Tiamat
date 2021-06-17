@@ -13,6 +13,7 @@ class GameView{
     endTurn.setAttribute('id', 'end-turn');
     returnToMenu.setAttribute('id', 'return-to-menu');
     const navBar = document.getElementById('nav-bar');
+    const turns = document.getElementById('turn-display');
     const ally = document.getElementById('ally-team');
     const enemy = document.getElementById('enemy-team');
     navBar.append(returnToMenu);
@@ -22,6 +23,9 @@ class GameView{
     }
     for (let i = 0; i < this.game.enemies.length; i++){
       this.game.enemies[i].render(enemy);
+    }
+    for (let i = 0; i < this.game.turns.length; i++){
+      turns.appendChild(this.game.turns[i].renderPortrait(this.game.turns[i].charType));
     }
   }
 }
