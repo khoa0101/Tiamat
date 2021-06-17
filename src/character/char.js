@@ -49,7 +49,7 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
-Character.prototype.render = function(char){
+Character.prototype.render = function(char, $el){
   const div = document.createElement('div');
   const healthBar = document.createElement('progress');
   const armor = document.createElement('progress');
@@ -65,6 +65,7 @@ Character.prototype.render = function(char){
   div.appendChild(healthBar);
   div.appendChild(armor);
   div.appendChild(barrier);
+  $el.appendChild(div);
 }
 
 Character.prototype.renderPortrait = function(){

@@ -1,7 +1,7 @@
 
 const Character = require("../char.js");
 class Rogue extends Character{
-  constructor(side = "player", charType = "Warrior", level = 1, currentHealth = 40, maxHealth = 40, AP = 4, APRec = 4, power = 18, armor = 20,
+  constructor(side = "player", charType = "Rogue", level = 1, currentHealth = 40, maxHealth = 40, AP = 4, APRec = 4, power = 18, armor = 20,
     initiative = 18, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 1, lifesteal = 0, regen = 1,
     barrier = 0, barrierDecay = 0, physicalRes = 0, fireRes = 0, waterRes = 0, lightningRes = 0, poisonRes = 0, energyRes = 0, 
     holyRes = 0, darkRes = 0, physicalMod = 0, fireMod = 0, waterMod = 0, lightningMod = 0, poisonMod = 0,
@@ -16,8 +16,8 @@ class Rogue extends Character{
   };
 
   render(){
-    Character.prototype.render.call("rogue");
-    const div = document.getElementById("rogue");
+    super.render(this.charType);
+    const div = document.getElementById(this.charType);
     const img = document.createElement("img");
     img.src = './dist/images/rogue.png';
     div.prepend(img);

@@ -18,10 +18,10 @@ class GameView{
     navBar.append(returnToMenu);
     grid.append(endTurn);
     for (let i = 0; i < this.game.players.length; i++){
-      ally.append(this.game.players[i].render());
-    } 
+      this.game.players[i].render(ally);
+    }
     for (let i = 0; i < this.game.enemies.length; i++){
-      enemy.append(this.game.players[i].render());
+      this.game.enemies[i].render(enemy);
     }
   }
 }

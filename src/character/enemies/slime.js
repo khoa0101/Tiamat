@@ -15,9 +15,9 @@ class Slime extends Character{
       maxXP = 100, xpReward = 10);
   };
 
-  render(){
-    Character.prototype.render.call("slime");
-    const div = document.getElementById("slime");
+  render($el){
+    super.render(this.charType, $el);
+    const div = document.getElementById(this.charType);
     const img = document.createElement("img");
     img.src = './dist/images/slime.png';
     div.prepend(img);

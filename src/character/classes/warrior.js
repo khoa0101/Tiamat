@@ -16,9 +16,10 @@ class Warrior extends Character{
   };
 
   render(){
-    Character.prototype.render.call("warrior");
-    const div = document.getElementById("warrior");
+    super.render(this.charType);
+    const div = document.getElementById(this.charType);
     const img = document.createElement("img");
+    console.log(div);
     img.src = './dist/images/warrior.png';
     div.prepend(img);
   }
