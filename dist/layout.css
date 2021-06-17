@@ -177,11 +177,11 @@ ul li {
 }
 
 .character{
-  width: 10vw;
-  height: 10vh;
+  width: 20vw;
+  height: 20vh;
 }
 
 .character img{
-  width: 5vw;
-  height: 5vh;
+  width: 10vh;
+  height: 10vh;
 }
