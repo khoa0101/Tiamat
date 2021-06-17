@@ -43,17 +43,23 @@ ul{
 
 footer{
   position: absolute;
-  background: black;
-  top: 87%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 20px 0;
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  background: black;
+  width: 100%;
+  height: 10vh;
+  top: 85%;
+  margin: 20px 0;
   z-index: 2;
 }
 
-img:hover{
+footer svg{
+  fill: white;
+  margin: 10px;
+}
+
+footer svg:hover{
   transform: scale(1.2);
   transition: ease-out 0.5s; 
 }
@@ -139,7 +145,7 @@ button:hover, input:hover{
 .menu h1{
   font-family: 'DnDC';
   font-size: 200px;
-  padding: 20px;
+  padding: 20px 0;
   background: -webkit-linear-gradient(left, rgb(255, 0, 0), rgb(114, 0, 114), rgb(255, 0, 0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -162,4 +168,20 @@ ul li {
   height: 85vh;
   width: 100vw;
   background: white;
+  color: black;
+}
+
+#arena-display{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.character{
+  width: 10vw;
+  height: 10vh;
+}
+
+.character img{
+  width: 5vw;
+  height: 5vh;
 }

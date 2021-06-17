@@ -53,15 +53,24 @@ Character.prototype.render = function(char, el){
   console.log(el);
   const img = document.createElement("img");
   const div = document.createElement('div');
-  const healthBar = document.createElement('progress');
-  const armor = document.createElement('progress');
-  const barrier = document.createElement('progress');
+  const healthBar = document.createElement('div');
+  const innerHealthBar = document.createElement('div');
+  const armor = document.createElement('div');
+  const barrier = document.createElement('div');
+  healthBar.setAttribute('id', 'max-health');
+  innerHealthBar.setAttribute('id', 'current-health');
+  armor.setAttribute('id', 'armor');
+  barrier.setAttribute('id', 'barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
+  healthBar.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
+  healthBar.appendChild(innerHealthBar);
   armor.value = this.armor;
   armor.max = this.armor;
+  armor.innerHTML =  `${this.armor}`;
   barrier.value = this.barrier;
   barrier.max = this.barrier;
+  barrier.innerHTML = `${this.barrier}`;
   img.src = `./dist/images/${char.toLowerCase()}.png`;
   div.classList.add('character');
   div.setAttribute('id', char);
@@ -70,6 +79,12 @@ Character.prototype.render = function(char, el){
   div.appendChild(armor);
   div.appendChild(barrier);
   el.appendChild(div);
+  if (this.armor < 1){
+    armor.classList.add('hidden');
+  }
+  if (this.barrier < 1){
+    barrier.classList.add('hidden');
+  }
 }
 
 Character.prototype.renderPortrait = function(char){
