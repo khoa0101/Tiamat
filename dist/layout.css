@@ -167,7 +167,11 @@ ul li {
 #game-view{
   height: 87vh;
   width: 100vw;
-  background: white;
+  background: url(https://wallpaperaccess.com/full/2536359.png)no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   color: black;
 }
 
