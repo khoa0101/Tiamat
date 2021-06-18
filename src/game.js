@@ -10,7 +10,6 @@ function Game(){
   this.enemies = new Array(4);
   this.turns = [];
   this.currentTurn = this.turns[0];
-  this.gameStart = false;
   this.gameOver = false;
 }
 

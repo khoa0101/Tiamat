@@ -35,6 +35,15 @@ class GameView{
       menuModal[0].classList.remove("hidden");
       
     })
+
+    endTurn.addEventListener('click', () => {
+      console.log("Clicked end turn!")
+      this.game.nextTurn();
+      console.log(this.game);
+      const temp = turns.firstChild;
+      turns.removeChild(turns.firstChild);
+      turns.appendChild(temp);
+    })
   }
 }
 
