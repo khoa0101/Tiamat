@@ -20,10 +20,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
-    game.addAllies();
-    game.addEnemy();
-    game.setTurn();
-    gameView.setupView();
+    if (!game.start){
+      game.start = true;
+      game.addAllies();
+      game.addEnemy();
+      game.setTurn();
+      gameView.setupView();
+    } else {
+      menuModal[0].value = 'Resume Game';
+    }
   });
 
   creditButton.addEventListener('click', () => {

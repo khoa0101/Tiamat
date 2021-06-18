@@ -4,8 +4,8 @@ const Cleric = require("./character/classes/cleric.js");
 const Warrior = require("./character/classes/warrior.js");
 const Wizard = require("./character/classes/wizard.js");
 
-function Game() {
-  this.grid = [];
+function Game(){
+  this.start = false;
   this.players = new Array(4);
   this.enemies = new Array(4);
   this.turns = [];

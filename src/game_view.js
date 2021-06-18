@@ -1,4 +1,5 @@
 const Game = require("./game.js");
+const Util = require("./util.js");
 
 class GameView{
   constructor(game){
@@ -26,11 +27,13 @@ class GameView{
       this.game.enemies[i].render(enemy);
     }
     for (let i = 0; i < this.game.turns.length; i++){
-      turns.appendChild(this.game.turns[i].renderPortrait(this.game.turns[i].charType));
+      turns.appendChild(this.game.turns[i].renderPortrait(this.game.turns[i].charType, this.game.turns[i].side));
     }
+
     returnToMenu.addEventListener('click', () => {
       const menuModal = document.getElementsByClassName("menu");
       menuModal[0].classList.remove("hidden");
+      
     })
   }
 }

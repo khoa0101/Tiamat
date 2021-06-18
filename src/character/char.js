@@ -52,14 +52,16 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
 Character.prototype.render = function(char, el){
   const img = document.createElement("img");
   const div = document.createElement('div');
+  const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
   const innerHealthBar = document.createElement('div');
   const armor = document.createElement('div');
   const barrier = document.createElement('div');
-  healthBar.setAttribute('id', 'max-health');
-  innerHealthBar.setAttribute('id', 'current-health');
-  armor.setAttribute('id', 'armor');
-  barrier.setAttribute('id', 'barrier');
+  healthBar.classList.add('max-health');
+  innerHealthBar.classList.add('current-health');
+  healthContainer.classList.add('health-container');
+  armor.classList.add('armor');
+  barrier.classList.add('barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
   healthBar.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
@@ -74,9 +76,10 @@ Character.prototype.render = function(char, el){
   div.classList.add('character');
   div.setAttribute('id', char);
   div.appendChild(img);
-  div.appendChild(healthBar);
-  div.appendChild(armor);
-  div.appendChild(barrier);
+  healthContainer.appendChild(healthBar);
+  healthContainer.appendChild(armor);
+  healthContainer.appendChild(barrier);
+  div.appendChild(healthContainer);
   el.appendChild(div);
   if (this.armor < 1){
     armor.classList.add('hidden');
@@ -86,9 +89,15 @@ Character.prototype.render = function(char, el){
   }
 }
 
-Character.prototype.renderPortrait = function(char){
+Character.prototype.renderPortrait = function(char, side){
   const img = document.createElement('img');
-  img.src=`./dist/images/${char.toLowerCase()}.png`;
+  img.src=`./dist/images/${char.toLowerCase()}-portrait.png`;
+  if (side === "enemy"){
+    img.classList.add("enemy");
+  } else {
+    img.classList.add("player");
+  }
+  
   return img; 
 }
 

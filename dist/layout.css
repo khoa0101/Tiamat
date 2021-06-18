@@ -165,7 +165,7 @@ ul li {
 }
 
 #game-view{
-  height: 85vh;
+  height: 87vh;
   width: 100vw;
   background: white;
   color: black;
@@ -196,3 +196,13 @@ ul li {
   width: 10vh;
   height: 10vh;
 }
+
+#ally-team img, .player{
+  background: blue;
+}
+
+#enemy-team img, .enemy{
+  background: red;
+}
+
+
