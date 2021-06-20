@@ -14,10 +14,6 @@ class Rogue extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
   };
-
-  render(el){
-    super.render(this.charType, el);
-  }
 }
 
 module.exports = Rogue;

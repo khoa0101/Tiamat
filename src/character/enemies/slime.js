@@ -14,10 +14,6 @@ class Slime extends Character{
       energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [], xp = 0,
       maxXP = 100, xpReward = 10);
   };
-
-  render(el){
-    super.render(this.charType, el);
-  }
 }
 
 module.exports = Slime;

@@ -49,7 +49,7 @@ function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50
   this.xpReward = xpReward;
 }
 
-Character.prototype.render = function(char, el){
+Character.prototype.render = function(el, i){
   const img = document.createElement("img");
   const div = document.createElement('div');
   const healthContainer = document.createElement('div');
@@ -72,9 +72,10 @@ Character.prototype.render = function(char, el){
   barrier.value = this.barrier;
   barrier.max = this.barrier;
   barrier.innerHTML = `${this.barrier}`;
-  img.src = `./dist/images/${char.toLowerCase()}.png`;
+  img.src = `./dist/images/${this.charType.toLowerCase()}.png`;
   div.classList.add('character');
-  div.setAttribute('id', char);
+  div.setAttribute('id', this.charType);
+  div.setAttribute('value', i);
   div.appendChild(img);
   healthContainer.appendChild(healthBar);
   healthContainer.appendChild(armor);
@@ -89,10 +90,10 @@ Character.prototype.render = function(char, el){
   }
 }
 
-Character.prototype.renderPortrait = function(char, side){
+Character.prototype.renderPortrait = function(){
   const img = document.createElement('img');
-  img.src=`./dist/images/${char.toLowerCase()}-portrait.png`;
-  if (side === "enemy"){
+  img.src=`./dist/images/${this.charType.toLowerCase()}-portrait.png`;
+  if (this.side === "enemy"){
     img.classList.add("enemy");
   } else {
     img.classList.add("player");
