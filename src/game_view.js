@@ -39,6 +39,12 @@ class GameView{
     })
     endTurn.addEventListener('click', () => {
       this.game.nextTurn();
+      for (let i = 0; i < this.game.players.length; i++){
+        this.game.players[i].renderFrame(i);
+      }
+      for (let i = 0; i < this.game.enemies.length; i++){
+        this.game.enemies[i].renderFrame(i);
+      }
       const temp = turns.firstChild;
       turns.removeChild(turns.firstChild);
       turns.appendChild(temp);

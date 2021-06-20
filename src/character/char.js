@@ -74,8 +74,7 @@ Character.prototype.render = function(el, i){
   barrier.innerHTML = `${this.barrier}`;
   img.src = `./dist/images/${this.charType.toLowerCase()}.png`;
   div.classList.add('character');
-  div.setAttribute('id', this.charType);
-  div.setAttribute('value', i);
+  div.setAttribute('id', `${this.charType}-${i}`);
   div.appendChild(img);
   healthContainer.appendChild(healthBar);
   healthContainer.appendChild(armor);
@@ -97,9 +96,28 @@ Character.prototype.renderPortrait = function(){
     img.classList.add("enemy");
   } else {
     img.classList.add("player");
-  }
-  
+  } 
   return img; 
+}
+
+Character.prototype.renderFrame = function(i){
+  let el = document.getElementById(`${this.charType}-${i}`);
+  let health = el.getElementsByClassName(`max-health`)[0];
+  let armor = el.getElementsByClassName(`armor`)[0];
+  let barrier = el.getElementsByClassName(`barrier`)[0];
+  health.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
+  armor.innerHTML =  `${this.armor}`;
+  barrier.innerHTML = `${this.barrier}`;
+  if (this.armor < 1){
+    armor.classList.add('hidden');
+  } else {
+    armor.classList.remove('hidden');
+  }
+  if (this.barrier < 1){
+    barrier.classList.add('hidden');
+  } else {
+    barrier.classList.remove('hidden');
+  }
 }
 
 Character.prototype.normalAttack = function(dmgType,target){
@@ -141,7 +159,9 @@ Character.prototype.endTurn = function(){
   if (this.AP > this.APMax){
     this.AP = this.APMax; 
   }
+  console.log(this.currentHealth, this.barrier)
   this.heal(this.healCal(0, this.regen));
+  console.log(this.currentHealth, this.barrier);
   this.barrierDie();
 }
 
@@ -164,7 +184,7 @@ Character.prototype.heal = function(healAmt){
   let value = this.currentHealth + healAmt;
   if ( value > this.maxHealth ){
     this.currentHealth = this.maxHealth;
-    this.barrier = value - this.maxHealth;
+    this.barrier += value - this.maxHealth;
   } else {
     this.currentHealth = value;
   }
