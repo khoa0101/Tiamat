@@ -17,6 +17,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
   this.APRec = APRec;
   this.power = power;
   this.armor = armor;
+  this.maxArmor = armor;
   this.initiative = initiative;
   this.critChance = critChance;
   this.critDamage = critDamage;
@@ -26,6 +27,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
   this.lifesteal = lifesteal;
   this.regen = regen;
   this.barrier = barrier;
+  this.maxBarrier = barrier;
   this.barrierDecay = barrierDecay;
   this.physicalRes = physicalRes;
   this.fireRes = fireRes;
@@ -120,7 +122,74 @@ Character.prototype.renderFrame = function(i){
   } else {
     barrier.classList.remove('hidden');
   }
-}
+};
+
+Character.prototype.printInfo = function(){
+  const ul = document.getElementsByClassName('info-container')[0];
+  const level = document.getElementById('level');
+  const charType = document.getElementById('charType');
+  const maxHealth = document.getElementById('maxHealth');
+  const armor = document.getElementById('armor');
+  const barrier = document.getElementById(`barrier`);
+  const initiative = document.getElementById(`initiative`);
+  const critChance = document.getElementById(`critChance`);
+  const critDamage = document.getElementById(`critDamage`);
+  const damageMod = document.getElementById(`damageMod`);
+  const healMod = document.getElementById(`healMod`);
+  const cdMod = document.getElementById(`cdMod`);
+  const lifesteal = document.getElementById(`lifesteal`);
+  const regen = document.getElementById(`regen`);
+  const physicalRes = document.getElementById(`physicalRes`);
+  const fireRes = document.getElementById(`fireRes`);
+  const waterRes = document.getElementById(`waterRes`);
+  const lightningRes = document.getElementById(`lightningRes`);
+  const poisonRes = document.getElementById(`poisonRes`);
+  const energyRes = document.getElementById(`energyRes`);
+  const holyRes = document.getElementById(`holyRes`);
+  const darkRes = document.getElementById(`darkRes`);
+  const physicalMod = document.getElementById(`physicalMod`);
+  const fireMod = document.getElementById(`fireMod`);
+  const waterMod = document.getElementById(`waterMod`);
+  const lightningMod = document.getElementById(`lightningMod`);
+  const poisonMod = document.getElementById(`poisonMod`);
+  const energyMod = document.getElementById(`energyMod`);
+  const holyMod = document.getElementById(`holyMod`);
+  const darkMod = document.getElementById(`darkMod`);
+  const talents = document.getElementById(`talents`);
+  const conditions = document.getElementById(`conditions`);
+  ul.classList.remove('hidden');
+  level.innerHTML = `Level: ${this.level}`;
+  charType.innerHTML = `${this.charType}`;
+  maxHealth.innerHTML = `Health: ${this.maxHealth}`;
+  armor.innerHTML = `Armor: ${this.armor}`;
+  barrier.innerHTML = `Barrier: ${this.barrier}`;
+  initiative.innerHTML = `Initiative: ${this.initiative}`;
+  critChance.innerHTML = `Critical Chance: ${this.critChance}`;
+  critDamage.innerHTML = `Critical Damage: ${this.critDamage}`;
+  damageMod.innerHTML = `Damage Modifier: ${this.damageMod * 100}%`;
+  healMod.innerHTML = `Healing Modifier: ${this.healMod * 100}%`;
+  cdMod.innerHTML = `Cooldown Reduction: ${this.cdMod * 100}%`;
+  lifesteal.innerHTML = `Lifesteal Reduction: ${this.lifesteal * 100}%`;
+  regen.innerHTML = `Health Regeneration: ${this.regen}/turn`;
+  physicalRes.innerHTML = `Physical Damage Resistance: ${this.physicalRes * 100}%`;
+  fireRes.innerHTML = `Fire Damage Resistance: ${this.fireRes * 100}%`;
+  waterRes.innerHTML = `Water Damage Resistance: ${this.waterRes * 100}%`;
+  lightningRes.innerHTML = `Lightning Damage Resistance: ${this.lightningRes * 100}%`;
+  poisonRes.innerHTML = `Poison Damage Resistance: ${this.poisonRes * 100}%`;
+  energyRes.innerHTML = `Energy Damage Resistance: ${this.energyRes * 100}%`;
+  holyRes.innerHTML = `Holy Damage Resistance: ${this.holyRes * 100}%`;
+  darkRes.innerHTML = `Darkness Damage Resistance: ${this.darkRes * 100}%`;
+  physicalMod.innerHTML = `Physical Damage Modifier: ${this.physicalMod * 100}%`;
+  fireMod.innerHTML = `Fire Damage Modifier: ${this.fireMod * 100}%`;
+  waterMod.innerHTML = `Water Damage Modifier: ${this.waterMod * 100}%`;
+  lightningMod.innerHTML = `Lightning Damage Modifier: ${this.lightningMod * 100}%`;
+  poisonMod.innerHTML = `Poison Damage Modifier: ${this.poisonMod * 100}%`;
+  energyMod.innerHTML = `Energy Damage Modifier: ${this.energyMod * 100}%`;
+  holyMod.innerHTML = `Holy Damage Modifier: ${this.holyMod * 100}%`;
+  darkMod.innerHTML = `Darkness Damage Modifier: ${this.darkMod * 100}%`;
+  talents.innerHTML = `Talents: ` + this.talents.length > 0 ? "" : "None";
+  conditions.innerHTML = `Current Conditions: ` + this.conditions.length > 0 ? "" : "None";
+};
 
 Character.prototype.normalAttack = function(dmgType,target){
   target.takeDamage(dmgType, this.damageCal(dmgType, 1, 1).bind(this));

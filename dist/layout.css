@@ -186,7 +186,7 @@ ul li {
 
 #arena-display{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 10fr 1fr;
 }
 
 #turn-display{
@@ -258,4 +258,15 @@ ul li {
 
 .barrier::before{
   background: cyan;
+}
+
+#info-display{
+  height: 20vh;
+  background: rgb(0, 0, 75);
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+#info-display::-webkit-scrollbar{
+  display: none;
 }
