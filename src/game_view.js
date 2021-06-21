@@ -43,10 +43,10 @@ class GameView{
     endTurn.addEventListener('click', () => {
       this.game.nextTurn();
       for (let i = 0; i < this.game.players.length; i++){
-        this.game.players[i].renderFrame(i);
+        this.game.players[i].renderTurn(i);
       }
       for (let i = 0; i < this.game.enemies.length; i++){
-        this.game.enemies[i].renderFrame(i);
+        this.game.enemies[i].renderTurn(i);
       }
       ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
       if (this.game.currentTurn.side === `enemy`){
@@ -64,12 +64,20 @@ class GameView{
         this.game.players[child.getAttributeNode('value').value].printInfo(); 
       })
     });
+
+    enemy.childNodes.forEach( child => {
+      child.addEventListener('click', () => {
+        this.game.enemies[child.getAttributeNode('value').value].printInfo(); 
+      })
+    });
+
   }
 
   infoDisplay(el){
     const ul = document.createElement('ul');
+    const img = document.createElement('img');
     const level = document.createElement('li');
-    const charType = document.createElement('h1');
+    const charType = document.createElement('h3');
     const maxHealth = document.createElement('li');
     const armor = document.createElement('li');
     const barrier = document.createElement(`li`);
@@ -99,8 +107,10 @@ class GameView{
     const darkMod = document.createElement(`li`);
     const talents = document.createElement(`li`);
     const conditions = document.createElement(`li`);
+    
     ul.classList.add('info-container');
     ul.classList.add('hidden');
+    img.classList.add('info-image');
     level.setAttribute('id', 'level');
     charType.setAttribute('id', 'charType');
     maxHealth.setAttribute('id', 'maxHealth');
@@ -132,6 +142,8 @@ class GameView{
     darkMod.setAttribute('id', "darkMod")
     talents.setAttribute('id', "talents");
     conditions.setAttribute('id', "conditions");
+    
+    ul.appendChild(charType);
     ul.appendChild(level);
     ul.appendChild(maxHealth);
     ul.appendChild(armor);
@@ -162,7 +174,7 @@ class GameView{
     ul.appendChild(darkMod);
     ul.appendChild(talents);
     ul.appendChild(conditions);
-    el.appendChild(charType);
+    el.appendChild(img);
     el.appendChild(ul);
   }
 }

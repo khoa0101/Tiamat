@@ -57,19 +57,16 @@ Character.prototype.render = function(el, i){
   const div = document.createElement('div');
   const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
-  // const innerHealthBar = document.createElement('div');
   const armor = document.createElement('div');
   const barrier = document.createElement('div');
   div.setAttribute('value', i);
   healthBar.classList.add('health-bar');
-  // innerHealthBar.classList.add('current-health');
   healthContainer.classList.add('health-container');
   armor.classList.add('armor');
   barrier.classList.add('barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
   healthBar.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
-  // healthBar.appendChild(innerHealthBar);
   armor.value = this.armor;
   armor.max = this.armor;
   armor.innerHTML =  `${this.armor}`;
@@ -104,7 +101,7 @@ Character.prototype.renderPortrait = function(){
   return img; 
 }
 
-Character.prototype.renderFrame = function(i){
+Character.prototype.renderTurn = function(i){
   let el = document.getElementById(`${this.charType}-${i}`);
   let health = el.getElementsByClassName(`health-bar`)[0];
   let armor = el.getElementsByClassName(`armor`)[0];
@@ -125,6 +122,7 @@ Character.prototype.renderFrame = function(i){
 };
 
 Character.prototype.printInfo = function(){
+  const img = document.getElementsByClassName('info-image')[0];
   const ul = document.getElementsByClassName('info-container')[0];
   const level = document.getElementById('level');
   const charType = document.getElementById('charType');
@@ -157,10 +155,19 @@ Character.prototype.printInfo = function(){
   const darkMod = document.getElementById(`darkMod`);
   const talents = document.getElementById(`talents`);
   const conditions = document.getElementById(`conditions`);
+
+  img.src=`./dist/images/${this.charType.toLowerCase()}.png`;
+  if (this.side === "enemy"){
+    img.classList.remove('player');
+    img.classList.add("enemy");
+  } else {
+    img.classList.remove('enemy');
+    img.classList.add("player");
+  }
   ul.classList.remove('hidden');
   level.innerHTML = `Level: ${this.level}`;
   charType.innerHTML = `${this.charType}`;
-  maxHealth.innerHTML = `Health: ${this.maxHealth}`;
+  maxHealth.innerHTML = `Health: ${this.currentHealth}/${this.maxHealth}`;
   armor.innerHTML = `Armor: ${this.armor}`;
   barrier.innerHTML = `Barrier: ${this.barrier}`;
   initiative.innerHTML = `Initiative: ${this.initiative}`;

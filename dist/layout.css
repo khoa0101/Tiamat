@@ -206,6 +206,10 @@ ul li {
   height: 20vh;
 }
 
+.character img:hover{
+  cursor: pointer;
+}
+
 .character img{
   border: solid 1px white;
   width: 15vh;
@@ -264,9 +268,11 @@ ul li {
   height: 20vh;
   background: rgb(0, 0, 75);
   overflow-y: scroll;
+  color: white;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
 #info-display::-webkit-scrollbar{
   display: none;
 }
