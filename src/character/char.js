@@ -1,9 +1,10 @@
-function Character(side, charType, level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 30,
+function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 30,
   initiative = 10, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 1, lifesteal = 0, regen = 1,
   barrier = 0, barrierDecay = 0, physicalRes = 0, fireRes = 0, waterRes = 0, lightningRes = 0, poisonRes = 0, energyRes = 0, 
   holyRes = 0, darkRes = 0, physicalMod = 0, fireMod = 0, waterMod = 0, lightningMod = 0, poisonMod = 0,
   energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [], xp = 0,
   maxXP = 100, xpReward = 0) {
+  this.id = id;
   this.level = level;
   this.active = true;
   this.alive = true;
@@ -54,19 +55,19 @@ Character.prototype.render = function(el, i){
   const div = document.createElement('div');
   const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
-  const innerHealthBar = document.createElement('div');
+  // const innerHealthBar = document.createElement('div');
   const armor = document.createElement('div');
   const barrier = document.createElement('div');
   div.setAttribute('value', i);
-  healthBar.classList.add('max-health');
-  innerHealthBar.classList.add('current-health');
+  healthBar.classList.add('health-bar');
+  // innerHealthBar.classList.add('current-health');
   healthContainer.classList.add('health-container');
   armor.classList.add('armor');
   barrier.classList.add('barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
   healthBar.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
-  healthBar.appendChild(innerHealthBar);
+  // healthBar.appendChild(innerHealthBar);
   armor.value = this.armor;
   armor.max = this.armor;
   armor.innerHTML =  `${this.armor}`;
@@ -103,7 +104,7 @@ Character.prototype.renderPortrait = function(){
 
 Character.prototype.renderFrame = function(i){
   let el = document.getElementById(`${this.charType}-${i}`);
-  let health = el.getElementsByClassName(`max-health`)[0];
+  let health = el.getElementsByClassName(`health-bar`)[0];
   let armor = el.getElementsByClassName(`armor`)[0];
   let barrier = el.getElementsByClassName(`barrier`)[0];
   health.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
@@ -158,7 +159,7 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
 Character.prototype.endTurn = function(){
   this.AP += this.APRec;
   if (this.AP > this.APMax){
-    this.AP = this.APMax; 
+    this.AP = this.APMax;
   }
   this.heal(this.healCal(0, this.regen));
   this.barrierDie();
@@ -194,6 +195,7 @@ Character.prototype.checkDeath = function(character){
     character.active = false;
     character.alive = false;
   }
+
 }
 
 module.exports = Character;

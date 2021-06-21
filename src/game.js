@@ -15,15 +15,15 @@ function Game(){
 
 Game.prototype.addEnemy = function(){
   for (let i = 0; i < this.enemies.length; i++){
-    this.enemies[i] = new Slime();
+    this.enemies[i] = new Slime(i);
   }
 };
 
 Game.prototype.addAllies = function(){
-  this.players[0] = new Warrior();
-  this.players[1] = new Cleric();
-  this.players[2] = new Wizard();
-  this.players[3] = new Rogue();
+  this.players[0] = new Warrior(0);
+  this.players[1] = new Cleric(1);
+  this.players[2] = new Wizard(2);
+  this.players[3] = new Rogue(3);
 }
 
 Game.prototype.setTurn = function(){

@@ -225,4 +225,37 @@ ul li {
   background: linear-gradient(rgb(255, 0, 0), rgb(255, 115, 0));
 }
 
+.health-container{
+  position: relative;
+  width: 15vh;
+  height: 20px;
+}
 
+.health-bar, .armor, .barrier{
+  text-align: center;
+  position: absolute;
+  width: 15vh;
+  height: 20px;
+  z-index: 1;
+}
+
+.health-bar::before, .armor::before, .barrier::before{
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: width .5s linear;
+}
+.health-bar::before{
+  background: greenyellow;
+}
+.armor::before{
+  background: silver;
+}
+
+.barrier::before{
+  background: cyan;
+}

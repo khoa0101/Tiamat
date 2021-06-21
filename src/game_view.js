@@ -47,6 +47,7 @@ class GameView{
       for (let i = 0; i < this.game.enemies.length; i++){
         this.game.enemies[i].renderFrame(i);
       }
+      ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
       if (this.game.currentTurn.side === `enemy`){
         ap.classList.add('hide');
       } else {
@@ -56,6 +57,7 @@ class GameView{
       turns.removeChild(turns.firstChild);
       turns.appendChild(temp);
     });
+    console.log(ally.childNodes);
   }
 }
 
