@@ -36,7 +36,7 @@ Game.prototype.setTurn = function(){
 
   this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
   this.turns = this.turns.reverse();
-
+  this.currentTurn = this.turns[0];
 };
 
 Game.prototype.checkTurn = function(){

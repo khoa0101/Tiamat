@@ -57,11 +57,11 @@ footer{
 footer svg{
   fill: white;
   margin: 10px;
+  transition: ease-out 0.5s; 
 }
 
 footer svg:hover{
   transform: scale(1.2);
-  transition: ease-out 0.5s; 
 }
 
 button, input{
@@ -73,11 +73,11 @@ button, input{
 
 button:hover{
   cursor: pointer;
+  transition: ease-in-out 0.5s;
 }
 
 .menu button:hover, input:hover{
   transform: scale(1.3);
-  transition: ease-in-out 0.5s;
 }
 
 .menu{
@@ -147,6 +147,9 @@ button:hover{
   display: none;
 }
 
+.hide{
+  visibility: hidden;
+}
 
 .menu h1{
   font-family: 'DnDC';

@@ -57,6 +57,7 @@ Character.prototype.render = function(el, i){
   const innerHealthBar = document.createElement('div');
   const armor = document.createElement('div');
   const barrier = document.createElement('div');
+  div.setAttribute('value', i);
   healthBar.classList.add('max-health');
   innerHealthBar.classList.add('current-health');
   healthContainer.classList.add('health-container');
@@ -72,7 +73,7 @@ Character.prototype.render = function(el, i){
   barrier.value = this.barrier;
   barrier.max = this.barrier;
   barrier.innerHTML = `${this.barrier}`;
-  img.src = `./dist/images/${this.charType.toLowerCase()}.png`;
+  img.src = `./dist/images/${this.charType.toLowerCase()}-portrait.png`;
   div.classList.add('character');
   div.setAttribute('id', `${this.charType}-${i}`);
   div.appendChild(img);
@@ -159,9 +160,7 @@ Character.prototype.endTurn = function(){
   if (this.AP > this.APMax){
     this.AP = this.APMax; 
   }
-  console.log(this.currentHealth, this.barrier)
   this.heal(this.healCal(0, this.regen));
-  console.log(this.currentHealth, this.barrier);
   this.barrierDie();
 }
 

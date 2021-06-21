@@ -8,8 +8,10 @@ class GameView{
 
   setupView(){
     const grid = document.getElementById('game-view');
+    const ap = document.getElementById('ap-display');
     const endTurn = document.createElement('button');
     const returnToMenu = document.createElement('button');
+    ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
     endTurn.setAttribute('id', 'end-turn');
     endTurn.innerHTML = "End Turn"
     returnToMenu.setAttribute('id', 'return-to-menu');
@@ -30,7 +32,7 @@ class GameView{
       turns.appendChild(this.game.turns[i].renderPortrait());
     }
     returnToMenu.addEventListener('click', () => {
-      const menuModal = document.getElementsByClassName("menu");
+      const menuModal = document.getElementsByClassName("menu")[0];
       const startButton = document.getElementById("start");
       menuModal.classList.remove("hidden");
       if (this.game.start){
@@ -45,10 +47,14 @@ class GameView{
       for (let i = 0; i < this.game.enemies.length; i++){
         this.game.enemies[i].renderFrame(i);
       }
+      if (this.game.currentTurn.side === `enemy`){
+        ap.classList.add('hide');
+      } else {
+        ap.classList.remove('hide');
+      }
       const temp = turns.firstChild;
       turns.removeChild(turns.firstChild);
       turns.appendChild(temp);
-      
     });
   }
 }
