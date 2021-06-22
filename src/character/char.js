@@ -122,6 +122,7 @@ Character.prototype.renderTurn = function(i){
 };
 
 Character.prototype.printInfo = function(){
+  const div = document.getElementById('info-display');
   const img = document.getElementsByClassName('info-image')[0];
   const ul = document.getElementsByClassName('info-container')[0];
   const level = document.getElementById('level');
@@ -130,6 +131,7 @@ Character.prototype.printInfo = function(){
   const armor = document.getElementById('armor');
   const barrier = document.getElementById(`barrier`);
   const initiative = document.getElementById(`initiative`);
+  const power = document.getElementById(`power`);
   const critChance = document.getElementById(`critChance`);
   const critDamage = document.getElementById(`critDamage`);
   const damageMod = document.getElementById(`damageMod`);
@@ -157,6 +159,7 @@ Character.prototype.printInfo = function(){
   const conditions = document.getElementById(`conditions`);
 
   img.src=`./dist/images/${this.charType.toLowerCase()}.png`;
+  img.classList.remove('hidden');
   if (this.side === "enemy"){
     img.classList.remove('player');
     img.classList.add("enemy");
@@ -170,9 +173,10 @@ Character.prototype.printInfo = function(){
   maxHealth.innerHTML = `Health: ${this.currentHealth}/${this.maxHealth}`;
   armor.innerHTML = `Armor: ${this.armor}`;
   barrier.innerHTML = `Barrier: ${this.barrier}`;
+  power.innerHTML = `Power: ${this.power}`;
   initiative.innerHTML = `Initiative: ${this.initiative}`;
-  critChance.innerHTML = `Critical Chance: ${this.critChance}`;
-  critDamage.innerHTML = `Critical Damage: ${this.critDamage}`;
+  critChance.innerHTML = `Critical Chance: ${this.critChance * 100}%`;
+  critDamage.innerHTML = `Critical Damage: ${this.critDamage * 100}%`;
   damageMod.innerHTML = `Damage Modifier: ${this.damageMod * 100}%`;
   healMod.innerHTML = `Healing Modifier: ${this.healMod * 100}%`;
   cdMod.innerHTML = `Cooldown Reduction: ${this.cdMod * 100}%`;
@@ -194,8 +198,9 @@ Character.prototype.printInfo = function(){
   energyMod.innerHTML = `Energy Damage Modifier: ${this.energyMod * 100}%`;
   holyMod.innerHTML = `Holy Damage Modifier: ${this.holyMod * 100}%`;
   darkMod.innerHTML = `Darkness Damage Modifier: ${this.darkMod * 100}%`;
-  talents.innerHTML = `Talents: ` + this.talents.length > 0 ? "" : "None";
-  conditions.innerHTML = `Current Conditions: ` + this.conditions.length > 0 ? "" : "None";
+  talents.innerHTML = `Talents: ` + (this.talents.length > 0 ? "" : "None");
+  conditions.innerHTML = `Current Conditions: ` + (this.conditions.length > 0 ? "" : "None");
+  div.scrollTop = 0;
 };
 
 Character.prototype.normalAttack = function(dmgType,target){

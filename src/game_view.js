@@ -40,6 +40,7 @@ class GameView{
         startButton.value = "";
       }
     })
+
     endTurn.addEventListener('click', () => {
       this.game.nextTurn();
       for (let i = 0; i < this.game.players.length; i++){
@@ -60,13 +61,13 @@ class GameView{
     });
 
     ally.childNodes.forEach( child => {
-      child.addEventListener('click', () => {
+      child.childNodes[0].addEventListener('click', () => {
         this.game.players[child.getAttributeNode('value').value].printInfo(); 
       })
     });
 
     enemy.childNodes.forEach( child => {
-      child.addEventListener('click', () => {
+      child.childNodes[0].addEventListener('click', () => {
         this.game.enemies[child.getAttributeNode('value').value].printInfo(); 
       })
     });
@@ -81,6 +82,7 @@ class GameView{
     const maxHealth = document.createElement('li');
     const armor = document.createElement('li');
     const barrier = document.createElement(`li`);
+    const power = document.createElement(`li`);
     const initiative = document.createElement(`li`);
     const critChance = document.createElement(`li`);
     const critDamage = document.createElement(`li`);
@@ -108,14 +110,14 @@ class GameView{
     const talents = document.createElement(`li`);
     const conditions = document.createElement(`li`);
     
-    ul.classList.add('info-container');
-    ul.classList.add('hidden');
-    img.classList.add('info-image');
+    ul.classList.add('info-container', 'hidden');
+    img.classList.add('info-image', 'hidden');
     level.setAttribute('id', 'level');
     charType.setAttribute('id', 'charType');
     maxHealth.setAttribute('id', 'maxHealth');
     armor.setAttribute('id', 'armor');
     barrier.setAttribute('id', 'barrier');
+    power.setAttribute('id', 'power');
     initiative.setAttribute('id', 'initiative');
     critChance.setAttribute('id', 'critChance');
     critDamage.setAttribute('id', 'critDamage');
@@ -148,6 +150,7 @@ class GameView{
     ul.appendChild(maxHealth);
     ul.appendChild(armor);
     ul.appendChild(barrier);
+    ul.appendChild(power);
     ul.appendChild(initiative);
     ul.appendChild(critChance);
     ul.appendChild(critDamage);

@@ -176,7 +176,7 @@ ul li {
 #game-view{
   height: 87vh;
   width: 100vw;
-  background: url(https://wallpaperaccess.com/full/2536359.png)no-repeat center center fixed;
+  background: url(https://wallpaperaccess.com/full/2536359.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -186,7 +186,7 @@ ul li {
 
 #arena-display{
   display: grid;
-  grid-template-columns: 10fr 1fr;
+  grid-template-columns: 1fr auto;
 }
 
 #turn-display{
@@ -202,7 +202,8 @@ ul li {
 }
 
 .character{
-  width: 20vw;
+  margin: 0 20px;
+  max-width: 20vw;
   height: 20vh;
 }
 
@@ -266,13 +267,30 @@ ul li {
 
 #info-display{
   height: 20vh;
+  display: grid;
+  grid-template-columns: auto 1fr;
   background: rgb(0, 0, 75);
-  overflow-y: scroll;
+  overflow-y: hidden;
   color: white;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
 
+.info-container{
+  padding: 15px;
+  list-style: none;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.info-container::-webkit-scrollbar,
 #info-display::-webkit-scrollbar{
   display: none;
+}
+
+.info-image{
+  margin: 3px;
+  width: 19vh;
+  height: 19vh;
 }
