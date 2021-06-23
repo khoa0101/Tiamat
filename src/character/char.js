@@ -81,6 +81,9 @@ Character.prototype.render = function(el, i){
   healthContainer.appendChild(armor);
   healthContainer.appendChild(barrier);
   div.appendChild(healthContainer);
+  if (this.side === 'player'){
+    this.renderSkills(div);
+  }
   el.appendChild(div);
   if (this.armor < 1){
     armor.classList.add('hidden');
@@ -88,6 +91,18 @@ Character.prototype.render = function(el, i){
   if (this.barrier < 1){
     barrier.classList.add('hidden');
   }
+}
+
+Character.prototype.renderSkills = function(el, skills = ['normal attack']){
+  const ul = document.createElement('ul');
+  skills.forEach(skill => {
+    const li = document.createElement('li');
+    li.innerHTML = skill;
+    ul.classList.add('skills-container');
+    li.classList.add('skill');
+    ul.appendChild(li);
+  })
+  el.appendChild(ul);
 }
 
 Character.prototype.renderPortrait = function(){

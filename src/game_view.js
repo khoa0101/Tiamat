@@ -24,7 +24,7 @@ class GameView{
     grid.append(endTurn);
     this.infoDisplay(info);
     for (let i = 0; i < this.game.players.length; i++){
-      this.game.players[i].render(ally, i);
+      let div = this.game.players[i].render(ally, i);
     }
     for (let i = 0; i < this.game.enemies.length; i++){
       this.game.enemies[i].render(enemy, i);
