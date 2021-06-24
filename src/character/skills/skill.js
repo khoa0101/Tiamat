@@ -9,16 +9,18 @@ class Skill {
 
   printInfo(){
     const div = document.getElementsByClassName('skill-info-container')[0];
-    const charInfo = document.getElementById('info-display');
+    const img = document.getElementsByClassName('info-image')[0];
+    const ul = document.getElementsByClassName('info-container')[0];
     const title = document.getElementById('skill-name');
     const cost = document.getElementById('skill-cost');
     const description = document.getElementById('skill-description');
     
     div.classList.remove('hidden');
-    charInfo.classList.add('hidden');
+    img.classList.add('hidden');
+    ul.classList.add('hidden');
 
     title.innerHTML = this.name;
-    cost.innerHTML = this.AP;
+    cost.innerHTML = `AP: ${this.AP}`;
     description.innerHTML = this.description;
   }
 }

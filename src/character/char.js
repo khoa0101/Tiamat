@@ -6,10 +6,6 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
   holyRes = 0, darkRes = 0, physicalMod = 0, fireMod = 0, waterMod = 0, lightningMod = 0, poisonMod = 0,
   energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [],  xp = 0,
   maxXP = 100, xpReward = 0, normalAttackType = 'physical', skills = []) {
-    skills.unshift(new Skill(
-      'Attack',
-      `Attack an enemy for ${this.damageCal(normalAttackType, 1, 10)} ${normalAttackType} damage.`,
-      2, 1, 'enemy'));
     this.id = id;
     this.level = level;
     this.active = true;
@@ -54,10 +50,15 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
     this.darkMod = darkMod;
     this.talents = talents;
     this.conditions = conditions;
-    this.skills = skills;
     this.xp = xp;
     this.maxXP = maxXP;
     this.xpReward = xpReward;
+
+    skills.unshift(new Skill(
+      'Basic Attack',
+      `Attack an enemy for ${this.damageCal(normalAttackType, 1, 0)} ${normalAttackType} damage.`,
+      2, 1, 'enemy'));
+    this.skills = skills;
 }
 
 Character.prototype.render = function(el, i){
@@ -193,10 +194,10 @@ Character.prototype.printInfo = function(){
     img.classList.remove('enemy');
     img.classList.add("player");
   }
+  
   ul.classList.remove('hidden');
-  if (!skill.classList.contains('hidden')){
-    skill.classList.add('hidden');
-  }
+  skill.classList.add('hidden');
+
   level.innerHTML = `Level: ${this.level}`;
   charType.innerHTML = `${this.charType}`;
   maxHealth.innerHTML = `Health: ${this.currentHealth}/${this.maxHealth}`;
