@@ -188,7 +188,23 @@ class GameView{
     el.appendChild(ul);
   }
 
-  skillInfoDisplay(){
+  skillInfoDisplay(el){
+    const div = document.createElement('div');
+    const titleContainer = document.createElement('div');
+    const title = document.createElement('h4');
+    const cost = document.createElement('i');
+    const description = document.createElement('p');
+    
+    title.classList.add('skill-name');
+    cost.classList.add('skill-cost');
+    titleContainer.classList.add('skill-name-container');
+    description.classList.add('skill-description');
+    div.classList.add('skill-info-container');
+
+    titleContainer.appendChild(title);
+    titleContainer.appendChild(cost);
+    div.appendChild(titleContainer);
+    div.appendChild(description);
   }
 
   currentTurn(el){
