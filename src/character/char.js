@@ -8,7 +8,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
   maxXP = 100, xpReward = 0, normalAttackType = 'physical', skills = []) {
     skills.unshift(new Skill(
       'Attack',
-      `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 10)} ${this.normalAttackType} damage`,
+      `Attack an enemy for ${this.damageCal(normalAttackType, 1, 10)} ${normalAttackType} damage.`,
       2, 1, 'enemy'));
     this.id = id;
     this.level = level;
@@ -148,6 +148,7 @@ Character.prototype.renderTurn = function(i){
 
 Character.prototype.printInfo = function(){
   const div = document.getElementById('info-display');
+  const skill = document.getElementsByClassName('skill-info-container')[0];
   const img = document.getElementsByClassName('info-image')[0];
   const ul = document.getElementsByClassName('info-container')[0];
   const level = document.getElementById('level');
@@ -193,6 +194,9 @@ Character.prototype.printInfo = function(){
     img.classList.add("player");
   }
   ul.classList.remove('hidden');
+  if (!skill.classList.contains('hidden')){
+    skill.classList.add('hidden');
+  }
   level.innerHTML = `Level: ${this.level}`;
   charType.innerHTML = `${this.charType}`;
   maxHealth.innerHTML = `Health: ${this.currentHealth}/${this.maxHealth}`;
@@ -226,10 +230,6 @@ Character.prototype.printInfo = function(){
   talents.innerHTML = `Talents: ` + (this.talents.length > 0 ? "" : "None");
   conditions.innerHTML = `Current Conditions: ` + (this.conditions.length > 0 ? "" : "None");
   div.scrollTop = 0;
-};
-
-Character.prototype.normalAttack = function(dmgType,target){
-  target.takeDamage(dmgType, this.damageCal(dmgType, 1, 1).bind(this));
 };
 
 Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){

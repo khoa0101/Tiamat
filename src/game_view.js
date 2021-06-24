@@ -24,6 +24,7 @@ class GameView{
     navBar.append(returnToMenu);
     grid.append(endTurn);
     this.charInfoDisplay(info);
+    this.skillInfoDisplay(info);
     for (let i = 0; i < this.game.players.length; i++){
       this.game.players[i].render(ally, i);
     }
@@ -68,8 +69,14 @@ class GameView{
     });
 
     ally.childNodes.forEach( child => {
+      const charIndex = child.getAttributeNode('value').value;
       child.childNodes[0].addEventListener('click', () => {
-        this.game.players[child.getAttributeNode('value').value].printInfo(); 
+        this.game.players[charIndex].printInfo(); 
+      })
+      child.childNodes[2].childNodes.forEach( li => {
+        li.addEventListener('click', () => {
+          this.game.players[charIndex].skills[li.getAttributeNode('value').value].printInfo();
+        })
       })
     });
 
@@ -195,23 +202,23 @@ class GameView{
     const cost = document.createElement('i');
     const description = document.createElement('p');
     
-    title.classList.add('skill-name');
-    cost.classList.add('skill-cost');
-    titleContainer.classList.add('skill-name-container');
-    description.classList.add('skill-description');
-    div.classList.add('skill-info-container');
+    title.setAttribute('id', 'skill-name');
+    cost.setAttribute('id', 'skill-cost');
+    titleContainer.setAttribute('id', 'skill-name-container');
+    description.setAttribute('id', 'skill-description');
+    div.classList.add('skill-info-container', 'hidden');
 
     titleContainer.appendChild(title);
     titleContainer.appendChild(cost);
     div.appendChild(titleContainer);
     div.appendChild(description);
+    el.appendChild(div);
   }
 
   currentTurn(el){
     el.childNodes.forEach((child) => {
       const index = child.getAttributeNode('value').value;
       if (this.game.currentTurn.AP > this.game.currentTurn.skills[index].AP){
-        console.log(this.game.currentTurn.skills[index].AP);
         child.classList.add('active');
       }
     })
