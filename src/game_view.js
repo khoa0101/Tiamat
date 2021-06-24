@@ -22,7 +22,7 @@ class GameView{
     const enemy = document.getElementById('enemy-team');
     navBar.append(returnToMenu);
     grid.append(endTurn);
-    this.infoDisplay(info);
+    this.charInfoDisplay(info);
     for (let i = 0; i < this.game.players.length; i++){
       let div = this.game.players[i].render(ally, i);
     }
@@ -74,7 +74,7 @@ class GameView{
 
   }
 
-  infoDisplay(el){
+  charInfoDisplay(el){
     const ul = document.createElement('ul');
     const img = document.createElement('img');
     const level = document.createElement('li');
@@ -179,6 +179,18 @@ class GameView{
     ul.appendChild(conditions);
     el.appendChild(img);
     el.appendChild(ul);
+  }
+
+  skillInfoDisplay(){
+  }
+
+  currentTurn(el){
+    el.childNodes.forEach((child) => {
+      const index = child.getAttributeNode('value').value;
+      if (this.game.currentTurn.AP > this.game.currentTurn.skills[index].AP){
+        child.classList.add('active');
+      }
+    })
   }
 }
 

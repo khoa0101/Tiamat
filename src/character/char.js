@@ -1,55 +1,63 @@
+const Skill = require(`./skills/skill.js`); 
+
 function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 30,
   initiative = 10, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 1,
   barrier = 0, barrierDecay = 0, physicalRes = 0, fireRes = 0, waterRes = 0, lightningRes = 0, poisonRes = 0, energyRes = 0, 
   holyRes = 0, darkRes = 0, physicalMod = 0, fireMod = 0, waterMod = 0, lightningMod = 0, poisonMod = 0,
-  energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [], xp = 0,
-  maxXP = 100, xpReward = 0) {
-  this.id = id;
-  this.level = level;
-  this.active = true;
-  this.alive = true;
-  this.side = side;
-  this.charType = charType;
-  this.currentHealth = currentHealth;
-  this.maxHealth = maxHealth;
-  this.AP = AP;
-  this.APMax = 6;
-  this.APRec = APRec;
-  this.power = power;
-  this.armor = armor;
-  this.maxArmor = armor;
-  this.initiative = initiative;
-  this.critChance = critChance;
-  this.critDamage = critDamage;
-  this.damageMod = damageMod;
-  this.healMod = healMod;
-  this.cdMod = cdMod;
-  this.lifesteal = lifesteal;
-  this.regen = regen;
-  this.barrier = barrier;
-  this.maxBarrier = barrier;
-  this.barrierDecay = barrierDecay;
-  this.physicalRes = physicalRes;
-  this.fireRes = fireRes;
-  this.waterRes = waterRes;
-  this.lightningRes = lightningRes;
-  this.poisonRes = poisonRes;
-  this.energyRes = energyRes;
-  this.holyRes = holyRes;
-  this.darkRes = darkRes;
-  this.physicalMod = physicalMod;
-  this.fireMod = fireMod;
-  this.waterMod = waterMod;
-  this.lightningMod = lightningMod;
-  this.poisonMod = poisonMod;
-  this.energyMod = energyMod;
-  this.holyMod = holyMod;
-  this.darkMod = darkMod;
-  this.talents = talents;
-  this.conditions = conditions;
-  this.xp = xp;
-  this.maxXP = maxXP;
-  this.xpReward = xpReward;
+  energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [],  xp = 0,
+  maxXP = 100, xpReward = 0, normalAttackType = 'physical',skills = []) {
+    skills.unshift(new Skill(
+      'Attack',
+      `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 10)} ${this.normalAttackType} damage`,
+      2, 1, 'enemy'));
+    this.id = id;
+    this.level = level;
+    this.active = true;
+    this.alive = true;
+    this.side = side;
+    this.charType = charType;
+    this.currentHealth = currentHealth;
+    this.maxHealth = maxHealth;
+    this.AP = AP;
+    this.APMax = 6;
+    this.APRec = APRec;
+    this.power = power;
+    this.armor = armor;
+    this.maxArmor = armor;
+    this.initiative = initiative;
+    this.critChance = critChance;
+    this.critDamage = critDamage;
+    this.damageMod = damageMod;
+    this.healMod = healMod;
+    this.cdMod = cdMod;
+    this.lifesteal = lifesteal;
+    this.regen = regen;
+    this.barrier = barrier;
+    this.maxBarrier = barrier;
+    this.barrierDecay = barrierDecay;
+    this.physicalRes = physicalRes;
+    this.fireRes = fireRes;
+    this.waterRes = waterRes;
+    this.lightningRes = lightningRes;
+    this.poisonRes = poisonRes;
+    this.energyRes = energyRes;
+    this.holyRes = holyRes;
+    this.darkRes = darkRes;
+    this.normalAttackType = normalAttackType;
+    this.physicalMod = physicalMod;
+    this.fireMod = fireMod;
+    this.waterMod = waterMod;
+    this.lightningMod = lightningMod;
+    this.poisonMod = poisonMod;
+    this.energyMod = energyMod;
+    this.holyMod = holyMod;
+    this.darkMod = darkMod;
+    this.talents = talents;
+    this.conditions = conditions;
+    this.skills = skills;
+    this.xp = xp;
+    this.maxXP = maxXP;
+    this.xpReward = xpReward;
 }
 
 Character.prototype.render = function(el, i){
@@ -93,13 +101,14 @@ Character.prototype.render = function(el, i){
   }
 }
 
-Character.prototype.renderSkills = function(el, skills = ['normal attack']){
+Character.prototype.renderSkills = function(el){
   const ul = document.createElement('ul');
-  skills.forEach(skill => {
+  this.skills.forEach((skill, i) => {
     const li = document.createElement('li');
-    li.innerHTML = skill;
+    li.innerHTML = skill.name;
     ul.classList.add('skills-container');
     li.classList.add('skill');
+    li.setAttribute('value', i);
     ul.appendChild(li);
   })
   el.appendChild(ul);
@@ -225,7 +234,7 @@ Character.prototype.normalAttack = function(dmgType,target){
 Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){
   let totalDamage = Math.floor((baseDmg + (this.power * powerRatio)) 
   * (1.0 + this[`${dmgType}Mod`]) * (1.0 + this.damageMod));
-  return totalDamage; 
+  return totalDamage;
 }
 
 Character.prototype.takeDamage = function(dmgType ,dmg){
@@ -291,7 +300,6 @@ Character.prototype.checkDeath = function(character){
     character.active = false;
     character.alive = false;
   }
-
 }
 
 module.exports = Character;
