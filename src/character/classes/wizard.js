@@ -12,7 +12,7 @@ class Wizard extends Character{
       barrier,  barrierDecay,  physicalRes,  fireRes,  waterRes,  lightningRes,  poisonRes,  energyRes,  
       holyRes, darkRes,  physicalMod,  fireMod,  waterMod,  lightningMod,  poisonMod, 
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
-      maxXP, xpReward);
+      maxXP, xpReward, 'fire');
   };
 }
 

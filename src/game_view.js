@@ -20,11 +20,12 @@ class GameView{
     const turns = document.getElementById('turn-display');
     const ally = document.getElementById('ally-team');
     const enemy = document.getElementById('enemy-team');
+    const currentTurn = this.game.currentTurn;
     navBar.append(returnToMenu);
     grid.append(endTurn);
     this.charInfoDisplay(info);
     for (let i = 0; i < this.game.players.length; i++){
-      let div = this.game.players[i].render(ally, i);
+      this.game.players[i].render(ally, i);
     }
     for (let i = 0; i < this.game.enemies.length; i++){
       this.game.enemies[i].render(enemy, i);
@@ -32,6 +33,12 @@ class GameView{
     for (let i = 0; i < this.game.turns.length; i++){
       turns.appendChild(this.game.turns[i].renderPortrait());
     }
+    
+    if (currentTurn.side === 'player'){
+      const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);
+      this.currentTurn(currentTurnSkills);
+    }
+
     returnToMenu.addEventListener('click', () => {
       const menuModal = document.getElementsByClassName("menu")[0];
       const startButton = document.getElementById("start");
@@ -188,6 +195,7 @@ class GameView{
     el.childNodes.forEach((child) => {
       const index = child.getAttributeNode('value').value;
       if (this.game.currentTurn.AP > this.game.currentTurn.skills[index].AP){
+        console.log(this.game.currentTurn.skills[index].AP);
         child.classList.add('active');
       }
     })

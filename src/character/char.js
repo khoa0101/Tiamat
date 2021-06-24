@@ -5,7 +5,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
   barrier = 0, barrierDecay = 0, physicalRes = 0, fireRes = 0, waterRes = 0, lightningRes = 0, poisonRes = 0, energyRes = 0, 
   holyRes = 0, darkRes = 0, physicalMod = 0, fireMod = 0, waterMod = 0, lightningMod = 0, poisonMod = 0,
   energyMod = 0, holyMod = 0, darkMod = 0, talents = [], conditions = [],  xp = 0,
-  maxXP = 100, xpReward = 0, normalAttackType = 'physical',skills = []) {
+  maxXP = 100, xpReward = 0, normalAttackType = 'physical', skills = []) {
     skills.unshift(new Skill(
       'Attack',
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 10)} ${this.normalAttackType} damage`,
@@ -103,10 +103,11 @@ Character.prototype.render = function(el, i){
 
 Character.prototype.renderSkills = function(el){
   const ul = document.createElement('ul');
+  ul.classList.add('skills-container');
+  ul.setAttribute('id', `${this.charType}-${this.id}-skills`);
   this.skills.forEach((skill, i) => {
     const li = document.createElement('li');
     li.innerHTML = skill.name;
-    ul.classList.add('skills-container');
     li.classList.add('skill');
     li.setAttribute('value', i);
     ul.appendChild(li);
