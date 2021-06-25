@@ -11,6 +11,8 @@ class Skill {
     this.targetNum = targetNum;
     this.targetType = targetType;
     this.status = status;
+
+    this.getTarget = this.getTarget.bind(this);
   }
 
   printInfo(){
@@ -42,13 +44,23 @@ class Skill {
 
   getTarget(){
     console.log("click!");
-    if (this.targetType === 'enemy'){
-    } 
-    else {
-      console.log(document.getElementById('player-team'));
+    console.log(this);
+    if (this.character.side === 'player'){
+      if (this.targetType === 'enemy'){
+        console.log(document.getElementById('enemy-team'));
+      } 
+      else {
+        console.log(document.getElementById('player-team'));
+      }
+    } else {
+      if (this.targetType === 'enemy'){
+        console.log(document.getElementById('player-team'));
+      } 
+      else {
+        console.log(document.getElementById('enemy-team'));
+      }
     }
-  } 
-  
+  }  
 }
 
 module.exports = Skill;
