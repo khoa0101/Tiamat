@@ -54,10 +54,10 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
     this.maxXP = maxXP;
     this.xpReward = xpReward;
 
-    skills.unshift(new Skill(
+    skills.unshift(new Skill(this,
       'Basic Attack',
-      `Attack an enemy for ${this.damageCal(normalAttackType, 1, 0)} ${normalAttackType} damage.`,
-      2, 1, 'enemy'));
+      `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
+      2, 1, 'enemy', 0, 1, this.normalAttackType));
     this.skills = skills;
 }
 
@@ -247,7 +247,7 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
     let remainder = damageRecieve;
     if (this.barrier > 0){
       remainder -= this.barrier;
-      this.barrier = this.barrier - damageRecieve;
+      this.barrier -= damageRecieve;
       if (this.barrier < 0) this.barrier = 0;
     }
     if (this.armor > 0 && remainder > 0){
@@ -257,7 +257,7 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
       if (this.armor < 0) this.armor = 0;
     }
     if (remainder > 0){
-      this.currentHealth = this.currentHealth - remainder;
+      this.currentHealth -= remainder;
     }
   }
   this.checkDeath();
@@ -297,10 +297,10 @@ Character.prototype.heal = function(healAmt){
   }
 }
 
-Character.prototype.checkDeath = function(character){
-  if (character.currentHealth < 0){
-    character.active = false;
-    character.alive = false;
+Character.prototype.checkDeath = function(){
+  if (this.currentHealth < 0){
+    this.active = false;
+    this.alive = false;
   }
 }
 

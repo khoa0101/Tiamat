@@ -18,7 +18,7 @@ class GameView{
     returnToMenu.innerHTML = "Return to menu";
     const navBar = document.getElementById('nav-bar');
     const turns = document.getElementById('turn-display');
-    const ally = document.getElementById('ally-team');
+    const ally = document.getElementById('player-team');
     const enemy = document.getElementById('enemy-team');
     const currentTurn = this.game.currentTurn;
     navBar.append(returnToMenu);
@@ -235,16 +235,20 @@ class GameView{
   currentTurn(el){
     el.childNodes.forEach((child) => {
       const index = child.getAttributeNode('value').value;
-      if (this.game.currentTurn.AP > this.game.currentTurn.skills[index].AP){
+      const skill = this.game.currentTurn.skills[index];
+      if (this.game.currentTurn.AP > skill.AP){
         child.classList.add('active');
+        child.addEventListener('click', skill.getTarget);
       }
     })
   }
 
   endTurn(el){
     el.childNodes.forEach((child) => {
-      // const index = child.getAttributeNode('value').value;
+      const index = child.getAttributeNode('value').value;
+      const skill = this.game.currentTurn.skills[index];
       child.classList.remove('active');
+      child.removeEventListener('click', skill.getTarget);
     })
   }
 }

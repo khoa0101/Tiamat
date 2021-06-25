@@ -219,12 +219,12 @@ ul li {
   height: 15vh;
 }
 
-#ally-team, #enemy-team{
+#player-team, #enemy-team{
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-#ally-team img, .player{
+#player-team img, .player{
   background: linear-gradient(rgb(0, 110, 255), rgb(0, 225, 255));
 }
 
@@ -307,6 +307,7 @@ ul li {
   cursor: pointer;
   margin: 10px;
   opacity: 0.5;
+  transition: all ease 0.5s;
 }
 
 .active{

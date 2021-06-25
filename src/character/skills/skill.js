@@ -1,10 +1,16 @@
 class Skill {
-  constructor(name, description, AP, targetSize, targetType){
+  constructor(character, name, description, AP, targetNum, targetType, basePower, scaling, 
+    affinity = 'none', status = []){
+    this.character = character;
     this.name = name;
     this.description = description;
     this.AP = AP;
-    this.targetSize = targetSize;
+    this.basePower = basePower;
+    this.scaling = scaling;
+    this.affinity = affinity;
+    this.targetNum = targetNum;
     this.targetType = targetType;
+    this.status = status;
   }
 
   printInfo(){
@@ -23,6 +29,26 @@ class Skill {
     cost.innerHTML = `AP: ${this.AP}`;
     description.innerHTML = this.description;
   }
+
+  performSkill(target){
+    if (this.targetType === 'enemy'){
+      const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
+      target.takeDamage(this.affinity, damage);
+    } else {
+      const heal = this.character.healCal(this.scaling, this.basePower);
+      target.heal(heal);
+    }
+  }
+
+  getTarget(){
+    console.log("click!");
+    if (this.targetType === 'enemy'){
+    } 
+    else {
+      console.log(document.getElementById('player-team'));
+    }
+  } 
+  
 }
 
 module.exports = Skill;
