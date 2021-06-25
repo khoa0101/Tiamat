@@ -49,20 +49,37 @@ class GameView{
       }
     })
 
-    endTurn.addEventListener('click', () => {
+    endTurn.addEventListener('click', () => {      
+      let currentTurn = this.game.currentTurn;
+
+      if (currentTurn.side === 'player'){
+        const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);
+        this.endTurn(currentTurnSkills);
+      }
+      
       this.game.nextTurn();
-      for (let i = 0; i < this.game.players.length; i++){
-        this.game.players[i].renderTurn(i);
+
+      currentTurn = this.game.currentTurn;
+
+      if (currentTurn.side === 'player'){
+        const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);
+        this.currentTurn(currentTurnSkills);
       }
-      for (let i = 0; i < this.game.enemies.length; i++){
-        this.game.enemies[i].renderTurn(i);
-      }
+      
       ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
       if (this.game.currentTurn.side === `enemy`){
         ap.classList.add('hide');
       } else {
         ap.classList.remove('hide');
       }
+      
+      for (let i = 0; i < this.game.players.length; i++){
+        this.game.players[i].renderTurn(i);
+      }
+      for (let i = 0; i < this.game.enemies.length; i++){
+        this.game.enemies[i].renderTurn(i);
+      }
+
       const temp = turns.firstChild;
       turns.removeChild(turns.firstChild);
       turns.appendChild(temp);
@@ -221,6 +238,13 @@ class GameView{
       if (this.game.currentTurn.AP > this.game.currentTurn.skills[index].AP){
         child.classList.add('active');
       }
+    })
+  }
+
+  endTurn(el){
+    el.childNodes.forEach((child) => {
+      // const index = child.getAttributeNode('value').value;
+      child.classList.remove('active');
     })
   }
 }

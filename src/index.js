@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 
-  soundButton.addEventListener("click", (song) => {
+  soundButton.addEventListener("click", () => {
     music.playAudio(music.menuMusic);
     if (music.menuMusic.paused){
       soundButton.value = "Unmute";

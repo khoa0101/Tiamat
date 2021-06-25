@@ -71,7 +71,7 @@ button, input{
   transition: ease-in-out 0.5s;
 }
 
-button:hover{
+button:hover, input:hover{
   cursor: pointer;
   transition: ease-in-out 0.5s;
 }
@@ -114,7 +114,7 @@ button:hover{
   scrollbar-width: none;  /* Firefox */
 }
 
-#credit, #tutorial-page, #team-management{
+#credit-screen, #tutorial-page, #team-management{
   max-height: 80vh;
 }
 
@@ -297,4 +297,18 @@ ul li {
   margin: 3px;
   width: 19vh;
   height: 19vh;
+}
+
+.skills-container{
+  list-style: none;
+}
+
+.skill{
+  cursor: pointer;
+  margin: 10px;
+  opacity: 0.5;
+}
+
+.active{
+  opacity: 1;
 }
