@@ -201,7 +201,6 @@ ul li {
   width: 5vh;
 }
 
-
 .character{
   display: grid;
   grid-template-columns: auto 1fr;
@@ -250,6 +249,7 @@ ul li {
 }
 
 .health-bar::before, .armor::before, .barrier::before{
+  border: solid 1px white;
   position: absolute;
   top: 0;
   left: 0;
@@ -315,3 +315,29 @@ ul li {
   opacity: 1;
 }
 
+.single-target::before{
+  background: yellow;
+  cursor: pointer;
+  border: solid 1px white;
+  opacity: 0.8s;
+  position: absolute;
+  content: "";
+  width: 15vh;
+  height: 15vh;
+  z-index: 1;
+  animation: blinking 2s ease-in-out infinite;
+}
+
+@keyframes blinking {
+  0% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100%{
+    opacity: 0.5;
+  }
+}
