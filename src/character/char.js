@@ -57,13 +57,14 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
       new Skill(this,
       'Basic Attack',
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
-      2, 1, 'enemy', 0, 1, this.normalAttackType));
+      2, 0, 1, 'enemy', 0, 1, this.normalAttackType));
     this.skills = skills;
 }
 
 Character.prototype.render = function(el, i){
   const img = document.createElement("img");
   const div = document.createElement('div');
+  const imgContainer = document.createElement('div');
   const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
   const armor = document.createElement('div');
@@ -85,7 +86,8 @@ Character.prototype.render = function(el, i){
   img.src = `./dist/images/${this.charType.toLowerCase()}-portrait.png`;
   div.classList.add('character');
   div.setAttribute('id', `${this.charType}-${i}`);
-  div.appendChild(img);
+  imgContainer.appendChild(img);
+  div.appendChild(imgContainer);
   healthContainer.appendChild(healthBar);
   healthContainer.appendChild(armor);
   healthContainer.appendChild(barrier);

@@ -1,10 +1,11 @@
 class Skill {
-  constructor(character, name, description, AP, targetNum, targetType, basePower, scaling, 
+  constructor(character, name, description, AP, cd, targetNum, targetType, basePower, scaling, 
     affinity = 'none', status = []){
     this.character = character;
     this.name = name;
     this.description = description;
     this.AP = AP;
+    this.cd = cd;
     this.basePower = basePower;
     this.scaling = scaling;
     this.affinity = affinity;
@@ -12,7 +13,8 @@ class Skill {
     this.targetType = targetType;
     this.status = status;
 
-    this.getTarget = this.getTarget.bind(this);
+    this.renderTarget = this.renderTarget.bind(this);
+    this.performSkill = this.performSkill.bind(this);
   }
 
   printInfo(){
@@ -42,25 +44,31 @@ class Skill {
     }
   }
 
-  getTarget(){
-    console.log("click!");
-    console.log(this);
+  renderTarget(){
     if (this.character.side === 'player'){
       if (this.targetType === 'enemy'){
-        console.log(document.getElementById('enemy-team'));
+        this.fetchTarget('enemy-team');
       } 
       else {
-        console.log(document.getElementById('player-team'));
-      }
+        this.fetchTarget('player-team');
+      } 
+    } else;
+  }
+
+  fetchTarget(id){
+    const team = document.getElementById(id);
+    if (this.targetNum < 2 ){
+      team.childNodes.forEach((child) => {
+        console.log(child.getAttributeNode('value').value);
+        child.childNodes[0].classList.add('single-target');
+        
+      })
     } else {
-      if (this.targetType === 'enemy'){
-        console.log(document.getElementById('player-team'));
-      } 
-      else {
-        console.log(document.getElementById('enemy-team'));
-      }
+      team.childNodes.forEach((child) => {
+        child.childNodes[0].classList.add('all-targets');
+      })
     }
-  }  
+  }
 }
 
 module.exports = Skill;

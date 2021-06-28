@@ -201,6 +201,7 @@ ul li {
   width: 5vh;
 }
 
+
 .character{
   display: grid;
   grid-template-columns: auto 1fr;
@@ -313,3 +314,4 @@ ul li {
 .active{
   opacity: 1;
 }
+

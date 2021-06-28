@@ -238,7 +238,7 @@ class GameView{
       const skill = this.game.currentTurn.skills[index];
       if (this.game.currentTurn.AP > skill.AP){
         child.classList.add('active');
-        child.addEventListener('click', skill.getTarget);
+        child.addEventListener('click', skill.renderTarget);
       }
     })
   }
@@ -248,7 +248,7 @@ class GameView{
       const index = child.getAttributeNode('value').value;
       const skill = this.game.currentTurn.skills[index];
       child.classList.remove('active');
-      child.removeEventListener('click', skill.getTarget);
+      child.removeEventListener('click', skill.renderTarget);
     })
   }
 }
