@@ -73,12 +73,7 @@ class GameView{
         ap.classList.remove('hide');
       }
       
-      for (let i = 0; i < this.game.players.length; i++){
-        this.game.players[i].renderTurn(i);
-      }
-      for (let i = 0; i < this.game.enemies.length; i++){
-        this.game.enemies[i].renderTurn(i);
-      }
+      this.renderFrame();
 
       const temp = turns.firstChild;
       turns.removeChild(turns.firstChild);
@@ -103,6 +98,23 @@ class GameView{
       })
     });
 
+  }
+
+  renderFrame(){
+    const ap = document.getElementById('ap-display');
+    ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
+    
+    if (this.game.currentTurn.side === `enemy`){
+      ap.classList.add('hide');
+    } else {
+      ap.classList.remove('hide');
+    }
+    for (let i = 0; i < GAME.players.length; i++){
+      GAME.players[i].renderFrame(i);
+    }
+    for (let i = 0; i < GAME.enemies.length; i++){
+      GAME.enemies[i].renderFrame(i);
+    }
   }
 
   charInfoDisplay(el){

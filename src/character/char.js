@@ -129,7 +129,7 @@ Character.prototype.renderPortrait = function(){
   return img; 
 }
 
-Character.prototype.renderTurn = function(i){
+Character.prototype.renderFrame = function(i){
   let el = document.getElementById(`${this.charType}-${i}`);
   let health = el.getElementsByClassName(`health-bar`)[0];
   let armor = el.getElementsByClassName(`armor`)[0];
@@ -260,6 +260,7 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
     }
     if (remainder > 0){
       this.currentHealth -= remainder;
+      if (this.currentHealth < 0) this.currentHealth = 0;
     }
   }
   this.checkDeath();
@@ -302,7 +303,7 @@ Character.prototype.heal = function(healAmt){
 }
 
 Character.prototype.checkDeath = function(){
-  if (this.currentHealth < 0){
+  if (this.currentHealth <= 0){
     this.alive = false;
   }
 }

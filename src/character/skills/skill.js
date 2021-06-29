@@ -35,6 +35,7 @@ class Skill {
   }
 
   performSkill(target){
+    this.character.AP -= this.AP;
     if (this.targetType === 'enemy'){
       const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
       target.takeDamage(this.affinity, damage);
@@ -56,39 +57,45 @@ class Skill {
   fetchTarget(id){
     const team = document.getElementById(id);
     
-    if (this.targetNum < 2 ){
-      team.childNodes.forEach((child) => {
-        child.childNodes[0].classList.add('single-target');
-        child.addEventListener('click', () => {
-          const index = child.getAttributeNode('value').value;
+    if (this.AP <= this.character.AP){
+      if (this.targetNum < 2){
+        team.childNodes.forEach((child) => {
+          child.childNodes[0].classList.add('single-target');
+          child.addEventListener('click', () => {
+            const index = child.getAttributeNode('value').value;
+            if (this.targetType === 'enemy'){
+              this.performSkill(GAME.enemies[index]);
+            } else {
+              this.performSkill(GAME.players[index]);
+            }
+            team.childNodes.forEach((child) => {
+              child.childNodes[0].classList.remove('single-target');
+            })
+
+            GAME_VIEW.renderFrame();
+          }, {once: true})
+        })
+      } else {
+        team.childNodes.forEach((child) => {
+          child.childNodes[0].classList.add('all-targets');
+          child.addEventListener('click', () => {
           if (this.targetType === 'enemy'){
-            this.performSkill(GAME.enemies[index]);
+            GAME.enemies.forEach(target => {
+              this.performSkill(target);
+            })
           } else {
-            this.performSkill(GAME.players[index]);
+            GAME.players.forEach(target => {
+              this.performSkill(target);
+            })
           }
           team.childNodes.forEach((child) => {
-            child.childNodes[0].classList.remove('single-target');
+            child.childNodes[0].classList.remove('all-target');
           })
-        }, {once: true})
-      })
-    } else {
-      team.childNodes.forEach((child) => {
-        child.childNodes[0].classList.add('all-targets');
-        child.addEventListener('click', () => {
-        if (this.targetType === 'enemy'){
-          GAME.enemies.forEach(target => {
-            this.performSkill(target);
-          })
-        } else {
-          GAME.players.forEach(target => {
-            this.performSkill(target);
-          })
-        }
-        team.childNodes.forEach((child) => {
-          child.childNodes[0].classList.remove('all-target');
-        });
-        }, {once: true});
-      })
+          
+          GAME_VIEW.renderFrame();
+          }, {once: true});
+        })
+      }
     }
   }
 }
