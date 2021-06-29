@@ -43,6 +43,11 @@ class Skill {
       const heal = this.character.healCal(this.scaling, this.basePower);
       target.heal(heal);
     }
+
+    if (GAME.currentTurn.side === 'player'){
+      const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
+      GAME_VIEW.currentTurn(currentTurnSkills);
+    }
   }
 
   renderTarget(){
@@ -66,15 +71,16 @@ class Skill {
             e.stopPropagation();
             const index = child.getAttributeNode('value').value;
             if (skill.targetType === 'enemy'){
-              skill.performSkill(GAME.enemies[index], 'single-target', team, clickSingleTarget);
+              skill.performSkill(GAME.enemies[index]);
             } else {
-              skill.performSkill(GAME.players[index], 'single-target', team, clickSingleTarget);
+              skill.performSkill(GAME.players[index]);
             }
 
-            team.childNodes.forEach((child) => {
-              child.childNodes[0].classList.remove('single-target');
-              child.removeEventListener('click', clickSingleTarget);
+            team.childNodes.forEach((el) => {
+              el.childNodes[0].classList.remove('single-target');
+              el.removeEventListener('click', clickSingleTarget);
             });
+
             GAME_VIEW.renderFrame();
           }
 

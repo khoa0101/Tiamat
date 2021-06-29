@@ -252,6 +252,10 @@ class GameView{
         child.classList.add('active');
         child.addEventListener('click', skill.renderTarget);
       }
+      else {
+        child.classList.remove('active');
+        child.removeEventListener('click', skill.renderTarget);
+      }
     })
   }
 
