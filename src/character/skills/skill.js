@@ -56,25 +56,30 @@ class Skill {
 
   fetchTarget(id){
     const team = document.getElementById(id);
-    
+    const skill = this;
     if (this.AP <= this.character.AP){
       if (this.targetNum < 2){
         team.childNodes.forEach((child) => {
           child.childNodes[0].classList.add('single-target');
-          child.addEventListener('click', () => {
+
+          const clickSingleTarget = function(e){
+            e.stopPropagation();
             const index = child.getAttributeNode('value').value;
-            if (this.targetType === 'enemy'){
-              this.performSkill(GAME.enemies[index]);
+            if (skill.targetType === 'enemy'){
+              skill.performSkill(GAME.enemies[index], 'single-target', team, clickSingleTarget);
             } else {
-              this.performSkill(GAME.players[index]);
+              skill.performSkill(GAME.players[index], 'single-target', team, clickSingleTarget);
             }
+
             team.childNodes.forEach((child) => {
               child.childNodes[0].classList.remove('single-target');
-            })
-
+              child.removeEventListener('click', clickSingleTarget);
+            });
             GAME_VIEW.renderFrame();
-          }, {once: true})
-        })
+          }
+
+          child.addEventListener('click', clickSingleTarget);
+        });
       } else {
         team.childNodes.forEach((child) => {
           child.childNodes[0].classList.add('all-targets');
@@ -91,12 +96,16 @@ class Skill {
           team.childNodes.forEach((child) => {
             child.childNodes[0].classList.remove('all-target');
           })
-          
+
           GAME_VIEW.renderFrame();
-          }, {once: true});
+          });
         })
       }
     }
+  }
+
+  clickSingleTarget(){
+    
   }
 }
 

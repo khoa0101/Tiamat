@@ -67,12 +67,18 @@ Character.prototype.render = function(el, i){
   const imgContainer = document.createElement('div');
   const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
+  const health = document.createElement('div');
   const armor = document.createElement('div');
+  const armorDisplay = document.createElement('div');
   const barrier = document.createElement('div');
+  const barrierDisplay = document.createElement('div');
   div.setAttribute('value', i);
   healthBar.classList.add('health-bar');
+  health.classList.add('health-green');
   healthContainer.classList.add('health-container');
+  armorDisplay.classList.add('armor-silver');
   armor.classList.add('armor');
+  barrierDisplay.classList.add('barrier-cyan');
   barrier.classList.add('barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
@@ -88,6 +94,9 @@ Character.prototype.render = function(el, i){
   div.setAttribute('id', `${this.charType}-${i}`);
   imgContainer.appendChild(img);
   div.appendChild(imgContainer);
+  healthBar.appendChild(health);
+  armor.appendChild(armorDisplay);
+  barrier.appendChild(barrierDisplay);
   healthContainer.appendChild(healthBar);
   healthContainer.appendChild(armor);
   healthContainer.appendChild(barrier);
@@ -97,10 +106,10 @@ Character.prototype.render = function(el, i){
   }
   el.appendChild(div);
   if (this.armor < 1){
-    armor.classList.add('hidden');
+    armor.classList.add('hide');
   }
   if (this.barrier < 1){
-    barrier.classList.add('hidden');
+    barrier.classList.add('hide');
   }
 }
 
@@ -132,20 +141,29 @@ Character.prototype.renderPortrait = function(){
 Character.prototype.renderFrame = function(i){
   let el = document.getElementById(`${this.charType}-${i}`);
   let health = el.getElementsByClassName(`health-bar`)[0];
+  let healthBar = el.querySelector('.health-green');
   let armor = el.getElementsByClassName(`armor`)[0];
+  let armorBar = el.querySelector('.armor-silver');
   let barrier = el.getElementsByClassName(`barrier`)[0];
+  let barrierBar = el.querySelector('.barrier-cyan');
+  healthBar.style.width = `${this.currentHealth/ this.maxHealth * 100}%`;
+  armorBar.style.width = `${this.armor/this.maxArmor * 100}%`;
+  barrierBar.style.width = `${this.barrier/this.maxBarrier * 100}%`;
   health.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
   armor.innerHTML =  `${this.armor}`;
   barrier.innerHTML = `${this.barrier}`;
+  health.appendChild(healthBar);
+  armor.appendChild(armorBar);
+  barrier.appendChild(barrierBar);
   if (this.armor < 1){
-    armor.classList.add('hidden');
+    armor.classList.add('hide');
   } else {
-    armor.classList.remove('hidden');
+    armor.classList.remove('hide');
   }
   if (this.barrier < 1){
-    barrier.classList.add('hidden');
+    barrier.classList.add('hide');
   } else {
-    barrier.classList.remove('hidden');
+    barrier.classList.remove('hide');
   }
 };
 
