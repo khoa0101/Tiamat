@@ -2,6 +2,10 @@ const Game = require("./game.js");
 const Sound = require("./sound.js");
 const GameView = require("./game_view.js");
 
+window.MUSIC = new Sound;
+window.GAME = new Game;
+window.GAME_VIEW = new GameView(GAME);
+
 document.addEventListener("DOMContentLoaded", function(){
   const menuModal = document.getElementsByClassName("menu");
   const soundButton = document.getElementById("music");
@@ -13,19 +17,16 @@ document.addEventListener("DOMContentLoaded", function(){
   const tutorialPage = document.getElementById("tutorial-page");
   const creditPage = document.getElementById("credit-screen");
   const teamPage = document.getElementById("team-management");
-  const music = new Sound;
-  const game = new Game;
-  const gameView = new GameView(game);
-  music.menuMusic.volume = 0.2;
+  MUSIC.menuMusic.volume = 0.2;
 
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
-    if (!game.start){
-      game.start = true;
-      game.addAllies();
-      game.addEnemy();
-      game.setTurn();
-      gameView.setupView();
+    if (!GAME.start){
+      GAME.start = true;
+      GAME.addAllies();
+      GAME.addEnemy();
+      GAME.setTurn();
+      GAME_VIEW.setupView();
     } else {
       menuModal[0].value = 'Resume Game';
     }
@@ -53,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
   soundButton.addEventListener("click", () => {
-    music.playAudio(music.menuMusic);
-    if (music.menuMusic.paused){
+    MUSIC.playAudio(MUSIC.menuMusic);
+    if (MUSIC.menuMusic.paused){
       soundButton.value = "Unmute";
     } else {
       soundButton.value = "Mute";

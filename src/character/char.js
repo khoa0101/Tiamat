@@ -266,12 +266,14 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
   return damageRecieve;
 }
 Character.prototype.endTurn = function(){
-  this.AP += this.APRec;
-  if (this.AP > this.APMax){
-    this.AP = this.APMax;
+  if(this.alive){
+    this.AP += this.APRec;
+    if (this.AP > this.APMax){
+      this.AP = this.APMax;
+    }
+    this.heal(this.healCal(0, this.regen));
+    this.barrierDie();
   }
-  this.heal(this.healCal(0, this.regen));
-  this.barrierDie();
 }
 
 Character.prototype.barrierDie = function(){
@@ -301,7 +303,6 @@ Character.prototype.heal = function(healAmt){
 
 Character.prototype.checkDeath = function(){
   if (this.currentHealth < 0){
-    this.active = false;
     this.alive = false;
   }
 }
