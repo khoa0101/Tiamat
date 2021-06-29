@@ -248,7 +248,7 @@ class GameView{
     el.childNodes.forEach((child) => {
       const index = child.getAttributeNode('value').value;
       const skill = this.game.currentTurn.skills[index];
-      if (this.game.currentTurn.AP > skill.AP){
+      if (this.game.currentTurn.AP >= skill.AP){
         child.classList.add('active');
         child.addEventListener('click', skill.renderTarget);
       }

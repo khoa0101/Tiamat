@@ -78,13 +78,13 @@ class Skill {
 
             team.childNodes.forEach((el) => {
               el.childNodes[0].classList.remove('single-target');
-              el.removeEventListener('click', clickSingleTarget);
+              el.childNodes[0].removeEventListener('click', clickSingleTarget);
             });
 
             GAME_VIEW.renderFrame();
           }
 
-          child.addEventListener('click', clickSingleTarget);
+          child.childNodes[0].addEventListener('click', clickSingleTarget);
         });
       } else {
         team.childNodes.forEach((child) => {
@@ -108,10 +108,6 @@ class Skill {
         })
       }
     }
-  }
-
-  clickSingleTarget(){
-    
   }
 }
 

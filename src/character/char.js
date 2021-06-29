@@ -327,7 +327,7 @@ Character.prototype.checkDeath = function(){
 }
 
 Character.prototype.addSkill = function(name, damage){
-
+  
 }
 
 module.exports = Character;
