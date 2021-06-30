@@ -145,7 +145,6 @@ Character.prototype.renderPortrait = function(){
 }
 
 Character.prototype.renderFrame = function(i){
-  console.log(this.maxArmor, this.maxBarrier);
   let el = document.getElementById(`${this.charType}-${i}`);
   let health = el.querySelector(`.health-bar i`);
   let healthBar = el.querySelector('.health-green');

@@ -53,14 +53,14 @@ class Skill {
   renderTarget(e){
       e.target.removeEventListener('click', this.renderTarget);
       if (this.targetType === 'enemy'){
-        this.fetchTarget('enemy-team', this.targetType);
-      } 
+        this.fetchTarget('enemy-team', GAME.enemies);
+      }
       else {
-        this.fetchTarget('player-team', this.targetType);
+        this.fetchTarget('player-team', GAME.players);
       }
   }
 
-  fetchTarget(id){
+  fetchTarget(id, side){
     const team = document.getElementById(id);
     const skill = this;
 
@@ -101,13 +101,19 @@ class Skill {
     if (this.AP <= this.character.AP){
       if (this.targetNum < 2){
         team.childNodes.forEach((child) => {
-          child.childNodes[0].classList.add('single-target');
-          child.childNodes[0].addEventListener('click', clickSingleTarget);
+          const index = child.getAttributeNode('value').value;
+          if (side[index].alive){
+            child.childNodes[0].classList.add('single-target');
+            child.childNodes[0].addEventListener('click', clickSingleTarget);
+          }
         });
       } else {
         team.childNodes.forEach((child) => {
-          child.childNodes[0].classList.add('all-targets');
-          child.addEventListener('click', clickAllTarget);
+          const index = child.getAttributeNode('value').value;
+            if (side[index].alive){
+              child.childNodes[0].classList.add('all-targets');
+              child.addEventListener('click', clickAllTarget);
+            }
           }
         )
       }
