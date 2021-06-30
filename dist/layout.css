@@ -250,25 +250,40 @@ ul li {
 
 .health-green{
   background: greenyellow;
+  animation: health 1s ease;
 }
 .armor-silver{
   background: silver;
+  animation: health 1s ease 0.5s;
 }
 
 .barrier-cyan{
   background: cyan;
+  animation: health 1s ease 1s;
 }
 
 .health-green, .armor-silver, .barrier-cyan{
-  opacity: 1;
   position: absolute;
   top: 0;
   left: 0;
   content: '';
+  opacity: 1;
   width: 100%;
   height: 100%;
   z-index: -1;
-  transition: width ease 1s, opacity ease 0.5s;
+  transition: width 1s ease, opacity 1s ease 2s;
+}
+
+@keyframes health {
+  0% {
+    opacity: 0;
+    width: 0%;
+  }
+
+  100%{
+    opacity: 1;
+    width: 100%;
+  }
 }
 
 

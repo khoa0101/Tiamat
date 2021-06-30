@@ -29,7 +29,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
     this.lifesteal = lifesteal;
     this.regen = regen;
     this.barrier = barrier;
-    this.maxBarrier = barrier;
+    this.maxBarrier = regen;
     this.barrierDecay = barrierDecay;
     this.physicalRes = physicalRes;
     this.fireRes = fireRes;
@@ -276,7 +276,6 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
       this.barrier -= damageRecieve;
       if (this.barrier < 0) {
         this.barrier = 0;
-        this.maxBarrier = 0;
       }
     }
     if (this.armor > 0 && remainder > 0){
@@ -285,7 +284,6 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
       remainder -= temp;
       if (this.armor < 0) {
         this.armor = 0;
-        this.maxArmor = 0;
       }
     }
     if (remainder > 0){
@@ -312,7 +310,6 @@ Character.prototype.barrierDie = function(){
     this.barrier -= this.barrierDecay;
     if (this.barrier < 0){
       this.barrier = 0;
-      this.maxBarrier = 0;
     } 
   }
 }
