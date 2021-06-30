@@ -50,7 +50,8 @@ class Skill {
     }
   }
 
-  renderTarget(){
+  renderTarget(e){
+      e.target.removeEventListener('click', this.renderTarget);
       if (this.targetType === 'enemy'){
         this.fetchTarget('enemy-team', this.targetType);
       } 
