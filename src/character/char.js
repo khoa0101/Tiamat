@@ -67,10 +67,13 @@ Character.prototype.render = function(el, i){
   const imgContainer = document.createElement('div');
   const healthContainer = document.createElement('div');
   const healthBar = document.createElement('div');
+  const healthText = document.createElement('i');
   const health = document.createElement('div');
   const armor = document.createElement('div');
+  const armorText = document.createElement('i');
   const armorDisplay = document.createElement('div');
   const barrier = document.createElement('div');
+  const barrierText = document.createElement('i');
   const barrierDisplay = document.createElement('div');
   div.setAttribute('value', i);
   healthBar.classList.add('health-bar');
@@ -82,20 +85,23 @@ Character.prototype.render = function(el, i){
   barrier.classList.add('barrier');
   healthBar.value = this.currentHealth;
   healthBar.max = this.maxHealth;
-  healthBar.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
+  healthText.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
   armor.value = this.armor;
   armor.max = this.armor;
-  armor.innerHTML =  `${this.armor}`;
+  armorText.innerHTML =  `${this.armor}`;
   barrier.value = this.barrier;
   barrier.max = this.barrier;
-  barrier.innerHTML = `${this.barrier}`;
+  barrierText.innerHTML = `${this.barrier}`;
   img.src = `./dist/images/${this.charType.toLowerCase()}-portrait.png`;
   div.classList.add('character');
   div.setAttribute('id', `${this.charType}-${i}`);
   imgContainer.appendChild(img);
   div.appendChild(imgContainer);
+  healthBar.appendChild(healthText);
   healthBar.appendChild(health);
+  armor.appendChild(armorText);
   armor.appendChild(armorDisplay);
+  barrier.appendChild(barrierText);
   barrier.appendChild(barrierDisplay);
   healthContainer.appendChild(healthBar);
   healthContainer.appendChild(armor);
@@ -139,12 +145,13 @@ Character.prototype.renderPortrait = function(){
 }
 
 Character.prototype.renderFrame = function(i){
+  console.log(this.maxArmor, this.maxBarrier);
   let el = document.getElementById(`${this.charType}-${i}`);
-  let health = el.getElementsByClassName(`health-bar`)[0];
+  let health = el.querySelector(`.health-bar i`);
   let healthBar = el.querySelector('.health-green');
-  let armor = el.getElementsByClassName(`armor`)[0];
+  let armor = el.querySelector(`.armor i`);
   let armorBar = el.querySelector('.armor-silver');
-  let barrier = el.getElementsByClassName(`barrier`)[0];
+  let barrier = el.querySelector(`.barrier i`);
   let barrierBar = el.querySelector('.barrier-cyan');
   healthBar.style.width = `${this.currentHealth/ this.maxHealth * 100}%`;
   armorBar.style.width = `${this.armor/this.maxArmor * 100}%`;
@@ -152,18 +159,17 @@ Character.prototype.renderFrame = function(i){
   health.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
   armor.innerHTML =  `${this.armor}`;
   barrier.innerHTML = `${this.barrier}`;
-  health.appendChild(healthBar);
-  armor.appendChild(armorBar);
-  barrier.appendChild(barrierBar);
+
   if (this.armor < 1){
-    armor.classList.add('hide');
+    armor.parentNode.classList.add('hide');
   } else {
-    armor.classList.remove('hide');
+    armor.parentNode.classList.remove('hide');
   }
+
   if (this.barrier < 1){
-    barrier.classList.add('hide');
+    barrier.parentNode.classList.add('hide');
   } else {
-    barrier.classList.remove('hide');
+    barrier.parentNode.classList.remove('hide');
   }
 };
 
@@ -268,13 +274,19 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
     if (this.barrier > 0){
       remainder -= this.barrier;
       this.barrier -= damageRecieve;
-      if (this.barrier < 0) this.barrier = 0;
+      if (this.barrier < 0) {
+        this.barrier = 0;
+        this.maxBarrier = 0;
+      }
     }
     if (this.armor > 0 && remainder > 0){
       let temp = this.armor;
       this.armor -= remainder;
       remainder -= temp;
-      if (this.armor < 0) this.armor = 0;
+      if (this.armor < 0) {
+        this.armor = 0;
+        this.maxArmor = 0;
+      }
     }
     if (remainder > 0){
       this.currentHealth -= remainder;
@@ -300,6 +312,7 @@ Character.prototype.barrierDie = function(){
     this.barrier -= this.barrierDecay;
     if (this.barrier < 0){
       this.barrier = 0;
+      this.maxBarrier = 0;
     } 
   }
 }
@@ -312,9 +325,10 @@ Character.prototype.healCal = function(powerRatio, baseHeal){
 
 Character.prototype.heal = function(healAmt){
   let value = this.currentHealth + healAmt;
-  if ( value > this.maxHealth ){
+  if (value > this.maxHealth){
     this.currentHealth = this.maxHealth;
     this.barrier += value - this.maxHealth;
+    if (this.barrier > this.maxBarrier) this.maxBarrier = this.barrier;
   } else {
     this.currentHealth = value;
   }
