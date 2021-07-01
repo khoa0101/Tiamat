@@ -100,8 +100,8 @@ class Skill {
 
     document.addEventListener('contextmenu', (e) => {
       e.preventDefault();
+      const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
       team.childNodes.forEach((child) => {
-        const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
         child.childNodes[0].classList.remove('all-target');
         child.childNodes[0].removeEventListener('click', clickAllTarget);
         child.childNodes[0].classList.remove('single-target');

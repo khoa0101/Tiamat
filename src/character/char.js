@@ -112,10 +112,15 @@ Character.prototype.render = function(el, i){
   }
   el.appendChild(div);
   if (this.armor < 1){
-    armor.classList.add('hide');
+    armor.style.opacity = 0;
+  } else {
+    healthText.style.opacity = 0;
   }
   if (this.barrier < 1){
-    barrier.classList.add('hide');
+    barrier.style.opacity = 0;
+  } else {
+    healthText.style.opacity = 0;
+    armorText.style.opacity = 0;
   }
 }
 
@@ -160,15 +165,19 @@ Character.prototype.renderFrame = function(i){
   barrier.innerHTML = `${this.barrier}`;
 
   if (this.armor < 1){
-    armor.parentNode.classList.add('hide');
+    armor.parentNode.style.opacity = 0;
+    health.style.opacity = 1;
   } else {
-    armor.parentNode.classList.remove('hide');
+    armor.parentNode.style.opacity = 1;
   }
 
   if (this.barrier < 1){
-    barrier.parentNode.classList.add('hide');
+    barrier.parentNode.style.opacity = 0;
+    armor.style.opacity = 1;
   } else {
-    barrier.parentNode.classList.remove('hide');
+    armor.style.opacity = 0;
+    barrier.parentNode.style.opacity = 1;
+    health.style.opacity = 0;
   }
 };
 
