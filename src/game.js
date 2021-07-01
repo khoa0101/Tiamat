@@ -53,11 +53,6 @@ Game.prototype.nextTurn = function(){
   temp.endTurn();
   this.turns.push(temp);
   this.currentTurn = this.turns[0];
-  if (this.win()){
-    alert('You won!');
-  } else if (this.lose()){
-    alert('You lose!');
-  }
 };
 
 Game.prototype.win = function(){

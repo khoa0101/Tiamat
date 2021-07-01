@@ -38,7 +38,7 @@ class Skill {
     this.character.AP -= this.AP;
     if (this.targetType === 'enemy'){
       const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
-      target.takeDamage(this.affinity, damage);
+      const resistedDamage = target.takeDamage(this.affinity, damage);
     } else {
       const heal = this.character.healCal(this.scaling, this.basePower);
       target.heal(heal);
@@ -48,6 +48,8 @@ class Skill {
       const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
       GAME_VIEW.currentTurn(currentTurnSkills);
     }
+
+    GAME_VIEW.renderFrame();
   }
 
   renderTarget(e){
@@ -76,8 +78,6 @@ class Skill {
         el.childNodes[0].classList.remove('single-target');
         el.childNodes[0].removeEventListener('click', clickSingleTarget);
       });
-
-      GAME_VIEW.renderFrame();
     }
 
     const clickAllTarget = function(e){
@@ -94,8 +94,6 @@ class Skill {
         child.childNodes[0].classList.remove('all-target');
         child.childNodes[0].removeEventListener('click', clickAllTarget);
       });
-
-      GAME_VIEW.renderFrame();
     }
 
     document.addEventListener('contextmenu', (e) => {

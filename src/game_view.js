@@ -48,7 +48,6 @@ class GameView{
         else {
           let skills = currentTurn.skills;
           let skillIndex = Math.floor(Math.random() * (skills.length - 1));
-          console.log(skillIndex);
           while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP){
             skillIndex = Math.floor(Math.random() * (skills.length - 1));
           }
@@ -80,8 +79,15 @@ class GameView{
                 skillToUse.performSkill(target);
               })
             }
-          }
+          }       
         }
+      }
+      GAME.nextTurn();
+      GAME_VIEW.renderFrame();
+      if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') aiTurn();
+      else if (GAME.currentTurn.side === 'player'){
+        const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
+        GAME_VIEW.currentTurn(currentTurnSkills);
       }
     }
 
@@ -110,7 +116,9 @@ class GameView{
         const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);
         this.currentTurn(currentTurnSkills);
       } else {
-        aiTurn();
+        if (!GAME.gameOver && currentTurn.alive){
+          aiTurn();
+        }
       }
       
       ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
@@ -121,10 +129,6 @@ class GameView{
       }
       
       this.renderFrame();
-
-      const temp = turns.firstChild;
-      turns.removeChild(turns.firstChild);
-      turns.appendChild(temp);
     });
 
     ally.childNodes.forEach( child => {
@@ -148,6 +152,7 @@ class GameView{
 
   renderFrame(){
     const ap = document.getElementById('ap-display');
+    const turns = document.getElementById('turn-display');
     ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
     
     if (this.game.currentTurn.side === `enemy`){
@@ -160,6 +165,20 @@ class GameView{
     }
     for (let i = 0; i < GAME.enemies.length; i++){
       GAME.enemies[i].renderFrame(i);
+    }
+
+    turns.innerHTML = "";
+
+    GAME.checkTurn();
+
+    for (let i = 0; i < this.game.turns.length; i++){
+      turns.appendChild(this.game.turns[i].renderPortrait());
+    }
+
+    if (GAME.win()){
+      alert('You won!');
+    } else if (GAME.lose()){
+      alert('You lose!');
     }
   }
 
