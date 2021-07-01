@@ -98,6 +98,18 @@ class Skill {
       GAME_VIEW.renderFrame();
     }
 
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      team.childNodes.forEach((child) => {
+        const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
+        child.childNodes[0].classList.remove('all-target');
+        child.childNodes[0].removeEventListener('click', clickAllTarget);
+        child.childNodes[0].classList.remove('single-target');
+        child.childNodes[0].removeEventListener('click', clickSingleTarget);
+        GAME_VIEW.currentTurn(currentTurnSkills);
+      });
+    })
+
     if (this.AP <= this.character.AP){
       if (this.targetNum < 2){
         team.childNodes.forEach((child) => {

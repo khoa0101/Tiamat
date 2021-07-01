@@ -97,7 +97,6 @@ class GameView{
         this.game.enemies[child.getAttributeNode('value').value].printInfo(); 
       })
     });
-
   }
 
   renderFrame(){
