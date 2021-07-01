@@ -1,3 +1,4 @@
+const Game = require("../game.js");
 const Skill = require(`./skills/skill.js`); 
 
 function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 30,
@@ -346,7 +347,6 @@ Character.prototype.checkDeath = function(){
 }
 
 Character.prototype.addSkill = function(name, damage){
-  
 }
 
 module.exports = Character;

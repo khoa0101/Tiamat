@@ -250,16 +250,16 @@ ul li {
 
 .health-green{
   background: greenyellow;
-  animation: health 1s ease;
+  animation: health 0.5s ease;
 }
 .armor-silver{
   background: silver;
-  animation: health 2s ease;
+  animation: health 1s ease;
 }
 
 .barrier-cyan{
   background: cyan;
-  animation: health 4s ease;
+  animation: health 2s ease;
 }
 
 .health-green, .armor-silver, .barrier-cyan{
