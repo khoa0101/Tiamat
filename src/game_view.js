@@ -84,7 +84,7 @@ class GameView{
       }
       GAME.nextTurn();
       GAME_VIEW.renderFrame();
-      if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') aiTurn();
+      if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(aiTurn, 1000);
       else if (GAME.currentTurn.side === 'player'){
         const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
         GAME_VIEW.currentTurn(currentTurnSkills);
