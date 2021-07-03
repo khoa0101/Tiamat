@@ -346,7 +346,10 @@ Character.prototype.checkDeath = function(){
   }
 }
 
-Character.prototype.addSkill = function(name, damage){
+Character.prototype.addSkill = function(name, description, AP, cd, 
+  targetNum, targetType, basePower, scaling, affinity = [], status = []){
+    this.skills.push(new Skill(this, name, description, AP, cd, targetNum, targetType,
+      basePower, scaling, affinity, status));
 }
 
 module.exports = Character;

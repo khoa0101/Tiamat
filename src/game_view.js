@@ -53,6 +53,7 @@ class GameView{
           }
           let skillToUse = skills[skillIndex];
           let targets, targetIndex;
+          currentTurn.AP -= skillToUse.AP;
           if (skillToUse.targetType === 'enemy'){
             if (skillToUse.targetNum < 2){
               targets = GAME.players;

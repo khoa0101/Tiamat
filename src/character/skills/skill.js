@@ -6,6 +6,7 @@ class Skill {
     this.description = description;
     this.AP = AP;
     this.cd = cd;
+    this.remainingCD = 0;
     this.basePower = basePower;
     this.scaling = scaling;
     this.affinity = affinity;
@@ -35,9 +36,11 @@ class Skill {
   }
 
   performSkill(target){
-    this.character.AP -= this.AP;
+    console.log('enter');
+    console.log(this);
     if (this.targetType === 'enemy'){
       const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
+      console.log(damage);
       const resistedDamage = target.takeDamage(this.affinity, damage);
     } else {
       const heal = this.character.healCal(this.scaling, this.basePower);
@@ -67,6 +70,7 @@ class Skill {
     const skill = this;
 
     const clickSingleTarget = function(e){
+      skill.character.AP -= skill.AP;
       const index = e.target.parentNode.getAttributeNode('value').value;
       if (skill.targetType === 'enemy'){
         skill.performSkill(GAME.enemies[index]);
@@ -81,13 +85,14 @@ class Skill {
     }
 
     const clickAllTarget = function(e){
-      if (this.targetType === 'enemy'){
+      skill.character.AP -= skill.AP;
+      if (skill.targetType === 'enemy'){
         GAME.enemies.forEach(target =>{
-          this.performSkill(target);
+          skill.performSkill(target);
         })
       } else {
         GAME.players.forEach(target =>{
-          this.performSkill(target);
+          skill.performSkill(target);
         })
       }
       team.childNodes.forEach((child) => {
@@ -122,7 +127,7 @@ class Skill {
           const index = child.getAttributeNode('value').value;
             if (side[index].alive){
               child.childNodes[0].classList.add('all-targets');
-              child.addEventListener('click', clickAllTarget);
+              child.childNodes[0].addEventListener('click', clickAllTarget);
             }
           }
         )
