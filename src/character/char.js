@@ -131,7 +131,7 @@ Character.prototype.renderSkills = function(el){
   ul.setAttribute('id', `${this.charType}-${this.id}-skills`);
   this.skills.forEach((skill, i) => {
     const li = document.createElement('li');
-    li.innerHTML = skill.name;
+    li.innerHTML = skill.name + " " + skill.remainingCD;
     li.classList.add('skill');
     li.setAttribute('value', i);
     ul.appendChild(li);
@@ -158,13 +158,13 @@ Character.prototype.renderFrame = function(i){
   let armorBar = el.querySelector('.armor-silver');
   let barrier = el.querySelector(`.barrier i`);
   let barrierBar = el.querySelector('.barrier-cyan');
+
   healthBar.style.width = `${this.currentHealth/ this.maxHealth * 100}%`;
   armorBar.style.width = `${this.armor/this.maxArmor * 100}%`;
   barrierBar.style.width = `${this.barrier/this.maxBarrier * 100}%`;
   health.innerHTML = `${this.currentHealth}/${this.maxHealth}`;
   armor.innerHTML =  `${this.armor}`;
   barrier.innerHTML = `${this.barrier}`;
-
   if (this.armor < 1){
     armor.parentNode.style.opacity = 0;
     health.style.opacity = 1;
@@ -179,6 +179,13 @@ Character.prototype.renderFrame = function(i){
     armor.style.opacity = 0;
     barrier.parentNode.style.opacity = 1;
     health.style.opacity = 0;
+  }
+
+  if (this.side === 'player'){
+    let skills = el.querySelector(`#${this.charType}-${this.id}-skills`);
+    skills.childNodes.forEach((skill, i) => {
+      skill.innerHTML = this.skills[i].name + " " + this.skills[i].remainingCD;
+    })
   }
 };
 
@@ -309,6 +316,12 @@ Character.prototype.endTurn = function(){
     if (this.AP > this.APMax){
       this.AP = this.APMax;
     }
+    this.skills.forEach(skill => {
+      skill.remainingCD -= 1;
+      if (skill.remainingCD < 0){
+        skill.remainingCD = 0;
+      }
+    });
     this.heal(this.healCal(0, this.regen));
     this.barrierDie();
   }

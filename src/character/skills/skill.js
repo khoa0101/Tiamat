@@ -71,6 +71,7 @@ class Skill {
 
     const clickSingleTarget = function(e){
       skill.character.AP -= skill.AP;
+      skill.remainingCD += skill.cd;
       const index = e.target.parentNode.getAttributeNode('value').value;
       if (skill.targetType === 'enemy'){
         skill.performSkill(GAME.enemies[index]);
@@ -86,6 +87,7 @@ class Skill {
 
     const clickAllTarget = function(e){
       skill.character.AP -= skill.AP;
+      skill.remainingCD += skill.cd;
       if (skill.targetType === 'enemy'){
         GAME.enemies.forEach(target =>{
           skill.performSkill(target);

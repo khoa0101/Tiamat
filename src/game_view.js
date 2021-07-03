@@ -314,7 +314,7 @@ class GameView{
     el.childNodes.forEach((child) => {
       const index = child.getAttributeNode('value').value;
       const skill = this.game.currentTurn.skills[index];
-      if (this.game.currentTurn.alive && this.game.currentTurn.AP >= skill.AP){
+      if (this.game.currentTurn.alive && this.game.currentTurn.AP >= skill.AP && skill.remainingCD < 1){
         child.classList.add('active');
         child.addEventListener('click', skill.renderTarget);
       }
