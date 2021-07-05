@@ -98,7 +98,7 @@ class Skill {
         })
       }
       team.childNodes.forEach((child) => {
-        child.childNodes[0].classList.remove('all-target');
+        child.childNodes[0].classList.remove('all-targets');
         child.childNodes[0].removeEventListener('click', clickAllTarget);
       });
     }
@@ -107,7 +107,7 @@ class Skill {
       e.preventDefault();
       const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
       team.childNodes.forEach((child) => {
-        child.childNodes[0].classList.remove('all-target');
+        child.childNodes[0].classList.remove('all-targets');
         child.childNodes[0].removeEventListener('click', clickAllTarget);
         child.childNodes[0].classList.remove('single-target');
         child.childNodes[0].removeEventListener('click', clickSingleTarget);

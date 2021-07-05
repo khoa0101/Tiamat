@@ -352,6 +352,18 @@ ul li {
   animation: blinking 2s ease-in-out infinite;
 }
 
+.all-targets::before{
+  background: yellow;
+  cursor: pointer;
+  border: solid 1px white;
+  opacity: 0.5;
+  position: absolute;
+  content: "";
+  width: 15vh;
+  height: 15vh;
+  z-index: 1;
+}
+
 @keyframes blinking {
   0% {
     opacity: 0.5;

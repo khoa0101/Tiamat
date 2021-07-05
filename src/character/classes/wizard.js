@@ -13,10 +13,14 @@ class Wizard extends Character{
       holyRes, darkRes,  physicalMod,  fireMod,  waterMod,  lightningMod,  poisonMod, 
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward, 'fire');
+    this.fireBall(); 
+  };
+
+  fireBall(){
     let affinity = 'fire'
     let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies.`
-    this.addSkill('Fireball', description, 2, 2, 4, 'enemy', 10, 1, affinity);  
-  };
+    this.addSkill('Fireball', description, 2, 2, 4, 'enemy', 10, 1, affinity);
+  }
 }
 
 module.exports = Wizard;

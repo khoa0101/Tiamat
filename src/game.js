@@ -34,10 +34,14 @@ Game.prototype.setTurn = function(){
     this.turns.push(enemy);
   });
 
-  this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
-  this.turns = this.turns.reverse();
+  this.reorderTurn();
   this.currentTurn = this.turns[0];
 };
+
+Game.prototype.reorderTurn = function(){
+  this.turns = this.turns.sort((player, enemy) => player.initiative - enemy.initiative);
+  this.turns = this.turns.reverse();
+}
 
 Game.prototype.checkTurn = function(){
   for (let i = 0; i < this.turns.length; i++){
