@@ -324,11 +324,11 @@ ul li {
 
 .info-container h3{
   font-size: 25px;
-  padding-left: 15px;
+  padding: 10px 0px 0px 10px;
 }
 
 .info-container ul{
-  padding-left: 15px;
+  padding: 10px 0px 0px 10px;
   height: 15vh;
   list-style: none;
   overflow-y: scroll;
@@ -347,7 +347,7 @@ ul li {
 }
 
 .info-image{
-  margin-left: 10px;
+  margin: 10px 0px 10px 10px;
   padding: 10px;
   width: 17vh;
   height: 17vh;
@@ -435,7 +435,7 @@ ul li {
 }
 
 #skill-name{
-  margin-bottom: 5px;
+  margin: 10px 0;
   font-size: 25px;
 }
 
