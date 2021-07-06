@@ -128,11 +128,11 @@ Character.prototype.render = function(el, i){
 
 Character.prototype.renderSkills = function(el){
   const ul = document.createElement('ul');
-  const img = document.createElement('img');
   ul.classList.add('skills-container');
   ul.setAttribute('id', `${this.charType}-${this.id}-skills`);
   this.skills.forEach((skill, i) => {
     const li = document.createElement('li');
+    const img = document.createElement('img');
     img.src = skill.image;
     li.appendChild(img);
     li.classList.add('skill');
@@ -232,6 +232,7 @@ Character.prototype.printInfo = function(){
 
   img.src=`./dist/images/${this.charType.toLowerCase()}.png`;
   img.classList.remove('hidden');
+  img.classList.remove('skill-image-info')
   if (this.side === "enemy"){
     img.classList.remove('player');
     img.classList.add("enemy");

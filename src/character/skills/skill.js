@@ -28,13 +28,14 @@ class Skill {
     const description = document.getElementById('skill-description');
     
     div.classList.remove('hidden');
-    // img.classList.add('hidden');
+    img.classList.remove('hidden', 'player', 'enemy');
+    img.classList.add('skill-image-info');
     ul.classList.add('hidden');
 
     img.src = this.image;
     title.innerHTML = this.name;
     cost.innerHTML = `AP: ${this.AP}`;
-    cooldown.innerHTML = `Cooldown: ${this.cd < 1 ? "none" : this.cd < 2 ? `${this.cd} turn` : `${this.cd} turns`}.`
+    cooldown.innerHTML = `Cooldown: ${this.cd < 1 ? "none" : this.cd < 2 ? `${this.cd} turn` : `${this.cd} turns`}`
     description.innerHTML = this.description;
   }
 
