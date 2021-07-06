@@ -24,7 +24,7 @@ class Cleric extends Character{
 
   massHeal(){
     let description = `Heal all allies for ${this.healCal(1, 20)} health.`;
-    let img = `../../../dist/images/skill_image/hydrosophist-16-23.png`;
+    let img = `../../../dist/images/skill_image/hydrosophist_healing_ritual-icon.png`;
     this.addSkill(img, `Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
   }
 }

@@ -122,7 +122,16 @@ class Skill {
     })
 
     if (this.AP <= this.character.AP){
-      if (this.targetNum < 2){
+      if (this.targetType === 'self'){
+        const target = this.character.id;
+        team.childNodes.forEach((child) => {
+          const index = child.getAttributeNode('value').value;
+          if (side[index].alive && +index === target){
+            child.childNodes[0].classList.add('single-target');
+            child.childNodes[0].addEventListener('click', clickSingleTarget);
+          }
+        });
+      } else if (this.targetNum < 2){
         team.childNodes.forEach((child) => {
           const index = child.getAttributeNode('value').value;
           if (side[index].alive){

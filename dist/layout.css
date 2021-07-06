@@ -401,7 +401,7 @@ ul li {
 
 .skill div{
   position: absolute;
-  /* background: rgba(255, 255, 255, 0.5); */
+  color: white;
   margin-top: 5px;
   text-align: center;
   font-size: 10vh;

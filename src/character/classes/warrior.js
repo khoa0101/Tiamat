@@ -1,5 +1,6 @@
 
 const Character = require("../char.js");
+const ArmorBoost = require("../skills/armorboost.js");
 class Warrior extends Character{
   constructor(id, side = "player", charType = "Warrior", level = 1, currentHealth = 100, maxHealth = 100, AP = 4, APRec = 4, power = 10, armor = 20,
     initiative = 11, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 5,
@@ -13,7 +14,15 @@ class Warrior extends Character{
       holyRes, darkRes,  physicalMod,  fireMod,  waterMod,  lightningMod,  poisonMod, 
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
+    this.armorUp();
   };
+
+  armorUp(){
+    let description = `Shield yourself to gain an additional ${this.healCal(0, 30)} armor.`;
+    let image = `../../../dist/images/skill_image/warfare_deflective_barrier-icon.png`
+    this.skills.push(new ArmorBoost(this, image, `Shield Up!`, description, 2, 2, 1, "self", 30, 0));
+    console.log(this.skills[1]);
+  }
 }
 
 module.exports = Warrior;
