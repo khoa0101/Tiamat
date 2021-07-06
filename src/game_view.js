@@ -63,6 +63,7 @@ class GameView{
           let skillToUse = skills[skillIndex];
           let targets, targetIndex;
           currentTurn.AP -= skillToUse.AP;
+
           if (skillToUse.targetType === 'enemy'){
             if (skillToUse.targetNum < 2){
               targets = GAME.players;
@@ -76,6 +77,8 @@ class GameView{
                 skillToUse.performSkill(target);
               })
             }
+          } else if (skillToUse.targetType === 'self') {
+            skillToUse.performSkill(currentTurn);
           } else {
             if (skillToUse.targetNum < 2){
               targets = GAME.enemies;
@@ -177,7 +180,7 @@ class GameView{
     } else {
       ap.classList.remove('hide');
     }
-    
+
     for (let i = 0; i < GAME.players.length; i++){
       GAME.players[i].renderFrame(i);
     }
