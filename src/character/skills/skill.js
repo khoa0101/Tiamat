@@ -57,13 +57,18 @@ class Skill {
   }
 
   renderTarget(e){
-      e.target.removeEventListener('click', this.renderTarget);
       if (this.targetType === 'enemy'){
         this.fetchTarget('enemy-team', GAME.enemies);
       }
       else {
         this.fetchTarget('player-team', GAME.players);
       }
+
+      e.target.parentNode.parentNode.childNodes.forEach((child) => {
+        const index = child.getAttributeNode('value').value;
+        const skill = GAME.currentTurn.skills[index];
+        child.removeEventListener('click', skill.renderTarget);
+      })
   }
 
   fetchTarget(id, side){

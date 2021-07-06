@@ -6,7 +6,6 @@ class GameView{
   }
 
   setupView(){
-    console.log(GAME);
     const grid = document.getElementById('game-view');
     const ap = document.getElementById('ap-display');
     const info = document.getElementById('info-display');
@@ -298,14 +297,12 @@ class GameView{
 
   skillInfoDisplay(el){
     const div = document.createElement('div');
-    // const img = document.createElement('img');
     const titleContainer = document.createElement('div');
     const title = document.createElement('h4');
     const cost = document.createElement('i');
     const cooldown = document.createElement('i');
     const description = document.createElement('p');
     
-    // img.setAttribute('id', 'skill-image');
     title.setAttribute('id', 'skill-name');
     cost.setAttribute('id', 'skill-cost');
     cooldown.setAttribute('id', 'skill-cooldown');
@@ -318,7 +315,6 @@ class GameView{
     titleContainer.appendChild(cooldown);
     div.appendChild(titleContainer);
     div.appendChild(description);
-    // el.appendChild(img);
     el.appendChild(div);
   }
 
