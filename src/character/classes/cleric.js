@@ -12,7 +12,19 @@ class Cleric extends Character{
       holyRes, darkRes,  physicalMod,  fireMod,  waterMod,  lightningMod,  poisonMod, 
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
+    this.healAlly();
+    this.massHeal();
   };
+
+  healAlly(){
+    let description = `Heal an ally for ${this.healCal(1, 5)} health.`;
+    this.addSkill(`Heal`, description, 2, 2, 1, 'ally', 5, 1);
+  }
+
+  massHeal(){
+    let description = `Heal all allies for ${this.healCal(1, 20)} health.`;
+    this.addSkill(`Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
+  }
 }
 
 module.exports = Cleric;

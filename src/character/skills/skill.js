@@ -24,6 +24,7 @@ class Skill {
     const ul = document.getElementsByClassName('info-container')[0];
     const title = document.getElementById('skill-name');
     const cost = document.getElementById('skill-cost');
+    const cooldown = document.getElementById('skill-cooldown');
     const description = document.getElementById('skill-description');
     
     div.classList.remove('hidden');
@@ -32,15 +33,13 @@ class Skill {
 
     title.innerHTML = this.name;
     cost.innerHTML = `AP: ${this.AP}`;
+    cooldown.innerHTML = `Cooldown: ${this.cd} turns.`
     description.innerHTML = this.description;
   }
 
   performSkill(target){
-    console.log('enter');
-    console.log(this);
     if (this.targetType === 'enemy'){
       const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
-      console.log(damage);
       const resistedDamage = target.takeDamage(this.affinity, damage);
     } else {
       const heal = this.character.healCal(this.scaling, this.basePower);

@@ -360,7 +360,7 @@ Character.prototype.checkDeath = function(){
 }
 
 Character.prototype.addSkill = function(name, description, AP, cd, 
-  targetNum, targetType, basePower, scaling, affinity = [], status = []){
+  targetNum, targetType, basePower, scaling, affinity = null, status = []){
     this.skills.push(new Skill(this, name, description, AP, cd, targetNum, targetType,
       basePower, scaling, affinity, status));
 }

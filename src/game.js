@@ -1,5 +1,6 @@
 const Slime = require("./character/enemies/slime.js");
 const Rogue = require("./character/classes/rogue.js");
+const Ranger = require("./character/classes/ranger");
 const Cleric = require("./character/classes/cleric.js");
 const Warrior = require("./character/classes/warrior.js");
 const Wizard = require("./character/classes/wizard.js");

@@ -6,6 +6,7 @@ class GameView{
   }
 
   setupView(){
+    console.log(GAME);
     const grid = document.getElementById('game-view');
     const ap = document.getElementById('ap-display');
     const info = document.getElementById('info-display');
@@ -298,16 +299,19 @@ class GameView{
     const titleContainer = document.createElement('div');
     const title = document.createElement('h4');
     const cost = document.createElement('i');
+    const cooldown = document.createElement('i');
     const description = document.createElement('p');
     
     title.setAttribute('id', 'skill-name');
     cost.setAttribute('id', 'skill-cost');
+    cooldown.setAttribute('id', 'skill-cooldown');
     titleContainer.setAttribute('id', 'skill-name-container');
     description.setAttribute('id', 'skill-description');
     div.classList.add('skill-info-container', 'hidden');
 
     titleContainer.appendChild(title);
     titleContainer.appendChild(cost);
+    titleContainer.appendChild(cooldown);
     div.appendChild(titleContainer);
     div.appendChild(description);
     el.appendChild(div);

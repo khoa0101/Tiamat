@@ -1,5 +1,6 @@
 html, *{
   box-sizing: border-box;
+  font-family: 'Bebas Neue', cursive;
 }
 
 body{
@@ -49,7 +50,7 @@ footer{
   background: black;
   width: 100%;
   height: 10vh;
-  top: 85%;
+  top: 83%;
   margin: 20px 0;
   z-index: 2;
 }
@@ -75,6 +76,8 @@ button:hover, input:hover{
   cursor: pointer;
   transition: ease-in-out 0.5s;
 }
+
+
 
 .menu button:hover, input:hover{
   transform: scale(1.3);
@@ -185,20 +188,31 @@ ul li {
 }
 
 #arena-display{
+  margin: 20px 0;
   display: grid;
   grid-template-columns: 1fr auto;
 }
 
 #turn-display{
+  margin: 5px 0;
   height: 5vh;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
 #turn-display img{
   border: solid 1px white;
   height: 5vh;
   width: 5vh;
+}
+
+#ap-display{
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 
 .character{
@@ -222,6 +236,7 @@ ul li {
 #player-team, #enemy-team{
   display: grid;
   grid-template-columns: 1fr 1fr;
+  row-gap: 5vh;
 }
 
 #player-team img, .player{
@@ -291,13 +306,13 @@ ul li {
   }
 }
 
-
-
 #info-display{
+  position: relative;
+  top: 5vh;
   height: 20vh;
   display: grid;
   grid-template-columns: auto 1fr;
-  background: rgb(0, 0, 75);
+  background: rgb(0, 0, 75, 0.5);
   overflow-y: hidden;
   color: white;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -324,11 +339,40 @@ ul li {
   height: 19vh;
 }
 
+#end-turn{
+  border-radius: 10px;
+  padding: 0 20px;
+  position: relative;
+  top: -20vh;
+  left: 50vw;
+  height: 30px;
+  text-align: center;
+  font-size: 25px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  transition: all 0.5s ease;
+}
+
+#end-turn:hover{
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 1s ease infinite;
+}
+
+#end-turn:active{
+  background-color: yellowgreen;
+}
+
 .skills-container{
+  border: solid 5px rgba(0, 225, 255, 0.5);
+  border-left: none;
+  background: rgb(0, 0, 75, 0.5);
+  height: 15vh;
   list-style: none;
 }
 
 .skill{
+  color: white;
   cursor: pointer;
   margin: 10px;
   opacity: 0.5;
@@ -375,5 +419,17 @@ ul li {
 
   100%{
     opacity: 0.5;
+  }
+}
+
+@keyframes gradient {
+  0%{
+    background-position:86% 0%
+  }
+  50%{
+    background-position:15% 100%
+  }
+  100%{
+    background-position:86% 0%
   }
 }
