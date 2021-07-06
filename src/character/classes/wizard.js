@@ -18,7 +18,7 @@ class Wizard extends Character{
 
   fireBall(){
     let affinity = 'fire';
-    let img = `../../../dist/images/Skill Image/pyrokinetic_fireball-icon.png`;
+    let img = `../../../dist/images/skill_image/pyrokinetic_fireball-icon.png`;
     let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies.`;
     this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, affinity);
   }

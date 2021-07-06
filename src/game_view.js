@@ -8,19 +8,27 @@ class GameView{
   setupView(){
     const grid = document.getElementById('game-view');
     const ap = document.getElementById('ap-display');
+    const currentAP = document.createElement('i');
+    const maxAP = document.createElement('i');
     const info = document.getElementById('info-display');
     const endTurn = document.createElement('button');
     const returnToMenu = document.createElement('button');
-    ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
     endTurn.setAttribute('id', 'end-turn');
     endTurn.innerHTML = "End Turn"
     returnToMenu.setAttribute('id', 'return-to-menu');
     returnToMenu.innerHTML = "Return to menu";
+    currentAP.setAttribute('id', 'current-AP');
+    maxAP.setAttribute('id', 'max-AP');    
     const navBar = document.getElementById('nav-bar');
     const turns = document.getElementById('turn-display');
     const ally = document.getElementById('player-team');
     const enemy = document.getElementById('enemy-team');
     const currentTurn = this.game.currentTurn;
+    currentAP.innerHTML = `${currentTurn.AP}`;
+    maxAP.innerHTML = `/${currentTurn.APMax}`;
+    currentAP.style = `color:yellowgreen`;
+    ap.appendChild(currentAP);
+    ap.appendChild(maxAP);
     navBar.append(returnToMenu);
     grid.append(endTurn);
     this.charInfoDisplay(info);
@@ -125,13 +133,6 @@ class GameView{
         }
       }
       
-      ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
-      if (this.game.currentTurn.side === `enemy`){
-        ap.classList.add('hide');
-      } else {
-        ap.classList.remove('hide');
-      }
-      
       this.renderFrame();
     });
 
@@ -156,14 +157,27 @@ class GameView{
 
   renderFrame(){
     const ap = document.getElementById('ap-display');
+    const currentAP = document.getElementById(`current-AP`);
+    const maxAP = document.getElementById(`max-AP`);
     const turns = document.getElementById('turn-display');
-    ap.innerHTML = `Action Point (AP): ${this.game.currentTurn.AP}/${this.game.currentTurn.APMax}`;
     
-    if (this.game.currentTurn.side === `enemy`){
+    let currentTurn = this.game.currentTurn;
+
+    currentAP.innerHTML = `${currentTurn.AP}`;
+    maxAP.innerHTML = `/${currentTurn.APMax}`;
+
+    if (currentTurn.AP > 0){
+      currentAP.style = `color:yellowgreen`;
+    } else {
+      currentAP.style = `color:black`;
+    }
+
+    if (currentTurn.side === `enemy`){
       ap.classList.add('hide');
     } else {
       ap.classList.remove('hide');
     }
+    
     for (let i = 0; i < GAME.players.length; i++){
       GAME.players[i].renderFrame(i);
     }

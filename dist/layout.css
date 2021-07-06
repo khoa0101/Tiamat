@@ -108,13 +108,16 @@ button:hover, input:hover{
 
 #credit-container, #tutorial-page-container, #team-management-container{
   margin: 0 auto;
-  padding-top: 10px;
   width: 600px;
   max-height: 80vh;
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* #credit-container ul, #tutorial-page-container ul, #team-management-container ul{
+  height: 80%;
+} */
 
 #credit-screen, #tutorial-page, #team-management{
   max-height: 80vh;
@@ -388,6 +391,7 @@ ul li {
 }
 
 .skill{
+  position: relative;
   color: white;
   cursor: pointer;
   margin: 10px;
@@ -395,10 +399,20 @@ ul li {
   transition: all ease 0.5s;
 }
 
-.skill img{
-  border: none;
+.skill div{
+  position: absolute;
+  /* background: rgba(255, 255, 255, 0.5); */
+  margin-top: 5px;
+  text-align: center;
+  font-size: 10vh;
   width: 10vh;
   height: 10vh;
+}
+
+.skill img{
+  border: none;
+  max-width: 10vh;
+  max-height: 10vh;
 }
 
 .active{
