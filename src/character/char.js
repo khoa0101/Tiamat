@@ -56,6 +56,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
     this.xpReward = xpReward;
     skills.unshift(
       new Skill(this,
+      `../../dist/images/Skill Image/all_in-attack.png`,  
       'Basic Attack',
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
       2, 0, 1, 'enemy', 0, 1, this.normalAttackType));
@@ -127,11 +128,13 @@ Character.prototype.render = function(el, i){
 
 Character.prototype.renderSkills = function(el){
   const ul = document.createElement('ul');
+  const img = document.createElement('img');
   ul.classList.add('skills-container');
   ul.setAttribute('id', `${this.charType}-${this.id}-skills`);
   this.skills.forEach((skill, i) => {
     const li = document.createElement('li');
-    li.innerHTML = skill.name + " " + skill.remainingCD;
+    img.src = skill.image;
+    li.appendChild(img);
     li.classList.add('skill');
     li.setAttribute('value', i);
     ul.appendChild(li);
@@ -181,12 +184,12 @@ Character.prototype.renderFrame = function(i){
     health.style.opacity = 0;
   }
 
-  if (this.side === 'player'){
-    let skills = el.querySelector(`#${this.charType}-${this.id}-skills`);
-    skills.childNodes.forEach((skill, i) => {
-      skill.innerHTML = this.skills[i].name + " " + this.skills[i].remainingCD;
-    })
-  }
+  // if (this.side === 'player'){
+  //   let skills = el.querySelector(`#${this.charType}-${this.id}-skills`);
+  //   skills.childNodes.forEach((skill, i) => {
+  //     skill.innerHTML = this.skills[i].name + " " + this.skills[i].remainingCD;
+  //   })
+  // }
 };
 
 Character.prototype.printInfo = function(){
@@ -359,9 +362,9 @@ Character.prototype.checkDeath = function(){
   }
 }
 
-Character.prototype.addSkill = function(name, description, AP, cd, 
+Character.prototype.addSkill = function(img, name, description, AP, cd, 
   targetNum, targetType, basePower, scaling, affinity = null, status = []){
-    this.skills.push(new Skill(this, name, description, AP, cd, targetNum, targetType,
+    this.skills.push(new Skill(this, img, name, description, AP, cd, targetNum, targetType,
       basePower, scaling, affinity, status));
 }
 

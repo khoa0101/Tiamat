@@ -18,12 +18,14 @@ class Cleric extends Character{
 
   healAlly(){
     let description = `Heal an ally for ${this.healCal(1, 5)} health.`;
-    this.addSkill(`Heal`, description, 2, 2, 1, 'ally', 5, 1);
+    let img = `../../../dist/images/Skill Image/hydrosophist_restoration-icon.png`
+    this.addSkill(img, `Heal`, description, 2, 2, 1, 'ally', 5, 1);
   }
 
   massHeal(){
     let description = `Heal all allies for ${this.healCal(1, 20)} health.`;
-    this.addSkill(`Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
+    let img = `../../../dist/images/Skill Image/hydrosophist-16-23.png`;
+    this.addSkill(img, `Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
   }
 }
 

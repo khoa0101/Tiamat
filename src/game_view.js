@@ -188,6 +188,7 @@ class GameView{
   }
 
   charInfoDisplay(el){
+    const div = document.createElement('div');
     const ul = document.createElement('ul');
     const img = document.createElement('img');
     const level = document.createElement('li');
@@ -223,7 +224,7 @@ class GameView{
     const talents = document.createElement(`li`);
     const conditions = document.createElement(`li`);
     
-    ul.classList.add('info-container', 'hidden');
+    div.classList.add('info-container', 'hidden');
     img.classList.add('info-image', 'hidden');
     level.setAttribute('id', 'level');
     charType.setAttribute('id', 'charType');
@@ -258,7 +259,7 @@ class GameView{
     talents.setAttribute('id', "talents");
     conditions.setAttribute('id', "conditions");
     
-    ul.appendChild(charType);
+    div.appendChild(charType);
     ul.appendChild(level);
     ul.appendChild(maxHealth);
     ul.appendChild(armor);
@@ -290,18 +291,21 @@ class GameView{
     ul.appendChild(darkMod);
     ul.appendChild(talents);
     ul.appendChild(conditions);
+    div.appendChild(ul);
     el.appendChild(img);
-    el.appendChild(ul);
+    el.appendChild(div);
   }
 
   skillInfoDisplay(el){
     const div = document.createElement('div');
+    // const img = document.createElement('img');
     const titleContainer = document.createElement('div');
     const title = document.createElement('h4');
     const cost = document.createElement('i');
     const cooldown = document.createElement('i');
     const description = document.createElement('p');
     
+    // img.setAttribute('id', 'skill-image');
     title.setAttribute('id', 'skill-name');
     cost.setAttribute('id', 'skill-cost');
     cooldown.setAttribute('id', 'skill-cooldown');
@@ -314,6 +318,7 @@ class GameView{
     titleContainer.appendChild(cooldown);
     div.appendChild(titleContainer);
     div.appendChild(description);
+    // el.appendChild(img);
     el.appendChild(div);
   }
 

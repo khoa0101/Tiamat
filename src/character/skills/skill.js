@@ -1,7 +1,8 @@
 class Skill {
-  constructor(character, name, description, AP, cd, targetNum, targetType, basePower, scaling, 
+  constructor(character, image, name, description, AP, cd, targetNum, targetType, basePower, scaling, 
     affinity = 'none', status = []){
     this.character = character;
+    this.image = image;
     this.name = name;
     this.description = description;
     this.AP = AP;
@@ -13,7 +14,6 @@ class Skill {
     this.targetNum = targetNum;
     this.targetType = targetType;
     this.status = status;
-
     this.renderTarget = this.renderTarget.bind(this);
     this.performSkill = this.performSkill.bind(this);
   }
@@ -28,12 +28,13 @@ class Skill {
     const description = document.getElementById('skill-description');
     
     div.classList.remove('hidden');
-    img.classList.add('hidden');
+    // img.classList.add('hidden');
     ul.classList.add('hidden');
 
+    img.src = this.image;
     title.innerHTML = this.name;
     cost.innerHTML = `AP: ${this.AP}`;
-    cooldown.innerHTML = `Cooldown: ${this.cd} turns.`
+    cooldown.innerHTML = `Cooldown: ${this.cd < 1 ? "none" : this.cd < 2 ? `${this.cd} turn` : `${this.cd} turns`}.`
     description.innerHTML = this.description;
   }
 

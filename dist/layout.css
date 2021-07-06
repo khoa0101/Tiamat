@@ -327,6 +327,11 @@ ul li {
   scrollbar-width: none;  /* Firefox */
 }
 
+.info-container h3{
+  position: sticky;
+  top: 0px;
+}
+
 .info-container::-webkit-scrollbar,
 #info-display::-webkit-scrollbar{
   display: none;
