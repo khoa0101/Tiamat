@@ -59,7 +59,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
       `../../dist/images/skill_image/all_in-attack.png`,  
       'Basic Attack',
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
-      2, 0, 1, 'enemy', 0, 1, this.normalAttackType));
+      2, 0, 1, 'enemy', 0, 1, true, 0, this.normalAttackType));
     this.skills = skills;
 }
 
@@ -370,9 +370,9 @@ Character.prototype.checkDeath = function(){
 }
 
 Character.prototype.addSkill = function(img, name, description, AP, cd, 
-  targetNum, targetType, basePower, scaling, affinity = null, status = []){
+  targetNum, targetType, basePower, scaling, crit = false, bonusCrit = 0, affinity = null, status = []){
     this.skills.push(new Skill(this, img, name, description, AP, cd, targetNum, targetType,
-      basePower, scaling, affinity, status));
+      basePower, scaling, crit, bonusCrit, affinity, status));
 }
 
 module.exports = Character;

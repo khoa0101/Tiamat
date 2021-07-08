@@ -26,7 +26,7 @@ class GameView{
     const currentTurn = this.game.currentTurn;
     currentAP.innerHTML = `${currentTurn.AP}`;
     maxAP.innerHTML = `/${currentTurn.APMax}`;
-    currentAP.style = `color:yellowgreen`;
+    currentAP.style = `color:green`;
     ap.appendChild(currentAP);
     ap.appendChild(maxAP);
     navBar.append(returnToMenu);
@@ -170,7 +170,7 @@ class GameView{
     maxAP.innerHTML = `/${currentTurn.APMax}`;
 
     if (currentTurn.AP > 0){
-      currentAP.style = `color:yellowgreen`;
+      currentAP.style = `color:green`;
     } else {
       currentAP.style = `color:black`;
     }

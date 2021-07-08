@@ -1,4 +1,5 @@
 const Character = require("../char.js");
+// const ArmorHeal = require("../skills/armorboost.js");
 class Cleric extends Character{
   constructor(id, side = "player", charType = "Cleric", level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 20,
     initiative = 12, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 4,
@@ -14,6 +15,8 @@ class Cleric extends Character{
       maxXP, xpReward);
     this.healAlly();
     this.massHeal();
+    this.smite();
+    this.mendArmor();
   };
 
   healAlly(){
@@ -27,6 +30,18 @@ class Cleric extends Character{
     let img = `../../../dist/images/skill_image/hydrosophist_healing_ritual-icon.png`;
     this.addSkill(img, `Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
   }
+
+  smite(){
+    let affinity = `lightning`;
+    let img = `../../../dist/images/skill_image/aerotheurge_lightning_bolt-icon.png`;
+    let description = `Summon heaven's lightning to smite your enemies for ${this.damageCal(affinity, 1, 5)} ${affinity} damage.${" "} 
+    This ability can crit and has a 30% bonus critical chance.`;
+  }
+
+  mendArmor(){
+    // this.skills.push(new ArmorBoost(this, img, `Mend Armor`))
+  }
+
 }
 
 module.exports = Cleric;

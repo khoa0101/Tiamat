@@ -1,6 +1,6 @@
 class Skill {
   constructor(character, image, name, description, AP, cd, targetNum, targetType, basePower, scaling, 
-    affinity = 'none', status = []){
+    crit = false, bonusCrit = 0, affinity = 'none', status = []){
     this.character = character;
     this.image = image;
     this.name = name;
@@ -10,6 +10,8 @@ class Skill {
     this.remainingCD = 0;
     this.basePower = basePower;
     this.scaling = scaling;
+    this.crit = crit;
+    this.bonusCrit = bonusCrit;
     this.affinity = affinity;
     this.targetNum = targetNum;
     this.targetType = targetType;
