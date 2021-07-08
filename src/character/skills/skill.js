@@ -43,7 +43,12 @@ class Skill {
 
   performSkill(target){
     if (this.targetType === 'enemy'){
-      const damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
+      let damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
+      if (this.crit){
+        if (Math.random() < this.character.crit){
+          damage *= this.character.critDamage;
+        }
+      }
       const resistedDamage = target.takeDamage(this.affinity, damage);
     } else {
       const heal = this.character.healCal(this.scaling, this.basePower);
