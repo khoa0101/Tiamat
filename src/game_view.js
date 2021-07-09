@@ -127,6 +127,11 @@ class GameView{
 
       currentTurn = this.game.currentTurn;
 
+      currentTurn.conditions.forEach((condi) =>{
+        condi.activate(currentTurn);
+        this.renderFrame();
+      })
+
       if (currentTurn.side === 'player'){
         const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);
         this.currentTurn(currentTurnSkills);

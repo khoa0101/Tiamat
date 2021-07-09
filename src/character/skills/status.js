@@ -8,11 +8,11 @@ class Status{
     this.stackable = stackable;
   }
 
-  apply(target){
-    if (this.stackable){
-      this.remainingTurn += this.turns;
+  apply(target, active){
+    if (active.stackable){
+      active.remainingTurn += this.turns;
     } else {
-      this.remainingTurn = this.turns;
+      active.remainingTurn = this.turns;
     }
     this.once(target);
     this.activate(target);
@@ -44,7 +44,7 @@ class Burning extends Status{
   }
 }
 
-class Poisoned extends Status {
+export class Poisoned extends Status {
   constructor(source, turns, damage = 0, stackable = false, name = "Poisoned", description = nulls){
     damage = source.damageCal(`poison`, 0.2, 5);
     description = `Take ${damage} every turn for ${turns}. Reduce your poison resistance by 20%.`;
@@ -69,7 +69,7 @@ class Poisoned extends Status {
   }
 }
 
-class ArmorBoost extends Status {
+export class ArmorBoost extends Status {
   constructor(source, turns, armor = 0, increaseMax, recovery, name, description, stackable = false){
     super(source, turns, stackable, name, description);
     this.armor = armor;
@@ -90,20 +90,18 @@ class ArmorBoost extends Status {
       if(target.armor > target.maxArmor){
         target.armor = target.maxArmor;
       }
-      this.remainingTurn--;
     }
+    this.remainingTurn--;
   }
 
   remove(target){
+    console.log(target.maxArmor);
     if (this.increaseMax){
-      target.maxArmor -= this.armor;
+      target.maxArmor = target.maxArmor - this.armor;
       if(target.armor > target.maxArmor){
         target.armor = target.maxArmor; 
       }
     }
+    console.log(target.maxArmor);
   }
 }
-
-module.exports = ArmorBoost;
-module.exports = Burning;
-module.exports = Poisoned;

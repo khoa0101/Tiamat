@@ -54,6 +54,24 @@ class Skill {
       const heal = this.character.healCal(this.scaling, this.basePower);
       target.heal(heal);
     }
+    
+    this.status.forEach(condi => {
+      let found = false;
+      let index = 0;
+      target.conditions.forEach((ele, i) => {
+        if (ele.name === condi.name){
+          found = true;
+          index = i;
+        }
+      })
+      
+      if (found){
+        condi.apply(target, target.conditions[index]);
+      } else {
+        target.conditions.push(condi);
+        condi.apply(target, condi);
+      }
+    })
 
     if (GAME.currentTurn.side === 'player'){
       const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);

@@ -332,6 +332,14 @@ Character.prototype.endTurn = function(){
         skill.remainingCD = 0;
       }
     });
+
+    for (let i = 0; i < this.conditions.length; i++){
+      if (this.conditions[i].remainingTurn < 1){
+        this.conditions[i].remove(this);
+        this.conditions.splice(i, 1);
+        i--;
+      };
+    }
     this.heal(this.healCal(0, this.regen));
     this.barrierDie();
   }
