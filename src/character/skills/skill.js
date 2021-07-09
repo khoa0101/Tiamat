@@ -68,21 +68,11 @@ class Skill {
       
       if (found){
         condi.apply(target, target.conditions[index]);
-        if (this.targetNum > 1) {
-          console.log(condi.remainingTurn);
-          condi.remainingTurn += condi.turns;
-          console.log(condi.remainingTurn);
-        }
       } else {
-        target.conditions.push(condi);
-        condi.apply(target,condi);
-        if (this.targetNum > 1) {
-          console.log(condi.remainingTurn);
-          condi.remainingTurn += condi.turns;
-          console.log(condi.remainingTurn);
-        }
+        let copy = condi.copy();
+        target.conditions.push(copy);
+        copy.apply(target, copy);
       }
-      console.log(condi);
     })
 
     if (GAME.currentTurn.side === 'player'){

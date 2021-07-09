@@ -8,6 +8,16 @@ class Status{
     this.stackable = stackable;
   }
 
+  copy(){
+    let copy = Object.assign(
+      Object.create(
+        Object.getPrototypeOf(this)
+        )
+      ,this);
+
+    return copy;
+  }
+
   apply(target, active){
     if (active.stackable){
       active.remainingTurn += this.turns;
