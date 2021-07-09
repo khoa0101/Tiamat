@@ -19,11 +19,11 @@ class Status{
   }
 }
 
-class Burning extends Status{
+export class Burning extends Status{
   constructor(source, turns, damage = 0, stackable = false, name = "Burning", description = null){
     damage = source.damageCal(`fire`, 0.2, 5);
-    description = `Take ${damage} every turn for ${turns}. Reduce your fire resistance by 20%.`;
-    super(source, turns, stackable, name, description);
+    description = `Take ${damage} every turn for ${turns + turns > 1 ? "turns" : "turn"}. Reduce your fire resistance by 20%.`;
+    super(source, turns, stackable, name, description); 
     this.damage = damage;
     this.resistance = -0.2;
   }
@@ -34,13 +34,13 @@ class Burning extends Status{
 
   activate(target){
     if (this.remainingTurn > 0){
-      target.takeDamge(`fire`, this.damage);
+      target.takeDamage(`fire`, this.damage);
       this.remainingTurn--;
     }
   }
 
   remove(target){
-    target.fireRes += this.resistance;
+    target.fireRes -= this.resistance;
   }
 }
 
@@ -59,13 +59,13 @@ export class Poisoned extends Status {
 
   activate(target){
     if (this.remainingTurn > 0){
-      target.takeDamge(`poison`, this.damage);
+      target.takeDamage(`poison`, this.damage);
       this.remainingTurn--;
     }
   }
 
   remove(target){
-    target.poisonRes += this.resistance;
+    target.poisonRes -= this.resistance;
   }
 }
 
@@ -95,13 +95,11 @@ export class ArmorBoost extends Status {
   }
 
   remove(target){
-    console.log(target.maxArmor);
     if (this.increaseMax){
       target.maxArmor = target.maxArmor - this.armor;
       if(target.armor > target.maxArmor){
         target.armor = target.maxArmor; 
       }
     }
-    console.log(target.maxArmor);
   }
 }

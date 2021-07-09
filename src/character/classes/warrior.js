@@ -21,8 +21,7 @@ class Warrior extends Character{
     let description = `Shield yourself to gain an additional ${this.healCal(0, 30)} armor.`;
     let image = `../../../dist/images/skill_image/warfare_deflective_barrier-icon.png`;
       let status = [new ArmorBoost(this, 3, this.healCal(0,30), true, false, "Shield Up!", description, false)];
-    this.addSkill(image, `Shield Up!`, description, 2, 2, 1, "self", 0, 0, false, false, null, status);
-    console.log(this.skills[1]);
+    this.addSkill(image, `Shield Up!`, description, 2, 3, 1, "self", 0, 0, false, false, null, status);
   }
 }
 

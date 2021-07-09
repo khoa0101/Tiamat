@@ -56,9 +56,9 @@ class GameView{
         if (currentTurn.AP < 2) done = true 
         else {
           let skills = currentTurn.skills;
-          let skillIndex = Math.floor(Math.random() * (skills.length - 1));
+          let skillIndex = Math.floor(Math.random() * (skills.length));
           while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP){
-            skillIndex = Math.floor(Math.random() * (skills.length - 1));
+            skillIndex = Math.floor(Math.random() * (skills.length));
           }
           let skillToUse = skills[skillIndex];
           let targets, targetIndex;
@@ -126,11 +126,6 @@ class GameView{
       this.game.nextTurn();
 
       currentTurn = this.game.currentTurn;
-
-      currentTurn.conditions.forEach((condi) =>{
-        condi.activate(currentTurn);
-        this.renderFrame();
-      })
 
       if (currentTurn.side === 'player'){
         const currentTurnSkills = document.getElementById(`${currentTurn.charType}-${currentTurn.id}-skills`);

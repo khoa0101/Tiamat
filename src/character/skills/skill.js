@@ -44,8 +44,9 @@ class Skill {
   performSkill(target){
     if (this.targetType === 'enemy'){
       let damage = this.character.damageCal(this.affinity, this.scaling, this.basePower);
+      let chance = Math.random();
       if (this.crit){
-        if (Math.random() < this.character.crit){
+        if (chance < (this.character.critChance + this.bonusCrit)){
           damage *= this.character.critDamage;
         }
       }
@@ -67,10 +68,21 @@ class Skill {
       
       if (found){
         condi.apply(target, target.conditions[index]);
+        if (this.targetNum > 1) {
+          console.log(condi.remainingTurn);
+          condi.remainingTurn += condi.turns;
+          console.log(condi.remainingTurn);
+        }
       } else {
         target.conditions.push(condi);
-        condi.apply(target, condi);
+        condi.apply(target,condi);
+        if (this.targetNum > 1) {
+          console.log(condi.remainingTurn);
+          condi.remainingTurn += condi.turns;
+          console.log(condi.remainingTurn);
+        }
       }
+      console.log(condi);
     })
 
     if (GAME.currentTurn.side === 'player'){

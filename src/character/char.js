@@ -320,6 +320,14 @@ Character.prototype.takeDamage = function(dmgType ,dmg){
   this.checkDeath();
   return damageRecieve;
 }
+
+Character.prototype.startTurn = function(){
+  this.conditions.forEach(condi => {
+    condi.activate(this);
+    setTimeout(GAME_VIEW.renderFrame(), 1000);
+  })
+}
+
 Character.prototype.endTurn = function(){
   if(this.alive){
     this.AP += this.APRec;

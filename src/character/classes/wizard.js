@@ -1,5 +1,6 @@
 
 const Character = require("../char.js");
+const { Burning } = require("../skills/status.js");
 class Wizard extends Character{
   constructor(id, side = "player", charType = "Wizard", level = 1, currentHealth = 30, maxHealth = 30, AP = 4, APRec = 4, power = 15, armor = 10,
     initiative = 14, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 2,
@@ -19,8 +20,9 @@ class Wizard extends Character{
   fireBall(){
     let affinity = 'fire';
     let img = `../../../dist/images/skill_image/pyrokinetic_fireball-icon.png`;
-    let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies.`;
-    this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, false, 0, affinity);
+    let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies and applies Burning.`;
+    let status = [new Burning(this, 3)];
+    this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, false, 0, affinity, status);
   }
 }
 
