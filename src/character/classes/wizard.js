@@ -22,7 +22,7 @@ class Wizard extends Character{
     let img = `../../../dist/images/skill_image/pyrokinetic_fireball-icon.png`;
     let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies and applies Burning.`;
     let status = [new Burning(this, 3)];
-    this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, false, 0, affinity, status);
+    this.addSkill(img,'Fireball', description, 2, 0, 4, 'enemy', 10, 1, false, 0, affinity, status);
   }
 }
 

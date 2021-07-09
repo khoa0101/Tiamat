@@ -67,11 +67,15 @@ class Skill {
       })
       
       if (found){
-        condi.apply(target, target.conditions[index]);
+        let foundCondi = target.conditions[index];
+        condi.apply(foundCondi);
+        foundCondi.activate(target);
       } else {
         let copy = condi.copy();
         target.conditions.push(copy);
-        copy.apply(target, copy);
+        copy.apply(copy);
+        copy.once(target);
+        copy.activate(target);
       }
     })
 
@@ -79,6 +83,8 @@ class Skill {
       const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
       GAME_VIEW.currentTurn(currentTurnSkills);
     }
+
+    console.log(target);
 
     GAME_VIEW.renderFrame();
   }

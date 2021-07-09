@@ -18,14 +18,12 @@ class Status{
     return copy;
   }
 
-  apply(target, active){
+  apply(active){
     if (active.stackable){
       active.remainingTurn += this.turns;
     } else {
       active.remainingTurn = this.turns;
     }
-    this.once(target);
-    this.activate(target);
   }
 }
 
