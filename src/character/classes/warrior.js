@@ -1,5 +1,6 @@
 
 const Character = require("../char.js");
+const ArmorBoost = require("../skills/status.js");
 class Warrior extends Character{
   constructor(id, side = "player", charType = "Warrior", level = 1, currentHealth = 100, maxHealth = 100, AP = 4, APRec = 4, power = 10, armor = 20,
     initiative = 11, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 5,

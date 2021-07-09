@@ -103,3 +103,7 @@ class ArmorBoost extends Status {
     }
   }
 }
+
+module.exports = ArmorBoost;
+module.exports = Burning;
+module.exports = Poisoned;
