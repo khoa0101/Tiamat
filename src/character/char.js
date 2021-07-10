@@ -428,12 +428,13 @@ Character.prototype.aiTurn = function(){
   else {
     let skills = currentTurn.skills;
     let skillIndex = Math.floor(Math.random() * (skills.length));
-    while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP){
+    while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP && skills[skillIndex].remainingCD < 1){
       skillIndex = Math.floor(Math.random() * (skills.length));
     }
     let skillToUse = skills[skillIndex];
     let targets, targetIndex;
     currentTurn.AP -= skillToUse.AP;
+    skillToUse.remainingCD += skillToUse.cd;
     
     if (skillToUse.targetType === 'enemy'){
       if (skillToUse.targetNum < 2){
@@ -469,7 +470,7 @@ Character.prototype.aiTurn = function(){
   if (done){
     GAME.nextTurn();
   }
-  
+
   GAME_VIEW.renderFrame();
   
   if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1000);
