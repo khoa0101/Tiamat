@@ -117,7 +117,11 @@ Game.prototype.restart = function(){
   if (this.currentTurn.side === 'player'){
     const currentTurnSkills = document.getElementById(`${this.currentTurn.charType}-${this.currentTurn.id}-skills`);
     GAME_VIEW.currentTurn(currentTurnSkills);
+  } else {
+    this.currentTurn.aiTurn();
   }
+
+  this.gameOver = false;
 
   GAME_VIEW.renderFrame();
 }

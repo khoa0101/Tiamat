@@ -406,7 +406,7 @@ Character.prototype.checkDeath = function(){
       i--;
     }
     if (GAME.currentTurn === this){
-      this.endTurn();
+      GAME.nextTurn();
     }
   }
 }
@@ -418,6 +418,7 @@ Character.prototype.addSkill = function(img, name, description, AP, cd,
 }
 
 Character.prototype.aiTurn = function(){
+  if (GAME.currentTurn.side === 'player') return;
   let endTurn = document.getElementById('end-turn');
   endTurn.disabled = true;
   let currentTurn = GAME.currentTurn;
@@ -469,7 +470,7 @@ Character.prototype.aiTurn = function(){
   GAME.nextTurn();
   GAME_VIEW.renderFrame();
   
-  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1000);
+  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 2000);
   else if (GAME.currentTurn.side === 'player'){
     endTurn.disabled = false;
     const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
