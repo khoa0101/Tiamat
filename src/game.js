@@ -77,4 +77,38 @@ Game.prototype.lose = function(){
   return true;
 }
 
+Game.prototype.restart = function(){
+  for (let i = 0; i < this.players.length; i++){
+    for (let j = 0; j < this.players[i].conditions.length; j++){
+      this.players[i].conditions[j].remove(this.players[i]);
+    }
+    this.players[i].conditions.splice(0, this.players[i].conditions.length);
+    this.players[i].currentHealth = this.players[i].maxHealth;
+    this.players[i].armor = this.players[i].maxArmor;
+    this.players[i].barrier = 0;
+    this.players[i].maxBarrier = this.players[i].regen;
+    this.players[i].AP = 4;
+  }
+
+  for (let i = 0; i < this.enemies.length; i++){
+    for (let j = 0; j < this.enemies[i].conditions.length; j++){
+      console.log(this.enemies[i].conditions[j]);
+      this.enemies[i].conditions[j].remove(this.enemies[i]);
+    }
+    this.enemies[i].conditions.splice(0, this.enemies[i].conditions.length);
+    this.enemies[i].currentHealth = this.enemies[i].maxHealth;
+    this.enemies[i].armor = this.enemies[i].maxArmor;
+    this.enemies[i].barrier = 0;
+    this.enemies[i].maxBarrier = this.enemies[i].regen;
+    this.enemies[i].AP = 4;
+  }
+
+  this.turns.splice(0, this.turns.length);
+  
+  this.setTurn();
+  this.reorderTurn();
+
+  GAME_VIEW.renderFrame();
+}
+
 module.exports = Game;

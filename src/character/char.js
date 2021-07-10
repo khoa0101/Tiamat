@@ -177,6 +177,7 @@ Character.prototype.renderFrame = function(i){
     health.style.opacity = 1;
   } else {
     armor.parentNode.style.opacity = 1;
+    health.style.opacity = 0;
   }
 
   if (this.barrier < 1){
@@ -280,9 +281,25 @@ Character.prototype.printInfo = function(){
   energyMod.innerHTML = `Energy Damage Modifier: ${this.energyMod * 100}%`;
   holyMod.innerHTML = `Holy Damage Modifier: ${this.holyMod * 100}%`;
   darkMod.innerHTML = `Darkness Damage Modifier: ${this.darkMod * 100}%`;
-  talents.innerHTML = `Talents: ` + (this.talents.length > 0 ? "" : "None");
-  conditions.innerHTML = `Current Conditions: ` + (this.conditions.length > 0 ? "" : "None");
+  talents.innerHTML = `Talents: ` + (this.talents.length > 0 ? this.printArray(this.talents) : "None");
+  conditions.innerHTML = `Current Conditions: ` + (this.conditions.length > 0 ? this.printArray(this.conditions) : "None");
   div.scrollTop = 0;
+};
+
+Character.prototype.printArray = function(array){
+  let result = "";
+
+  for (let i = 0; i < array.length; i++){
+    if ( i === array.length - 1){
+      result += array[i].name + " " + 
+      (array[i].remainingTurn ? array[i].remainingTurn : "");
+    } else {
+      result += array[i].name + " " + 
+      (array[i].remainingTurn ? array[i].remainingTurn : "") + ", ";
+    }
+  }
+
+  return result;
 };
 
 Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){
@@ -382,6 +399,11 @@ Character.prototype.heal = function(healAmt){
 Character.prototype.checkDeath = function(){
   if (this.currentHealth <= 0){
     this.alive = false;
+    for (let i = 0; i < this.conditions.length; i++){
+      this.conditions[i].remove(this);
+      this.conditions.splice(i, 1);
+      i--;
+    }
   }
 }
 

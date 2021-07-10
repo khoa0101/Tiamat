@@ -13,10 +13,13 @@ class GameView{
     const info = document.getElementById('info-display');
     const endTurn = document.createElement('button');
     const returnToMenu = document.createElement('button');
+    const restart = document.createElement('button');
     endTurn.setAttribute('id', 'end-turn');
-    endTurn.innerHTML = "End Turn"
+    endTurn.innerHTML = "End Turn";
     returnToMenu.setAttribute('id', 'return-to-menu');
     returnToMenu.innerHTML = "Return to menu";
+    restart.setAttribute('id', 'restart');
+    restart.innerHTML = "Restart";
     currentAP.setAttribute('id', 'current-AP');
     maxAP.setAttribute('id', 'max-AP');    
     const navBar = document.getElementById('nav-bar');
@@ -30,6 +33,7 @@ class GameView{
     ap.appendChild(currentAP);
     ap.appendChild(maxAP);
     navBar.append(returnToMenu);
+    navBar.append(restart);
     grid.append(endTurn);
     this.charInfoDisplay(info);
     this.skillInfoDisplay(info);
@@ -113,6 +117,10 @@ class GameView{
       if (this.game.start){
         startButton.value = "";
       }
+    });
+
+    restart.addEventListener('click', () => {
+      GAME.restart();
     })
 
     endTurn.addEventListener('click', () => {      

@@ -84,8 +84,6 @@ class Skill {
       GAME_VIEW.currentTurn(currentTurnSkills);
     }
 
-    console.log(target);
-
     GAME_VIEW.renderFrame();
   }
 

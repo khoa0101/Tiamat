@@ -80,7 +80,7 @@ export class Poisoned extends Status {
 export class ArmorBoost extends Status {
   constructor(source, turns, armor = 0, increaseMax, recovery, name, description, stackable = false){
     super(source, turns, stackable, name, description);
-    this.armor = armor;
+    this.armor = this.source.healCal(0, armor);
     this.increaseMax = increaseMax;
     this.recovery = recovery;
   }

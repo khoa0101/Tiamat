@@ -1,5 +1,6 @@
 const Character = require("../char.js");
-// const ArmorHeal = require("../skills/armorboost.js");
+const { ArmorBoost } = require("../skills/status.js");
+
 class Cleric extends Character{
   constructor(id, side = "player", charType = "Cleric", level = 1, currentHealth = 50, maxHealth = 50, AP = 4, APRec = 4, power = 10, armor = 20,
     initiative = 12, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 4,
@@ -13,9 +14,9 @@ class Cleric extends Character{
       holyRes, darkRes,  physicalMod,  fireMod,  waterMod,  lightningMod,  poisonMod, 
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward);
+    this.smite();
     this.healAlly();
     this.massHeal();
-    this.smite();
     this.mendArmor();
   };
 
@@ -28,7 +29,7 @@ class Cleric extends Character{
   massHeal(){
     let description = `Heal all allies for ${this.healCal(1, 20)} health.`;
     let img = `../../../dist/images/skill_image/hydrosophist_healing_ritual-icon.png`;
-    this.addSkill(img, `Healing Ritual`, description, 3, 4, 4, 'ally', 20, 1);
+    this.addSkill(img, `Healing Ritual`, description, 4, 4, 4, 'ally', 20, 1);
   }
 
   smite(){
@@ -40,7 +41,10 @@ class Cleric extends Character{
   }
 
   mendArmor(){
-    
+    let img = `../../../dist/images/skill_image/geomancer_mend_metal-icon.png`;
+    let description = `Mend the armors of all alies, restoring ${this.healCal(0, 10)} armor every turn for 3 turns.`
+    let status = [new ArmorBoost(this, 3, 10, false, true, `Mend Armor`, description)]
+    this.addSkill(img, `Mend Armor`, description, 4, 5, 4, 'ally', 0, 0, false, 0, null, status);
   }
 
 }
