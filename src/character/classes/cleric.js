@@ -36,7 +36,7 @@ class Cleric extends Character{
     let affinity = `lightning`;
     let img = `../../../dist/images/skill_image/aerotheurge_lightning_bolt-icon.png`;
     let description = `Summon heaven's lightning to smite your enemies for ${this.damageCal(affinity, 1, 5)} ${affinity} damage.${" "} 
-    This ability can crit and has a 30% bonus critical chance.`;
+    This ability can critically hit and has a 30% bonus critical chance.`;
     this.addSkill(img, `Smite`, description, 4, 5, 4, 'enemy', 5, 1, true, 0.3, affinity);
   }
 

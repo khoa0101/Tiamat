@@ -423,54 +423,56 @@ Character.prototype.aiTurn = function(){
   endTurn.disabled = true;
   let currentTurn = GAME.currentTurn;
   let done = false;
-  while(!done){
-    if (currentTurn.AP < 2) done = true 
-    else {
-      let skills = currentTurn.skills;
-      let skillIndex = Math.floor(Math.random() * (skills.length));
-      while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP){
-        skillIndex = Math.floor(Math.random() * (skills.length));
-      }
-      let skillToUse = skills[skillIndex];
-      let targets, targetIndex;
-      currentTurn.AP -= skillToUse.AP;
-      
-      if (skillToUse.targetType === 'enemy'){
-        if (skillToUse.targetNum < 2){
-          targets = GAME.players;
-          targetIndex = Math.floor(Math.random() * targets.length);
-          while (!targets[targetIndex].alive){
-            targetIndex = targetIndex = Math.floor(Math.random() * targets.length);
-          }
-          skillToUse.performSkill(targets[targetIndex]);
-        } else {
-          targets.forEach(target => {
-            skillToUse.performSkill(target);
-          })
-        }
-      } else if (skillToUse.targetType === 'self') {
-        skillToUse.performSkill(currentTurn);
-      } else {
-        if (skillToUse.targetNum < 2){
-          targets = GAME.enemies;
-          targetIndex = Math.floor(Math.random() * targets.length);
-          while (!targets[targetIndex].alive){
-            targetIndex = targetIndex = Math.floor(Math.random() * targets.length);
-          }
-          skillToUse.performSkill(targets[targetIndex]);
-        } else {
-          targets.forEach(target => {
-            skillToUse.performSkill(target);
-          })
-        }
-      }       
+  // while(!done){
+  if (currentTurn.AP < 2) done = true; 
+  else {
+    let skills = currentTurn.skills;
+    let skillIndex = Math.floor(Math.random() * (skills.length));
+    while (currentTurn.AP > 1 && skills[skillIndex].AP > currentTurn.AP){
+      skillIndex = Math.floor(Math.random() * (skills.length));
     }
+    let skillToUse = skills[skillIndex];
+    let targets, targetIndex;
+    currentTurn.AP -= skillToUse.AP;
+    
+    if (skillToUse.targetType === 'enemy'){
+      if (skillToUse.targetNum < 2){
+        targets = GAME.players;
+        targetIndex = Math.floor(Math.random() * targets.length);
+        while (!targets[targetIndex].alive){
+          targetIndex = targetIndex = Math.floor(Math.random() * targets.length);
+        }
+        skillToUse.performSkill(targets[targetIndex]);
+      } else {
+        targets.forEach(target => {
+          skillToUse.performSkill(target);
+        })
+      }
+    } else if (skillToUse.targetType === 'self') {
+      skillToUse.performSkill(currentTurn);
+    } else {
+      if (skillToUse.targetNum < 2){
+        targets = GAME.enemies;
+        targetIndex = Math.floor(Math.random() * targets.length);
+        while (!targets[targetIndex].alive){
+          targetIndex = targetIndex = Math.floor(Math.random() * targets.length);
+        }
+        skillToUse.performSkill(targets[targetIndex]);
+      } else {
+        targets.forEach(target => {
+          skillToUse.performSkill(target);
+        })
+      }
+    }       
   }
 
-  GAME.nextTurn();
+  if (done){
+    GAME.nextTurn();
+  }
+  
   GAME_VIEW.renderFrame();
   
-  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1500);
+  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1000);
   else if (GAME.currentTurn.side === 'player'){
     endTurn.disabled = false;
     const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);
