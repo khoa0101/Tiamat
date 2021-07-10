@@ -88,6 +88,7 @@ Game.prototype.restart = function(){
     this.players[i].barrier = 0;
     this.players[i].maxBarrier = this.players[i].regen;
     this.players[i].AP = 4;
+    this.players[i].alive = true;
   }
 
   for (let i = 0; i < this.enemies.length; i++){
@@ -101,6 +102,7 @@ Game.prototype.restart = function(){
     this.enemies[i].barrier = 0;
     this.enemies[i].maxBarrier = this.enemies[i].regen;
     this.enemies[i].AP = 4;
+    this.enemies[i].alive = true;
   }
 
   this.turns.splice(0, this.turns.length);
