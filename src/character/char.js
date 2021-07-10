@@ -470,7 +470,7 @@ Character.prototype.aiTurn = function(){
   GAME.nextTurn();
   GAME_VIEW.renderFrame();
   
-  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 2000);
+  if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1500);
   else if (GAME.currentTurn.side === 'player'){
     endTurn.disabled = false;
     const currentTurnSkills = document.getElementById(`${GAME.currentTurn.charType}-${GAME.currentTurn.id}-skills`);

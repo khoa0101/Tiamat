@@ -82,6 +82,11 @@ Game.prototype.restart = function(){
     for (let j = 0; j < this.players[i].conditions.length; j++){
       this.players[i].conditions[j].remove(this.players[i]);
     }
+
+    for (let j = 0; j < this.players[i].skills.length; j++){
+      this.players[i].skills[j].remainingCD = 0;
+    }
+
     this.players[i].conditions.splice(0, this.players[i].conditions.length);
     this.players[i].currentHealth = this.players[i].maxHealth;
     this.players[i].armor = this.players[i].maxArmor;
@@ -96,6 +101,11 @@ Game.prototype.restart = function(){
       console.log(this.enemies[i].conditions[j]);
       this.enemies[i].conditions[j].remove(this.enemies[i]);
     }
+
+    for (let j = 0; j < this.enemies[i].skills.length; j++){
+      this.enemies[i].skills[j].remainingCD = 0;
+    }
+
     this.enemies[i].conditions.splice(0, this.enemies[i].conditions.length);
     this.enemies[i].currentHealth = this.enemies[i].maxHealth;
     this.enemies[i].armor = this.enemies[i].maxArmor;
