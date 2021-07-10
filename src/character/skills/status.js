@@ -38,6 +38,7 @@ export class Burning extends Status{
 
   once(target){
     target.fireRes += this.resistance;
+    target.waterRes -= this.resistance;
   }
 
   activate(target){
@@ -49,6 +50,7 @@ export class Burning extends Status{
 
   remove(target){
     target.fireRes -= this.resistance;
+    target.waterRes += this.resistance;
   }
 }
 
@@ -109,5 +111,29 @@ export class ArmorBoost extends Status {
         target.armor = target.maxArmor; 
       }
     }
+  }
+}
+
+export class ResistanceBoost extends Status{
+  constructor(source, turns, resistanceTypes, resistance, name, description, stackable = false){
+    super(source, turns, stackable, name, description);
+    this.resistanceTypes = resistanceTypes;
+    this.resistance = resistance;
+  }
+
+  once(target){
+    this.resistanceTypes.forEach(res => {
+      target[res] += this.resistance;
+    });
+  }
+
+  activate(target){
+    return;
+  }
+
+  remove(target){
+    this.resistanceTypes.forEach(res => {
+      target[res] -= this.resistance;
+    })
   }
 }

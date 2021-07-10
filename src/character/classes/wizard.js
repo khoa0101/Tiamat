@@ -15,6 +15,7 @@ class Wizard extends Character{
       energyMod, holyMod,  darkMod,  talents, conditions, xp, 
       maxXP, xpReward, 'fire');
     this.fireBall(); 
+    this.hailStrike();
   };
 
   fireBall(){
@@ -23,6 +24,13 @@ class Wizard extends Character{
     let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies and applies Burning for 2 turns.`;
     let status = [new Burning(this, 2)];
     this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, false, 0, affinity, status);
+  }
+
+  hailStrike(){
+    let affinity = `water`;
+    let img = `../../../dist/images/skill_image/hydrosophist-11-0.png`;
+    let description = `Hail falls from the sky, dealing ${this.damageCal(affinity, 0.4, 4)} ${affinity} damage to all enemies for 3 turns and applies Chilled for 2 turn.`;
+    this.addSkill(img, 'Hail Strike', description, 2, 6, 4, 'enemy', 4, 0.4, false, false, affinity);
   }
 }
 

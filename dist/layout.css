@@ -166,7 +166,7 @@ button:hover, input:hover{
 }
 
 ul li {
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .important{
@@ -331,7 +331,7 @@ ul li {
 }
 
 .info-container ul{
-  padding: 10px 0px 0px 10px;
+  padding-left: 10px;
   height: 13vh;
   list-style: none;
   overflow-y: scroll;
