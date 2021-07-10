@@ -106,9 +106,18 @@ Game.prototype.restart = function(){
   }
 
   this.turns.splice(0, this.turns.length);
-  
+
+  if(this.currentTurn.side === `player`){
+    const currentTurnSkills = document.getElementById(`${this.currentTurn.charType}-${this.currentTurn.id}-skills`);
+    GAME_VIEW.endTurn(currentTurnSkills);
+  }
+
   this.setTurn();
-  this.reorderTurn();
+
+  if (this.currentTurn.side === 'player'){
+    const currentTurnSkills = document.getElementById(`${this.currentTurn.charType}-${this.currentTurn.id}-skills`);
+    GAME_VIEW.currentTurn(currentTurnSkills);
+  }
 
   GAME_VIEW.renderFrame();
 }
