@@ -1,6 +1,6 @@
 
 const Character = require("../char.js");
-const {ArmorBoost, ResistanceBoost} = require("../skills/status.js");
+const {ArmorBoost, ResistanceBoost, Stunned} = require("../skills/status.js");
 
 const _RES_TYPES = [
   `fireRes`,
@@ -48,10 +48,10 @@ class Warrior extends Character{
   stomp(){
     let baseDmg = 0;
     let scaling = 0.5;
-    let description = `Stomp the ground, dealing ${this.damageCal(this.normalAttackType, scaling, baseDmg)} ${this.normalAttackType} damage. (Will apply stun when 
-      stun is implemented).`;
+    let description = `Stomp the ground, dealing ${this.damageCal(this.normalAttackType, scaling, baseDmg)} ${this.normalAttackType} damage and stunning all enemies.`;
     let img = `../../../dist/images/skill_image/warfare_battle_stomp-icon.png`;
-    this.addSkill(img, `Battle Stomp`, description, 4, 4, 4, 'enemy', baseDmg, scaling, true, 0, this.normalAttackType);
+    let status = [new Stunned(this, 1)];
+    this.addSkill(img, `Battle Stomp`, description, 4, 4, 4, 'enemy', baseDmg, scaling, true, 0, this.normalAttackType, status);
   }
 
   bolster(){

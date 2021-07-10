@@ -1,6 +1,6 @@
 
 const Character = require("../char.js");
-const { Burning } = require("../skills/status.js");
+const { Burning, MultiStrike, Chilled } = require("../skills/status.js");
 class Wizard extends Character{
   constructor(id, side = "player", charType = "Wizard", level = 1, currentHealth = 30, maxHealth = 30, AP = 4, APRec = 4, power = 15, armor = 10,
     initiative = 14, critChance = 0, critDamage = 2, damageMod = 0, healMod = 0, cdMod = 0, lifesteal = 0, regen = 2,
@@ -28,9 +28,14 @@ class Wizard extends Character{
 
   hailStrike(){
     let affinity = `water`;
+    let damage = this.damageCal(affinity, 0.4, 4);
     let img = `../../../dist/images/skill_image/hydrosophist-11-0.png`;
-    let description = `Hail falls from the sky, dealing ${this.damageCal(affinity, 0.4, 4)} ${affinity} damage to all enemies for 3 turns and applies Chilled for 2 turn.`;
-    this.addSkill(img, 'Hail Strike', description, 2, 6, 4, 'enemy', 4, 0.4, false, false, affinity);
+    let description = `Hail falls from the sky, dealing ${damage} ${affinity} damage to all enemies for 3 turns and applies Chilled for 2 turn.`;
+    let status = [
+      new MultiStrike(this, 3, damage, affinity, false, `Hail Strike`, description),
+      new Chilled(this, 3)
+    ];
+    this.addSkill(img, 'Hail Strike', description, 2, 6, 4, 'enemy', 4, 0.4, false, false, affinity, status);
   }
 }
 
