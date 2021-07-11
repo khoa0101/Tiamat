@@ -490,3 +490,66 @@ ul li {
     background-position:86% 0%
   }
 }
+
+@media (display-mode: fullscreen){
+  .character{
+    height: 17vh;
+  }
+
+  .character img{
+    width: 12vh;
+    height: 12vh;
+  }
+
+  .health-container{
+    width: 12vh;
+    height: 20px;
+  }
+  
+  .health-bar, .armor, .barrier{
+    width: 12vh;
+  }
+
+  .skills-container{
+    height: 12vh;
+  }
+
+  .skill div{
+    font-size: 7vh;
+    width: 8vh;
+    height: 8vh;
+  }
+
+  .skill img{
+    max-width: 8vh;
+    max-height: 8vh;
+  }
+
+  #end-turn{
+    top: -24vh;
+  }
+
+  #info-display{
+    top: 6.7vh;
+    height: 25vh;
+  }
+
+  .info-image{
+    height: 22vh;
+    width: 22vh;
+  }
+
+  .info-container ul{
+    height: 18vh;
+  }
+
+  .single-target::before{
+    height: 12vh;
+    width: 12vh;
+  }
+
+  .all-targets::before{
+    height: 12vh;
+    width: 12vh;
+  }
+}

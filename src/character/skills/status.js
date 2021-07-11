@@ -194,7 +194,11 @@ export class Stunned extends Status{
   }
 
   once(target){
-    target.AP = 0;
     this.remainingTurn++;
+  }
+
+  activate(target){
+    target.AP = 0;
+    this.remainingTurn--;
   }
 }
