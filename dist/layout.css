@@ -312,7 +312,7 @@ ul li {
 #info-display{
   border: solid 5px rgba(0, 225, 255, 0.5); 
   position: relative;
-  top: 4vh;
+  top: 3.8vh;
   height: 20vh;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -367,13 +367,11 @@ ul li {
   font-size: 25px;
   transform: translate(-50%, -50%);
   display: flex;
-  transition: all 0.5s ease;
+  transition: transform 0.2s ease;
 }
 
 #end-turn:hover{
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 1s ease infinite;
+	animation: pulse 0.2s infinite alternate;
 }
 
 #end-turn:active{
@@ -479,15 +477,12 @@ ul li {
   }
 }
 
-@keyframes gradient {
+@keyframes pulse {
   0%{
-    background-position:86% 0%
-  }
-  50%{
-    background-position:15% 100%
+    transform: translate(-50%, -50%) scale(1.0);
   }
   100%{
-    background-position:86% 0%
+    transform: translate(-50%, -50%) scale(1.2);
   }
 }
 

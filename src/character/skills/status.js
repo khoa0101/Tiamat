@@ -49,8 +49,10 @@ export class Burning extends Status{
   }
 
   once(target){
-    target.fireRes += this.resistance;
-    target.waterRes -= this.resistance;
+    if (target.fireRes < 1){
+      target.fireRes += this.resistance;
+      target.waterRes -= this.resistance;
+    }
   }
 
   activate(target){
@@ -61,8 +63,10 @@ export class Burning extends Status{
   }
 
   remove(target){
-    target.fireRes -= this.resistance;
-    target.waterRes += this.resistance;
+    if (target.fireRes < 1){
+      target.fireRes -= this.resistance;
+      target.waterRes += this.resistance;
+    }
   }
 }
 
@@ -76,7 +80,7 @@ export class Poisoned extends Status {
   }
 
   once(target){
-    target.poisonRes += this.resistance;
+    if (target.poisonRes < 1) target.poisonRes += this.resistance;
   }
 
   activate(target){
@@ -87,7 +91,7 @@ export class Poisoned extends Status {
   }
 
   remove(target){
-    target.poisonRes -= this.resistance;
+    if (target.poisonRes < 1) target.poisonRes -= this.resistance;
   }
 }
 
@@ -121,6 +125,41 @@ export class ArmorBoost extends Status {
       target.maxArmor = target.maxArmor - this.armor;
       if(target.armor > target.maxArmor){
         target.armor = target.maxArmor; 
+      }
+    }
+  }
+}
+
+export class BarrierBoost extends Status {
+  constructor(source, turns, barrier = 0, increaseMax, recovery, name, description, stackable = false){
+    super(source, turns, stackable, name, description);
+    this.barrier = this.source.healCal(0, barrier);
+    this.increaseMax = increaseMax;
+    this.recovery = recovery;
+  }
+
+  once(target){
+    if (this.increaseMax){
+      target.maxBarrier += this.barrier;
+      target.barrier += this.barrier;
+    }
+  }
+
+  activate(target){
+    if(this.recovery && this.remainingTurn > 0){
+      target.barrier += this.barrier;
+      if(target.barrier > target.maxBarrier){
+        target.barrier = target.maxBarrier;
+      }
+    }
+    this.remainingTurn--;
+  }
+
+  remove(target){
+    if (this.increaseMax){
+      target.maxBarrier = target.maxBarrier - this.barrier;
+      if(target.barrier > target.maxBarrier){
+        target.barrier = target.maxBarrier; 
       }
     }
   }

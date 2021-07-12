@@ -313,7 +313,7 @@ Character.prototype.damageCal = function(dmgType, powerRatio, baseDmg){
 Character.prototype.takeDamage = function(dmgType ,dmg){
   let damageRecieve = Math.floor(dmg * (1.0 - this[`${dmgType}Res`]));
   if (damageRecieve < 0){
-    heal(this, -damageRecieve);
+    this.heal(-damageRecieve);
   } else {
     let remainder = damageRecieve;
     if (this.barrier > 0){
