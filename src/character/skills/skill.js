@@ -127,11 +127,15 @@ class Skill {
       skill.remainingCD += skill.cd;
       if (skill.targetType === 'enemy'){
         GAME.enemies.forEach(target =>{
-          skill.performSkill(target);
+          if (target.alive){
+            skill.performSkill(target);
+          }
         })
       } else {
         GAME.players.forEach(target =>{
-          skill.performSkill(target);
+          if (target.alive){
+            skill.performSkill(target);
+          }
         })
       }
       team.childNodes.forEach((child) => {
