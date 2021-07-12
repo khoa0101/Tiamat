@@ -2,8 +2,11 @@ const Game = require("./game.js");
 const Sound = require("./sound.js");
 const GameView = require("./game_view.js");
 
+window.MUSIC = new Sound;
+window.GAME = new Game;
+window.GAME_VIEW = new GameView(GAME);
+
 document.addEventListener("DOMContentLoaded", function(){
-  const canvasEl = document.getElementById("game-canvas");
   const menuModal = document.getElementsByClassName("menu");
   const soundButton = document.getElementById("music");
   const startButton = document.getElementById("start");
@@ -14,32 +17,19 @@ document.addEventListener("DOMContentLoaded", function(){
   const tutorialPage = document.getElementById("tutorial-page");
   const creditPage = document.getElementById("credit-screen");
   const teamPage = document.getElementById("team-management");
-  const music = new Sound;
-  const game = new Game;
-  canvasEl.width = Game.DIM_X;
-  canvasEl.height= Game.DIM_Y;
-  music.menuMusic.volume = 0.2;
-
-  let canvasPosition = canvasEl.getBoundingClientRect();
-  canvasEl.addEventListener('mousemove', function(e){
-    Game.MOUSE.x = e.x - canvasPosition.left;
-    Game.MOUSE.y = e.y - canvasPosition.top;
-  });
-
-  canvasEl.addEventListener('mouseleave', function(){
-    Game.MOUSE.x = undefined;
-    Game.MOUSE.y = undefined;
-  });
-
-  const ctx = canvasEl.getContext("2d");
-  const gameView = new GameView(game, ctx);
+  MUSIC.menuMusic.volume = 0.2;
 
   startButton.addEventListener('click', () => {
     menuModal[0].classList.add("hidden");
-    game.addEnemy();
-    game.setTurn();
-    gameView.animate();
-    gameView.createGrid();
+    if (!GAME.start){
+      GAME.start = true;
+      GAME.addAllies();
+      GAME.addEnemy();
+      GAME.setTurn();
+      GAME_VIEW.setupView();
+    } else {
+      menuModal[0].value = 'Resume Game';
+    }
   });
 
   creditButton.addEventListener('click', () => {
@@ -64,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
   soundButton.addEventListener("click", () => {
-    music.playAudio(music.menuMusic);
-    if (music.menuMusic.paused){
+    MUSIC.playAudio(MUSIC.menuMusic);
+    if (MUSIC.menuMusic.paused){
       soundButton.value = "Unmute";
     } else {
       soundButton.value = "Mute";
