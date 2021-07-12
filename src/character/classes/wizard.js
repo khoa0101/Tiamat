@@ -22,7 +22,7 @@ class Wizard extends Character{
 
   fireBall(){
     let affinity = 'fire';
-    let img = `../../../dist/images/skill_image/pyrokinetic_fireball-icon.png`;
+    let img = `./dist/images/skill_image/pyrokinetic_fireball-icon.png`;
     let description = `Summon a fireball dealing ${this.damageCal(affinity, 1, 10)} ${affinity} damage to all enemies and applies Burning for 2 turns.`;
     let status = [new Burning(this, 2)];
     this.addSkill(img,'Fireball', description, 2, 2, 4, 'enemy', 10, 1, false, 0, affinity, status);
@@ -31,7 +31,7 @@ class Wizard extends Character{
   hailStrike(){
     let affinity = `water`;
     let damage = this.damageCal(affinity, 0.4, 4);
-    let img = `../../../dist/images/skill_image/hydrosophist-11-0.png`;
+    let img = `./dist/images/skill_image/hydrosophist-11-0.png`;
     let description = `Hail falls from the sky, dealing ${damage} ${affinity} damage to all enemies for 3 turns and applies Chilled for 3 turn.`;
     let status = [
       new MultiStrike(this, 3, damage, affinity, false, `Hail Strike`, description),
@@ -49,7 +49,7 @@ class Wizard extends Character{
       target.barrier += (this.armor / 2);
       this.remainingTurn--;
     }
-    let img = `../../../dist/images/skill_image/summoning_circle_of_protection-icon.png`;
+    let img = `./dist/images/skill_image/summoning_circle_of_protection-icon.png`;
     let status = [armor];
     this.addSkill(img, `Mage Armor`, description, 2, 5, 1, "self", 0, 0, false, 0, null, status);
   }
@@ -57,7 +57,7 @@ class Wizard extends Character{
   poisonWave(){
     let affinity = `poison`;
     let damage = this.damageCal(affinity, 1, 5);
-    let img = `../../../dist/images/skill_image/geomancer-14-15.png`;
+    let img = `./dist/images/skill_image/geomancer-14-15.png`;
     let description = `Poison erupts from you, dealing ${damage} ${affinity} damage and applies poison for 3 turns.`;
     let status = [new Poisoned(this, 3)];
     this.addSkill(img, `Poison Wave`, description, 2, 2, 4, `enemy`, 5, 1, false, 0, affinity, status);

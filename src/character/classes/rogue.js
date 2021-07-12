@@ -22,7 +22,7 @@ class Rogue extends Character{
 
   backStab(){
     let description = `Move behind the target and strike for ${this.damageCal(this.normalAttackType, 1, 0) * this.critDamage} ${this.normalAttackType} critical damage.`
-    let img = `../../../dist/images/skill_image/scoundrel_vault-icon.png`;
+    let img = `./dist/images/skill_image/scoundrel_vault-icon.png`;
     this.addSkill(img, `Back Stab`, description, 2, 4, 1, 'enemy', 0, 1, true, 1, this.normalAttackType);
   }
 
@@ -31,7 +31,7 @@ class Rogue extends Character{
     let scaling = 1.2;
     let description = `Throw a barrage of daggers at all enemies, dealing ${this.damageCal(this.normalAttackType, scaling, baseDmg)} ${this.normalAttackType} damage.
     This ability can critically hit and recieve a 20% bonus critical hit chance.`;
-    let img = `../../../dist/images/skill_image/scoundrel-15-7.png`;
+    let img = `./dist/images/skill_image/scoundrel-15-7.png`;
     this.addSkill(img, `Dagger Volley`, description, 6, 4, 4, 'enemy', baseDmg, scaling, true, 0.2, this.normalAttackType);
   }
 
@@ -39,7 +39,7 @@ class Rogue extends Character{
     let affinity = this.normalAttackType;
     let damage = this.damageCal(affinity, 0.5, this.power);
     let description = `Stab your target with a poisoned blade, dealing ${damage} ${affinity} damage and applies Poisoned for 2 turns. This ability can critically hit.`;
-    let img = `../../../dist/images/skill_image/scoundrel-14-20.png`;
+    let img = `./dist/images/skill_image/scoundrel-14-20.png`;
     let status = [new Poisoned(this, 3)];
     this.addSkill(img, `Corrupted Blade`, description, 2, 4, 1, `enemy`, this.power, 0.5, true, 0, affinity, status);
   }
@@ -49,7 +49,7 @@ class Rogue extends Character{
     let damage = this.damageCal(affinity, 2, this.power);
     let description = `Perform a horrific combo on your target, stunning it for 1 turn and deals ${damage} ${affinity} damage. This ability can critically hit.`
     let status = [new Stunned(this, 1)];
-    let img = `../../../dist/images/skill_image/scoundrel-15-6.png`;
+    let img = `./dist/images/skill_image/scoundrel-15-6.png`;
     this.addSkill(img, `Horrific Barrage`, description, 4, 6, 1, `enemy`, this.power, 2, true, 0, affinity, status);
   }
 }

@@ -22,26 +22,26 @@ class Cleric extends Character{
 
   healAlly(){
     let description = `Heal an ally for ${this.healCal(1, 5)} health.`;
-    let img = `../../../dist/images/skill_image/hydrosophist_restoration-icon.png`
+    let img = `./dist/images/skill_image/hydrosophist_restoration-icon.png`
     this.addSkill(img, `Heal`, description, 2, 2, 1, 'ally', 5, 1);
   }
 
   massHeal(){
     let description = `Heal all allies for ${this.healCal(1, 20)} health.`;
-    let img = `../../../dist/images/skill_image/hydrosophist_healing_ritual-icon.png`;
+    let img = `./dist/images/skill_image/hydrosophist_healing_ritual-icon.png`;
     this.addSkill(img, `Healing Ritual`, description, 4, 4, 4, 'ally', 20, 1);
   }
 
   smite(){
     let affinity = `holy`;
-    let img = `../../../dist/images/skill_image/aerotheurge_lightning_bolt-icon.png`;
+    let img = `./dist/images/skill_image/aerotheurge_lightning_bolt-icon.png`;
     let description = `Summon heaven's lightning to smite your enemies for ${this.damageCal(affinity, 1, 5)} ${affinity} damage.${" "} 
     This ability can critically hit and has a 30% bonus critical chance.`;
     this.addSkill(img, `Smite`, description, 4, 5, 4, 'enemy', 5, 1, true, 0.3, affinity);
   }
 
   mendArmor(){
-    let img = `../../../dist/images/skill_image/geomancer_mend_metal-icon.png`;
+    let img = `./dist/images/skill_image/geomancer_mend_metal-icon.png`;
     let description = `Mend the armors of all alies, restoring ${this.healCal(0, 10)} armor every turn for 3 turns.`
     let status = [new ArmorBoost(this, 3, 10, false, true, `Mend Armor`, description)]
     this.addSkill(img, `Mend Armor`, description, 4, 5, 4, 'ally', 0, 0, false, 0, null, status);

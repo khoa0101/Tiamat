@@ -56,7 +56,7 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
     this.xpReward = xpReward;
     skills.unshift(
       new Skill(this,
-      `../../dist/images/skill_image/all_in-attack.png`,  
+      `./dist/images/skill_image/all_in-attack.png`,  
       'Basic Attack',
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
       2, 0, 1, 'enemy', 0, 1, true, 0, this.normalAttackType));
