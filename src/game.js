@@ -98,7 +98,6 @@ Game.prototype.restart = function(){
 
   for (let i = 0; i < this.enemies.length; i++){
     for (let j = 0; j < this.enemies[i].conditions.length; j++){
-      console.log(this.enemies[i].conditions[j]);
       this.enemies[i].conditions[j].remove(this.enemies[i]);
     }
 

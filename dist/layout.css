@@ -486,6 +486,54 @@ ul li {
   }
 }
 
+#end-modal-container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+#end-modal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+#end-modal h1{
+  font-size: 40vh;
+  background: none;
+}
+
+.Victory{
+  color: turquoise;
+}
+
+.Defeat{
+  color: red;
+}
+
+#end-modal button{
+  margin: 0 auto;
+  width: max-content;
+  font-size: 20px;
+  background: none;
+  margin-bottom: 10px;
+  transform: scale(1.0);
+  transition: all ease 0.2s;
+}
+
+#end-modal button:hover{
+  transform: scale(1.2);
+}
+
 @media (display-mode: fullscreen){
   .character{
     height: 17vh;
@@ -547,4 +595,5 @@ ul li {
     height: 12vh;
     width: 12vh;
   }
+
 }

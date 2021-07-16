@@ -315,15 +315,20 @@ class GameView{
   endGame(condition){
     const message = document.createElement('h1');
     const div = document.createElement('div');
+    const modal = document.createElement('div');
     const returnToMenu = document.createElement('button');
     const restart = document.createElement('button');
     
+    div.setAttribute('id', 'end-modal-container');
+    modal.setAttribute('id', 'end-modal');
+    message.classList.add(condition);
     message.innerHTML = condition;
     returnToMenu.innerHTML = "Return to Menu";
     restart.innerHTML = "Restart";
 
-    div.append(message, returnToMenu, restart);
-    
+    modal.append(message, returnToMenu, restart);
+    div.append(modal);
+
     document.body.appendChild(div);
 
     restart.addEventListener('click', () => {
