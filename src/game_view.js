@@ -60,7 +60,7 @@ class GameView{
       const startButton = document.getElementById("start");
       menuModal.classList.remove("hidden");
       if (this.game.start){
-        startButton.value = "";
+        startButton.innerHTML = "Resume Game";
       }
     });
 
@@ -150,9 +150,9 @@ class GameView{
     }
 
     if (GAME.win()){
-      alert('You won!');
+      this.endGame("Victory");
     } else if (GAME.lose()){
-      alert('You lose!');
+      this.endGame("Defeat");
     }
   }
 
@@ -311,6 +311,42 @@ class GameView{
       child.removeEventListener('click', skill.renderTarget);
     })
   }
+
+  endGame(condition){
+    const message = document.createElement('h1');
+    const div = document.createElement('div');
+    const modal = document.createElement('div');
+    const returnToMenu = document.createElement('button');
+    const restart = document.createElement('button');
+    
+    div.setAttribute('id', 'end-modal-container');
+    modal.setAttribute('id', 'end-modal');
+    message.classList.add(condition);
+    message.innerHTML = condition;
+    returnToMenu.innerHTML = "Return to Menu";
+    restart.innerHTML = "Restart";
+
+    modal.append(message, returnToMenu, restart);
+    div.append(modal);
+
+    document.body.appendChild(div);
+
+    restart.addEventListener('click', () => {
+      GAME.restart();
+      document.body.removeChild(div);
+    })
+
+    returnToMenu.addEventListener('click', () => {
+      GAME.restart();
+      document.body.removeChild(div);
+      const menuModal = document.getElementsByClassName("menu")[0];
+      const startButton = document.getElementById("start");
+      menuModal.classList.remove("hidden");
+      if (this.game.start){
+        startButton.value = "Resume Game";
+      }
+    })
+  }  
 }
 
 module.exports = GameView;
