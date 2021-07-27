@@ -1,4 +1,4 @@
-# Tiamat
+# <img src="https://github.com/khoa0101/Tiamat/blob/main/dist/images/drag_icon.svg" width="25px" height="25px"/> Tiamat
 ![image](https://user-images.githubusercontent.com/70730501/127105601-f65d3434-8ba2-4c85-9ef8-2632e3a9d202.png)
 <br>
 [Tiamat live!](https://khoa0101.github.io/Tiamat/)
