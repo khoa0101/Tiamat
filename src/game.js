@@ -7,6 +7,17 @@ const Wizard = require("./character/classes/wizard.js");
 
 function Game(){
   this.start = false;
+  this.account = {
+    gold: 0,
+    characters: {
+      Rogue,
+      Ranger,
+      Cleric,
+      Warrior,
+      Wizard,
+    },
+    inventory: [],
+  };
   this.players = new Array(4);
   this.enemies = new Array(4);
   this.turns = [];
