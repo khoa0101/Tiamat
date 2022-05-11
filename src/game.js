@@ -1,6 +1,6 @@
 const Slime = require("./character/enemies/slime.js");
 const Rogue = require("./character/classes/rogue.js");
-const Ranger = require("./character/classes/ranger");
+const Ranger = require("./character/classes/ranger.js");
 const Cleric = require("./character/classes/cleric.js");
 const Warrior = require("./character/classes/warrior.js");
 const Wizard = require("./character/classes/wizard.js");
@@ -78,6 +78,8 @@ Game.prototype.lose = function(){
 }
 
 Game.prototype.restart = function(){
+  let endTurn = document.getElementById('end-turn');
+
   for (let i = 0; i < this.players.length; i++){
     for (let j = 0; j < this.players[i].conditions.length; j++){
       this.players[i].conditions[j].remove(this.players[i]);
@@ -126,6 +128,7 @@ Game.prototype.restart = function(){
   if (this.currentTurn.side === 'player'){
     const currentTurnSkills = document.getElementById(`${this.currentTurn.charType}-${this.currentTurn.id}-skills`);
     GAME_VIEW.currentTurn(currentTurnSkills);
+    endTurn.disabled = false; 
   } else {
     this.currentTurn.aiTurn();
   }
