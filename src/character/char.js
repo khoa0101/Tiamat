@@ -61,7 +61,14 @@ function Character(id, side, charType, level = 1, currentHealth = 50, maxHealth 
       `Attack an enemy for ${this.damageCal(this.normalAttackType, 1, 0)} ${this.normalAttackType} damage.`,
       2, 0, 1, 'enemy', 0, 1, true, 0, this.normalAttackType));
     this.skills = skills;
-
+    this.equipment = {
+      head: {},
+      shoulder: {},
+      chest: {},
+      hand: {},
+      pant: {},
+      feet: {},
+    };
     this.aiTurn = this.aiTurn.bind(this);
 }
 
@@ -469,10 +476,9 @@ Character.prototype.aiTurn = function(){
 
   if (done){
     GAME.nextTurn();
+    GAME_VIEW.renderFrame();
   }
 
-  GAME_VIEW.renderFrame();
-  
   if (!GAME.gameOver && GAME.currentTurn.side === 'enemy') setTimeout(this.aiTurn, 1000);
   else if (GAME.currentTurn.side === 'player'){
     endTurn.disabled = false;
